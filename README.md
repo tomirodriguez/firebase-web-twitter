@@ -22,17 +22,17 @@ Implement a web-based social networking application (similar to Twitter) satisfy
 * As a user we should be able to follow or unfollow a user.
  
 <h2>How the UI should looke like?</h2>
-<h3>That is up to you, we will be checking how you structure the source code and how you reuse the different components, you can use a componentes library if you want or code it from scratch, no preference here. </h3>
+You are not intended to be proven as a designer. The provided mockup are just a guideline, feel free to build whatever you want. You can use a component's library in order to help you to build the UI or code it from scratch, no preference here.
+
+![View the wall](resources/wireframe.png)
 
 
 <h2>What we are looking for?</h2>
  
-* Pay attention about how your code is organized. Es importante que el dominio de la aplicación esté reflejado en el código.
+* Pay attention about how your code is organized. It's important the domain of the application is reflected in the code.
 * We love reusable and scalable code. This is the reason why we pay attention to the separation of concerns between the UI and the business logic.
 * We would love to see the usage of the Software Design Patterns, SOLID principles and Clean Architectures.
-* You are not intended to be proven as a designer. The provided mockups are just a guideline, feel free to build whatever you want using a component's library in order to help you to build the UI.
 * We are not fanboys of frameworks/libraries but keep in mind that our front-end stack is based on React.
-* We love clean code.
 * We don't think 100% of code coverage is a must, but we love tests.
 * We are looking forward to seeing your code and discussing your solution with you.
  
