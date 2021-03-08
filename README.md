@@ -20,11 +20,6 @@ Implement a web-based social networking application (similar to Twitter) satisfy
 <h3>Following/Unfollowing a user</h3>
  
 * As a user we should be able to follow or unfollow a user.
- 
-<h2>How the UI should looke like?</h2>
-You are not intended to be proven as a designer. The provided mockup are just a guideline, feel free to build whatever you want. You can use a component's library in order to help you to build the UI or code it from scratch, no preference here.
-
-![View the wall](resources/wireframe.png)
 
 
 <h2>What we are looking for?</h2>
@@ -35,6 +30,11 @@ You are not intended to be proven as a designer. The provided mockup are just a 
 * We are not fanboys of frameworks/libraries but keep in mind that our front-end stack is based on React.
 * We don't think 100% of code coverage is a must, but we love tests.
 * We are looking forward to seeing your code and discussing your solution with you.
+
+<h2>How the UI should looke like?</h2>
+You are not intended to be proven as a designer. The provided mockup are just a guideline, feel free to build whatever you want. You can use a component's library in order to help you to build the UI or code it from scratch, no preference here.
+
+![View the wall](resources/wireframe.png)
  
  
 **NOTE**: Please it is important that you add instructions about how to run the application.
