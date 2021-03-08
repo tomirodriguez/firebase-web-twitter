@@ -6,7 +6,7 @@ Implement a web-based social networking application (similar to Twitter) satisfy
 <h2>Scenarios</h2> 
 
 **View timeline messages** 
--  Once the main view is accessed, the aggregated list of all messages from users we follow will be displayed.
+-  Once the main view is accessed, the aggregated list of all messages from users we follow (including mine) will be displayed.
 -  When selecting one of the following users, the timeline should only show posts from that user.
 -  Again, if no follower is selected, it should show the aggregated message list of all the users you follow.
 
