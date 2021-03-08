@@ -1,7 +1,6 @@
 WebTwitter
 ========================
- 
- 
+  
 Implement a web-based social networking application (similar to Twitter) satisfying the scenarios below.
  
 <h2>Scenarios</h2>
@@ -12,22 +11,21 @@ Implement a web-based social networking application (similar to Twitter) satisfy
 * When selecting one of the following users, the timeline should only show posts from that user.
 * Again, if no follower is selected, it should show the aggregated message list of all the users you follow.
  
-![View the wall](resources/wall.png)
  
 <h3>Posting a message</h3>
  
 * As a user we should be able to add new messages to the timeline 
  
-![Post a message](resources/post.png)
  
 <h3>Following/Unfollowing a user</h3>
  
 * As a user we should be able to follow or unfollow a user.
  
-![Follow](resources/follow.png)
- 
- 
-<h2>What we are looking for: </h2>
+<h2>How the UI should looke like?</h2>
+<h3>That is up to you, we will be checking how you structure the source code and how you reuse the different components, you can use a componentes library if you want or code it from scratch, no preference here. </h3>
+
+
+<h2>What we are looking for?</h2>
  
 * Pay attention about how your code is organized. Es importante que el dominio de la aplicación esté reflejado en el código.
 * We love reusable and scalable code. This is the reason why we pay attention to the separation of concerns between the UI and the business logic.
