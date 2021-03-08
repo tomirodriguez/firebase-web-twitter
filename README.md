@@ -3,23 +3,20 @@ WebTwitter
   
 Implement a web-based social networking application (similar to Twitter) satisfying the scenarios below.
  
-<h2>Scenarios</h2>
- 
-<h3>View timeline messages</h3>
- 
-* Once the main view is accessed, the aggregated list of all messages from users we follow will be displayed.
-* When selecting one of the following users, the timeline should only show posts from that user.
-* Again, if no follower is selected, it should show the aggregated message list of all the users you follow.
- 
- 
-<h3>Posting a message</h3>
- 
-* As a user we should be able to add new messages to the timeline 
+<h2>Scenarios</h2> 
+
+- View timeline messages 
+    * Once the main view is accessed, the aggregated list of all messages from users we follow will be displayed.
+    * When selecting one of the following users, the timeline should only show posts from that user.
+    * Again, if no follower is selected, it should show the aggregated message list of all the users you follow.
  
  
-<h3>Following/Unfollowing a user</h3>
+- Posting a message 
+    * As a user we should be able to add new messages to the timeline 
  
-* As a user we should be able to follow or unfollow a user.
+ 
+- Following/Unfollowing a user 
+    * As a user we should be able to follow or unfollow a user.
 
 
 <h2>What we are looking for?</h2>
@@ -33,6 +30,7 @@ Implement a web-based social networking application (similar to Twitter) satisfy
 
 <h2>How the UI should looke like?</h2>
 You are not intended to be proven as a designer. The provided mockup are just a guideline, feel free to build whatever you want. You can use a component's library in order to help you to build the UI or code it from scratch, no preference here.
+
 
 ![View the wall](resources/wireframe.png)
  
