@@ -2,6 +2,9 @@ WebTwitter
 ========================
   
 Implement a web-based social networking application (similar to Twitter) satisfying the scenarios below.
+
+**NOTE**: Please it is important that you add instructions about how to run the application.
+ 
  
 <h2>Scenarios</h2> 
 
@@ -33,9 +36,6 @@ You are not intended to be proven as a designer. The provided mockup are just a 
 
 
 ![View the wall](resources/wireframe.png)
- 
- 
-**NOTE**: Please it is important that you add instructions about how to run the application.
  
  
  
