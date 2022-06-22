@@ -1,17 +1,24 @@
-import { Helmet } from 'react-helmet';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { SEO } from './components/SEO';
+import { Home } from './pages';
+import { Header } from './views';
 
 function App() {
   return (
-    <div className="h-screen bg-blue-300">
-      <Helmet>
-        <meta lang="en" />
-        <meta charSet="utf-8" />
-
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>WebTwitter</title>
-        <meta name="description" content="Challenge para Lookiero" />
-      </Helmet>
-      <header></header>
+    <div className="h-screen bg-black text-slate-100">
+      <SEO />
+      <div className="container mx-auto max-w-[1320px]">
+        <div className="mx-5 flex text-primary-white">
+          <Header />
+          <main className="w-full">
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" replace />}></Route>
+              <Route path="/home" element={<Home />} />
+              <Route path="/about" element={<div className="">ABOUT</div>} />
+            </Routes>
+          </main>
+        </div>
+      </div>
     </div>
   );
 }
