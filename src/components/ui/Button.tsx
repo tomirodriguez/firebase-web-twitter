@@ -8,6 +8,7 @@ export const Button: React.FC<Props> = ({ children, title }) => {
   return (
     <button
       title={title}
+      type={'button'}
       className="w-full h-full transition-opacity rounded-full font-bold text-lg bg-primary-blue hover:opacity-90"
     >
       {children}

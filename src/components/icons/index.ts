@@ -1,2 +1,2 @@
-export * from './Home';
-export * from './Logo';
+export * from './Icons';
+export * from './Icon';

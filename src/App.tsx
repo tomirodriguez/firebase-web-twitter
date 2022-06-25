@@ -8,7 +8,7 @@ function App() {
     <div className="h-screen bg-black text-slate-100">
       <SEO />
       <div className="container mx-auto max-w-[1320px]">
-        <div className="mx-5 flex text-primary-white">
+        <div className="mx-5 flex text-primary-white pt-1">
           <Header />
           <main className="w-full">
             <Routes>
