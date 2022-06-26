@@ -1,5 +1,6 @@
-import { Feed, MainLayout } from '../views';
+import { HomeMainContent } from '../views/HomeMainContent';
+import { MainLayout } from '../views/MainLayout';
 
 export const Home: React.FC = () => (
-  <MainLayout mainContent={<Feed />} aside={<div>aside</div>} />
+  <MainLayout mainContent={<HomeMainContent />} aside={<div>aside</div>} />
 );

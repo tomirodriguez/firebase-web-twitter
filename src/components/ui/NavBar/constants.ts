@@ -1,14 +1,47 @@
-import { home } from '../../icons';
+import { iExplore, iHome } from '../../../icons';
 
-export const navBarSections = [
+type NavBarSection = {
+  name: string;
+  path: string;
+  icon: IconPath;
+  fillOnPath?: boolean;
+};
+
+export const navBarSections: NavBarSection[] = [
   {
-    name: 'Home',
+    name: 'Inicio',
     path: '/home',
-    icon: home,
+    icon: iHome,
   },
   {
-    name: 'About',
-    path: '/about',
-    icon: home,
+    name: 'Explorar',
+    path: '/explorar',
+    icon: iExplore,
+    fillOnPath: false,
+  },
+  {
+    name: 'Notificaciones',
+    path: '/notificaciones',
+    icon: iHome,
+  },
+  {
+    name: 'Mensajes',
+    path: '/mensajes',
+    icon: iHome,
+  },
+  {
+    name: 'Guardados',
+    path: '/guardados',
+    icon: iHome,
+  },
+  {
+    name: 'Listas',
+    path: '/listas',
+    icon: iHome,
+  },
+  {
+    name: 'Perfil',
+    path: '/perfil',
+    icon: iHome,
   },
 ];

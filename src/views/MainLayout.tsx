@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { TopBar } from '../components/ui/TopBar';
 
 type Props = {
   mainContent: ReactNode;
@@ -8,10 +9,11 @@ type Props = {
 export const MainLayout: React.FC<Props> = ({ mainContent, aside }) => {
   return (
     <div className="h-screen flex">
-      <div className="w-7/12 border-l border-r border-stone-700 h-screen px-4">
+      <div className="w-center h-screen pt-14 relative w-main-content">
+        <TopBar />
         {mainContent}
       </div>
-      <aside className="ml-8">{aside}</aside>
+      <aside className="pl-8 pt-14 border-l border-border">{aside}</aside>
     </div>
   );
 };

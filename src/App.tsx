@@ -1,14 +1,14 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { SEO } from './components/SEO';
-import { Home } from './pages';
-import { Header } from './views';
+import { Home } from './pages/Home';
+import { Header } from './views/Header';
 
 function App() {
   return (
-    <div className="h-screen bg-black text-slate-100">
+    <div className="h-screen bg-main-dark text-slate-100">
       <SEO />
       <div className="container mx-auto max-w-[1320px]">
-        <div className="mx-5 flex text-primary-white pt-1">
+        <div className="mx-5 flex text-primary-white">
           <Header />
           <main className="w-full">
             <Routes>
