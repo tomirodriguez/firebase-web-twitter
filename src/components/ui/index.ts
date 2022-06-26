@@ -1,3 +1,3 @@
 export * from './NavBar';
-export * from './Button';
+export * from './PrimaryButton';
 export * from './Logo';

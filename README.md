@@ -1,46 +1,42 @@
-# Getting Started with Create React App
+WebTwitter
+========================
+  
+Implement a web-based social networking application (similar to Twitter) satisfying the scenarios below.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**NOTE**: Please it is important that you add instructions about how to run the application.
+ 
+ 
+<h2>Scenarios</h2> 
 
-## Available Scripts
+**Posting a message**
+-  As a user we should be able to add new messages to the timeline 
 
-In the project directory, you can run:
+**Following/Unfollowing a user**
+- As a user we should be able to follow or unfollow a user.
 
-### `yarn start`
+**View timeline messages** 
+-  Once the main view is accessed, the aggregated list of all messages from users we follow (including mine) will be displayed.
+-  When selecting one of the following users, the timeline should only show posts from that user.
+-  Again, if no follower is selected, it should show the aggregated message list of all the users you follow.
+-  The content of a message should include this info: author name, date, content
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<h2>What we are looking for?</h2>
+ 
+* Pay attention about how your code is organized. It's important the domain of the application is reflected in the code.
+* We love reusable and scalable code. This is the reason why we pay attention to the separation of concerns between the UI and the business logic.
+* We would love to see the usage of the Software Design Patterns, SOLID principles and Clean Architectures.
+* We are not fanboys of frameworks/libraries but keep in mind that our front-end stack is based on React.
+* We don't think 100% of code coverage is a must, but we love tests.
+* We are looking forward to seeing your code and discussing your solution with you.
 
-### `yarn test`
+<h2>How the UI should look like?</h2>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You are not intended to be proven as a designer. The provided mockup are just a guideline, feel free to build whatever you want. You can use a component's library in order to help you to build the UI or code it from scratch, no preference here.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![View the wall](resources/wireframe.png)
+ 
+ 
+ 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
