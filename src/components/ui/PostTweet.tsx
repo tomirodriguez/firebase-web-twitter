@@ -1,10 +1,15 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { User } from '../../icons/User';
 import { PrimaryButton } from './PrimaryButton';
 
 export const PostTweet = () => {
   const [tweet, setTweet] = useState('');
   const isTweetValid = tweet.length <= 280 && tweet.length > 0;
+  const tweetInput = useRef<HTMLDivElement>(null);
+
+  const setInputFocus = () => {
+    tweetInput.current?.focus();
+  };
 
   const handleTweetChange = (event: ChangeEvent<HTMLDivElement>) => {
     setTweet(event.target.innerText);
@@ -19,6 +24,7 @@ export const PostTweet = () => {
         <div className="grow relative">
           <div
             className="w-full grow-0 break-words outline-none text-xl pt-2"
+            ref={tweetInput}
             contentEditable
             style={{
               overflow: 'wrap',
@@ -30,7 +36,10 @@ export const PostTweet = () => {
             aria-invalid={!isTweetValid}
           />
           {tweet.length === 0 && (
-            <span className="absolute text-xl top-0 pt-2 text-secondary-text">
+            <span
+              className="absolute text-xl top-0 pt-2 text-secondary-text"
+              onClick={setInputFocus}
+            >
               What's happening?
             </span>
           )}
