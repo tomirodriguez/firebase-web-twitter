@@ -1,10 +1,11 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import { User } from '../../icons/User';
 import { PrimaryButton } from './PrimaryButton';
+import { MAX_TWEET_LENGTH } from '../../constants';
 
 export const PostTweet = () => {
   const [tweet, setTweet] = useState('');
-  const isTweetValid = tweet.length <= 280 && tweet.length > 0;
+  const isTweetValid = tweet.length <= MAX_TWEET_LENGTH && tweet.length > 0;
   const tweetInput = useRef<HTMLDivElement>(null);
 
   const setInputFocus = () => {
@@ -46,9 +47,9 @@ export const PostTweet = () => {
         </div>
       </div>
       <div className="flex justify-end items-center">
-        {tweet.length > 280 && (
+        {tweet.length > MAX_TWEET_LENGTH && (
           <p id="error-message" className="text-error text-sm mr-3">
-            {280 - tweet.length}
+            {MAX_TWEET_LENGTH - tweet.length}
           </p>
         )}
         <div className="w-20 h-9 text-sm">
