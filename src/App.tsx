@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { SEO } from './components/SEO';
-import { Home } from './pages/Home';
+import { HomePage } from './pages';
 import { Header } from './views/Header';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
           <main className="min-h-screen w-full">
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />}></Route>
-              <Route path="/home" element={<Home />} />
+              <Route path="/home" element={<HomePage />} />
               <Route path="/about" element={<div className="">ABOUT</div>} />
             </Routes>
           </main>

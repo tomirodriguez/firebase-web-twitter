@@ -1,3 +1,0 @@
-type IconPath = {
-  path: string;
-};
