@@ -5,7 +5,6 @@ module.exports = {
     extend: {
       colors: {
         'primary-blue': '#1D9BF0',
-        'hover-blue': '#1D9BF01A',
         'primary-white': '#F7F9F9',
         'secondary-text': '#8b98a5',
         'hover-white': '#E7E9EA1A',
@@ -14,6 +13,7 @@ module.exports = {
         border: '#38444d',
         error: '#F4212E',
         search: '#263340',
+        'card-dark': '#1E2732',
       },
       spacing: {
         header: '275px',

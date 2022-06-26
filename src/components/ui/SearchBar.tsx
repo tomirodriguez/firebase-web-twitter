@@ -20,7 +20,7 @@ export const SearchBar = () => {
           />
         </div>
         <input
-          className="appearance-none outline-none bg-search text-secondary-text pr-3 pl-14 text-sm focus:border-primary-blue border border-search h-11 w-full rounded-full focus:bg-transparent text-white"
+          className="appearance-none outline-none bg-search  pr-3 pl-14 text-sm focus:border-primary-blue border border-search h-11 w-full rounded-full focus:bg-transparent text-white"
           type="text"
           name="search"
           id="search"

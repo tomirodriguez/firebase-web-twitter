@@ -5,3 +5,5 @@ export * from './PostTweet';
 export * from './TopBar';
 export * from './Tweet';
 export * from './SearchBar';
+export * from './FollowUser';
+export * from './Card';

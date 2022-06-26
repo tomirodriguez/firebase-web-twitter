@@ -8,3 +8,4 @@ export const BLUR = '#15202bbf';
 export const BORDER = '#38444d';
 export const ERROR = '#F4212E';
 export const SEARCH = '#263340';
+export const CARD_DARK = '#1E2732';

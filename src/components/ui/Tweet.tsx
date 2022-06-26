@@ -6,15 +6,21 @@ type Props = {
   author: string;
   message: string;
   date: Date;
-  userImage?: string;
+  image?: string;
 };
 
-export const Tweet: FC<Props> = ({ author, message, date, userImage }) => {
+export const Tweet: FC<Props> = ({ author, message, date, image }) => {
   return (
     <article className="flex border-b border-border p-5 hover:bg-opacity-5 hover:bg-white cursor-pointer">
-      <div className="w-12 mr-4 mb-1">
-        {userImage ? (
-          <img src={userImage} alt={author} width={48} height={48} />
+      <div className="w-12 mr-4 mb-1 aspect-square shrink-0">
+        {image ? (
+          <img
+            className="rounded-full"
+            src={image}
+            alt={author}
+            width={48}
+            height={48}
+          />
         ) : (
           <User />
         )}
