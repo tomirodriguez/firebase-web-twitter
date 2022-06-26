@@ -1,5 +1,6 @@
 export * from './NavBar';
 export * from './PrimaryButton';
+export * from './FollowButton';
 export * from './Logo';
 export * from './PostTweet';
 export * from './TopBar';

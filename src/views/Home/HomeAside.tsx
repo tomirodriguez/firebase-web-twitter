@@ -4,11 +4,11 @@ import { NewFollowersList } from './NewFollowersList';
 
 export const HomeAside: FC = () => {
   return (
-    <aside className="flex flex-col shrink-0 min-h-screen">
-      <div className="mb-4">
-        <SearchBar />
+    <aside className="flex flex-col shrink-0 min-h-screen h-full">
+      <SearchBar />
+      <div className="mt-4">
+        <NewFollowersList />
       </div>
-      <NewFollowersList />
     </aside>
   );
 };

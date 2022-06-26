@@ -8,7 +8,7 @@ export const SearchBar = () => {
 
   return (
     <div
-      className="sticky top-0 h-12 flex items-center bg-blur transition-none pt-1"
+      className="sticky top-0 h-14 flex items-center bg-blur transition-none"
       style={{ backdropFilter: 'blur(12px)' }}
     >
       <form className="flex items-center relative w-full">

@@ -14,11 +14,14 @@ module.exports = {
         error: '#F4212E',
         search: '#263340',
         'card-dark': '#1E2732',
+        'follow-black': '#0F1419',
+        'follow-white': '#EFF3F4',
       },
       spacing: {
         header: '275px',
         'main-content': '600px',
         aside: '322px',
+        18: '72px',
       },
       fontSize: {
         sm: '.9375rem',
