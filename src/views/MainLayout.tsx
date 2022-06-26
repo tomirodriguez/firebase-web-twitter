@@ -8,14 +8,12 @@ type Props = {
 
 export const MainLayout: React.FC<Props> = ({ mainContent, aside }) => {
   return (
-    <div className="flex">
-      <div className="w-center pt-14 relative w-main-content">
+    <div className="flex justify-between">
+      <div className="center-size shrink-0 border-r border-border">
         <TopBar />
         {mainContent}
       </div>
-      <aside className="pl-8 pt-14 border-l border-border min-h-screen">
-        {aside}
-      </aside>
+      <div className="aside-size min-h-screen">{aside}</div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="bg-main-dark text-slate-100 flex flex-col">
       <SEO />
-      <div className="container mx-auto max-w-[1320px]">
+      <div className="container mx-auto max-w-[1300px]">
         <div className="mx-5 flex text-primary-white">
           <Header />
           <main className="min-h-screen w-full">

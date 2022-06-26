@@ -1,7 +1,7 @@
 import { NavBar } from '../components/ui/NavBar';
 
 export const Header = () => (
-  <header className="flex flex-col w-header shrink-0 border-r border-border">
+  <header className="header-size flex flex-col shrink-0 border-r border-border">
     <NavBar />
   </header>
 );

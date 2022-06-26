@@ -13,10 +13,15 @@ module.exports = {
         blur: '#15202bbf',
         border: '#38444d',
         error: '#F4212E',
+        search: '#263340',
       },
       spacing: {
         header: '275px',
         'main-content': '600px',
+        aside: '322px',
+      },
+      fontSize: {
+        sm: '.9375rem',
       },
     },
   },

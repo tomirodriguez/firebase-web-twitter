@@ -1,0 +1,10 @@
+export const SECONDARY_TEXT = '#8b98a5';
+export const PRIMARY_BLUE = '#1D9BF0';
+export const HOVER_BLUE = '#1D9BF01A';
+export const PRIMARY_WHITE = '#F7F9F9';
+export const HOVER_WHITE = '#E7E9EA1A';
+export const MAIN_DARK = '#15202B';
+export const BLUR = '#15202bbf';
+export const BORDER = '#38444d';
+export const ERROR = '#F4212E';
+export const SEARCH = '#263340';
