@@ -17,8 +17,6 @@ export const NavBarItem: React.FC<Props> = ({
 }) => {
   const isSelected = useIsCurrentSection(path);
 
-  console.log({ path, isSelected });
-
   return (
     <Link to={path} title={text}>
       <div className="w-12 h-12 md:w-fit md:h-12 rounded-full md:p-3 md:my-1 hover:bg-hover-white flex justify-center items-center">
