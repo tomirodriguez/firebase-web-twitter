@@ -25,7 +25,10 @@ export const FollowUser: FC<Props> = ({ user }) => {
           <User />
         )}
       </div>
-      <div className="grow px-5">{user.name}</div>
+      <div className="grow px-5 flex flex-col">
+        <h3>{user.name}</h3>
+        <h4 className="text-secondary-text">@{user.username}</h4>
+      </div>
       <div className="shrink-0">
         <FollowButton title={'Follow'} text="Follow" />
       </div>

@@ -7,6 +7,7 @@ type User = {
   name: string;
   image?: string;
   email: string;
+  username: string;
 };
 
 type Tweet = {

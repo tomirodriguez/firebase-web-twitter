@@ -10,7 +10,7 @@ export const Card: FC<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <div className="bg-card-dark rounded-3xl w-full">
-      {title && <h2 className="font-bold text-xl py-3 px-4">{title}</h2>}
+      {title && <h2 className="font-black text-xl py-3 px-4">{title}</h2>}
       {children}
     </div>
   );
