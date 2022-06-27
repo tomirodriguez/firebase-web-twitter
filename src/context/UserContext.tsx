@@ -7,8 +7,10 @@ import {
   useState,
 } from 'react';
 import { auth } from '../firebase';
+import { User as FirebaseUser } from 'firebase/auth';
+import { getUserData } from '../firebase/getUserData';
 
-const defaultFirebaseFunction = (): Promise<DbResponse> =>
+const defaultFirebaseFunction = (): Promise<{}> =>
   new Promise((resolve) =>
     resolve({ success: false, errorKey: 'CONTEXT_LOADING_ERROR' })
   );
@@ -26,19 +28,34 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (fireUser) => {
-      setLoading(true);
-      if (fireUser) {
-        console.log('HAY USUARIO', fireUser?.uid);
-      } else {
-        setUser(null);
+  const onUserChange = async (fireUser: FirebaseUser | null) => {
+    setLoading(true);
+    if (fireUser) {
+      try {
+        await getUserData(fireUser.uid);
+      } catch (error) {
+        setUser({
+          email: fireUser.email || '',
+          id: fireUser.uid,
+          name: '',
+          username: '',
+          bio: '',
+        });
       }
-      setLoading(false);
-    });
+    } else {
+      setUser(null);
+    }
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, onUserChange);
+
+    return unsubscribe;
   }, []);
 
-  const tweet = (tweet: string): Promise<DbResponse> => {
+  const tweet = (tweet: string): Promise<{}> => {
     alert(`SE VA A TWITTER ${tweet}`);
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -47,7 +64,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     });
   };
 
-  const logout = (): Promise<DbResponse> => {
+  const logout = (): Promise<{}> => {
     setUser(null);
     return new Promise((resolve) => {
       setTimeout(() => {

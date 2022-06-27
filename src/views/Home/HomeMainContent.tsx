@@ -1,10 +1,9 @@
-import { useContext } from 'react';
-import { PostTweet } from '../../components/ui/PostTweet';
-import { Feed } from '../Feed';
-import { UserContext } from '../../context/UserContext';
+import { PostTweet } from '../../components/ui';
+import { useUser } from '../../hooks';
+import { Feed } from './Feed';
 
 export const HomeMainContent = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
 
   if (!user) return null;
 

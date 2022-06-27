@@ -3,22 +3,18 @@ type IconPath = {
 };
 
 type User = {
-  id: number;
+  id: string;
   name: string;
   image?: string;
   email: string;
   username: string;
+  bio: string;
 };
 
 type Tweet = {
   user: User;
   tweet: string;
   timestamp: Date;
-};
-
-type DbResponse = {
-  success: boolean;
-  errorKey: string;
 };
 
 type UserContextType = {

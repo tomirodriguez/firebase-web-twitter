@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { PrimaryButton } from '../PrimaryButton';
-import { Logo } from '../Logo';
+import { PrimaryButton } from '../Main/PrimaryButton';
+import { LogoLink } from '../LogoLink';
 import { navBarSections } from './constants';
 import { NavBarItem } from './NavBarItem';
 
@@ -9,7 +9,7 @@ export const NavBar: FC = () => {
     <div className="px-3">
       <h1>
         <span hidden>WebTwitter</span>
-        <Logo />
+        <LogoLink />
       </h1>
       <nav className="flex flex-col">
         {navBarSections.map(({ name, path, icon, fillOnPath = true }) => (
