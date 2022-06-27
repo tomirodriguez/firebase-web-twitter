@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 type Props = {
   icon: IconPath;
-  size?: number;
+  size?: number | string;
   color?: string;
   filled?: boolean;
 };

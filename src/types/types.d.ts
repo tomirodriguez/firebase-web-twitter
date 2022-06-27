@@ -15,3 +15,15 @@ type Tweet = {
   tweet: string;
   timestamp: Date;
 };
+
+type DbResponse = {
+  success: boolean;
+  errorKey: string;
+};
+
+type UserContextType = {
+  loading: boolean;
+  user: User | null;
+  tweet: (tweet: string) => Promise<DbResponse>;
+  logout: () => Promise<DbResponse>;
+};

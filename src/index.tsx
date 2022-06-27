@@ -3,15 +3,20 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import UserProvider from './context/UserContext';
+import { SEO } from './components';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <UserProvider>
+    <BrowserRouter>
+      <SEO />
+      <App />
+    </BrowserRouter>
+  </UserProvider>
   // </React.StrictMode>
 );
 

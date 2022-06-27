@@ -3,3 +3,4 @@ export * from './Header';
 export * from './Feed';
 export * from './Home/HomeAside';
 export * from './Home/HomeMainContent';
+export * from './Loading';

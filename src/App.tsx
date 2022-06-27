@@ -1,26 +1,49 @@
+import { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { SEO } from './components/SEO';
+import { RequireAuth } from './components';
+import { UserContext } from './context/UserContext';
 import { HomePage } from './pages';
+import { LoginPage } from './pages/Login';
 import { Header } from './views/Header';
+import { Loading } from './views/Loading';
 
-function App() {
+const App = () => {
+  const { loading } = useContext(UserContext);
+
+  if (loading) return <Loading />;
+
   return (
-    <div className="bg-main-dark text-slate-100 flex flex-col">
-      <SEO />
-      <div className="container mx-auto max-w-[1300px]">
-        <div className="mx-5 flex text-primary-white">
-          <Header />
-          <main className="min-h-screen w-full">
-            <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />}></Route>
-              <Route path="/home" element={<HomePage />} />
-              <Route path="/about" element={<div className="">ABOUT</div>} />
-            </Routes>
-          </main>
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="*"
+        element={
+          <RequireAuth>
+            <div className="bg-main-dark text-slate-100 flex flex-col">
+              <div className="container mx-auto max-w-[1300px]">
+                <div className="mx-5 flex text-primary-white">
+                  <Header />
+                  <main className="min-h-screen w-full">
+                    <Routes>
+                      <Route
+                        path="/"
+                        element={<Navigate to="/home" replace />}
+                      ></Route>
+                      <Route path="/home" element={<HomePage />} />
+                      <Route
+                        path="/about"
+                        element={<div className="">ABOUT</div>}
+                      />
+                    </Routes>
+                  </main>
+                </div>
+              </div>
+            </div>
+          </RequireAuth>
+        }
+      />
+    </Routes>
   );
-}
+};
 
 export default App;
