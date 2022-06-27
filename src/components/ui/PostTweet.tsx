@@ -1,9 +1,14 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState, FC } from 'react';
 import { User } from '../../icons/User';
 import { PrimaryButton } from './PrimaryButton';
 import { MAX_TWEET_LENGTH } from '../../constants';
+import { UserProfilePic } from './UserProfilePic';
 
-export const PostTweet = () => {
+type Props = {
+  user: User;
+};
+
+export const PostTweet: FC<Props> = ({ user }) => {
   const [tweet, setTweet] = useState('');
   const isTweetValid = tweet.length <= MAX_TWEET_LENGTH && tweet.length > 0;
   const tweetInput = useRef<HTMLDivElement>(null);
@@ -20,7 +25,7 @@ export const PostTweet = () => {
     <div>
       <div className="flex items-start">
         <div className="mr-4 shrink-0">
-          <User size={48} />
+          <UserProfilePic src={user.image} name={user.name} />
         </div>
         <div className="grow relative">
           <div

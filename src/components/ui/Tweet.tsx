@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { User } from '../../icons/User';
 import fecha from 'fecha';
+import { FC } from 'react';
+import { UserProfilePic } from './UserProfilePic';
 
 type Props = {
   author: string;
@@ -20,17 +20,7 @@ export const Tweet: FC<Props> = ({
   return (
     <article className="flex border-b border-border p-5 hover:bg-opacity-5 hover:bg-white cursor-pointer">
       <div className="w-12 mr-4 mb-1 aspect-square shrink-0">
-        {image ? (
-          <img
-            className="rounded-full"
-            src={image}
-            alt={author}
-            width={48}
-            height={48}
-          />
-        ) : (
-          <User />
-        )}
+        <UserProfilePic src={image} name={author} />
       </div>
       <div className="flex flex-col">
         <div className="flex items-center">

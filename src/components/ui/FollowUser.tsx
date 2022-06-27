@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { User } from '../../icons';
 import { FollowButton } from '.';
+import { UserProfilePic } from './UserProfilePic';
 
 type Props = {
   user: User;
@@ -13,17 +14,7 @@ export const FollowUser: FC<Props> = ({ user }) => {
       key={user.id}
     >
       <div className="aspect-square shrink-0">
-        {user.image ? (
-          <img
-            className="rounded-full"
-            src={user.image}
-            alt={user.name}
-            width={48}
-            height={48}
-          />
-        ) : (
-          <User />
-        )}
+        <UserProfilePic src={user.image} name={user.name} />
       </div>
       <div className="grow px-5 flex flex-col">
         <h3>{user.name}</h3>
