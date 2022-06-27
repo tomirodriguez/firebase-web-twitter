@@ -7,9 +7,9 @@ import {
 } from 'react';
 import { DUMMY_USER } from '../mock';
 
-const defaultFirebaseFunction = (): Promise<FirebaseResult> =>
+const defaultFirebaseFunction = (): Promise<DbResponse> =>
   new Promise((resolve) =>
-    resolve({ success: false, error: 'CONTEXT_LOADING_ERROR' })
+    resolve({ success: false, errorKey: 'CONTEXT_LOADING_ERROR' })
   );
 
 const defaultContext = {
@@ -32,20 +32,20 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     }, 500);
   }, []);
 
-  const tweet = (tweet: string): Promise<FirebaseResult> => {
+  const tweet = (tweet: string): Promise<DbResponse> => {
     alert(`SE VA A TWITTER ${tweet}`);
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({ success: true, error: '' });
+        resolve({ success: true, errorKey: '' });
       }, 300);
     });
   };
 
-  const logout = (): Promise<FirebaseResult> => {
+  const logout = (): Promise<DbResponse> => {
     setUser(null);
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({ success: true, error: '' });
+        resolve({ success: true, errorKey: '' });
       }, 300);
     });
   };
