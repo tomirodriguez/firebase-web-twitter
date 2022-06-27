@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { getAuth, connectAuthEmulator } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -12,10 +13,12 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
 export const firestore = getFirestore(app);
 
 if (process.env.NODE_ENV === 'development') {
   connectFirestoreEmulator(firestore, 'localhost', 8080);
+  connectAuthEmulator(auth, 'http://localhost:9099');
 }
 if (process.env.NODE_ENV === 'production') getAnalytics(app);

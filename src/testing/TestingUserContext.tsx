@@ -6,7 +6,7 @@ const defaultFirebaseFunction = () =>
     resolve({ success: true, errorKey: '' })
   );
 
-export const TestingUserContext: FC<
+export const TestingUserProvider: FC<
   PropsWithChildren & Partial<UserContextType>
 > = ({
   children,

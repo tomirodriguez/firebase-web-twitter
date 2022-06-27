@@ -1,3 +1,4 @@
+import { onAuthStateChanged } from 'firebase/auth';
 import {
   createContext,
   FC,
@@ -5,7 +6,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { DUMMY_USER } from '../mock';
+import { auth } from '../firebase';
 
 const defaultFirebaseFunction = (): Promise<DbResponse> =>
   new Promise((resolve) =>
@@ -26,10 +27,15 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setUser(DUMMY_USER);
+    onAuthStateChanged(auth, (fireUser) => {
+      setLoading(true);
+      if (fireUser) {
+        console.log('HAY USUARIO', fireUser?.uid);
+      } else {
+        setUser(null);
+      }
       setLoading(false);
-    }, 500);
+    });
   }, []);
 
   const tweet = (tweet: string): Promise<DbResponse> => {
