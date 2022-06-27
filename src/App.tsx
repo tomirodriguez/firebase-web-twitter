@@ -5,12 +5,11 @@ import { UserContext } from './context/UserContext';
 import { HomePage } from './pages';
 import { LoginPage } from './pages/Login';
 import { Header } from './views/Header';
-import { Loading } from './views/Loading';
 
 const App = () => {
   const { loading } = useContext(UserContext);
 
-  if (loading) return <Loading />;
+  if (loading) return <div>loading</div>;
 
   return (
     <Routes>
