@@ -12,6 +12,7 @@ First install the dependencias needed
 Create two files: .env.local and .env.test.local. Both files must contain the .env.example under the local section
 
 <code>REACT_APP_API_KEY=demo-local</code>
+<code>REACT_APP_PROJECT_ID=demo-local</code>
 
 <h2>Running the project</h2>
 
