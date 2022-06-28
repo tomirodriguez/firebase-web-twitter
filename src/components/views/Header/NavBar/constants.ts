@@ -1,4 +1,4 @@
-import { iExplore, iHome } from '../../../icons';
+import { iExplore, iHome } from '../../../../icons';
 
 type NavBarSection = {
   name: string;

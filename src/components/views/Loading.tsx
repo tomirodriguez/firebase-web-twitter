@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import Icons, { iLogo } from '../icons';
-import { PRIMARY_BLUE } from '../colors/index';
+import Icons, { iLogo } from '../../icons';
+import { PRIMARY_BLUE } from '../../colors/index';
 
 export const Loading: FC = () => {
   return (

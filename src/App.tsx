@@ -1,8 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './components';
-import { HomePage } from './pages';
-import { LoginPage } from './pages/Login';
-import { Header } from './views/Header';
+import { Header } from './components/views';
+import { HomePage, LoginPage } from './pages';
 
 const App = () => {
   return (

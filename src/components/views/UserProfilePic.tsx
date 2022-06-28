@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { User } from '../../../icons';
+import { User } from '../../icons';
 
 type Props = {
   src: string | undefined;

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { PrimaryButton } from '../Main/PrimaryButton';
-import { LogoLink } from '../LogoLink';
+import { PrimaryButton } from '../../PrimaryButton';
+import { LogoLink } from '../../LogoLink';
 import { navBarSections } from './constants';
 import { NavBarItem } from './NavBarItem';
 

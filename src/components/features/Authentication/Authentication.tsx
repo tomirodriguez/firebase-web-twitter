@@ -1,6 +1,6 @@
 import { FC, SyntheticEvent } from 'react';
-import { useUser } from '../../hooks/useUser';
-import { LoginForm } from '../ui';
+import { useUser } from '../../../hooks/useUser';
+import { LoginForm } from './LoginForm';
 
 export const Authentication: FC = () => {
   const { signIn } = useUser();

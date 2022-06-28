@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { FollowButton } from '..';
+import { FollowButton } from '.';
 import { UserProfilePic } from './UserProfilePic';
 
 type Props = {

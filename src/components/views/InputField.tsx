@@ -6,8 +6,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import { ERROR } from '../../../colors';
-import { INPUT_MAX_LENGTH } from '../../../constants/index';
+import { ERROR } from '../../colors';
+import { INPUT_MAX_LENGTH } from '../../constants/index';
 
 type Props = {
   label: string;

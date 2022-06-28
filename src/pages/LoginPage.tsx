@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom';
-import { Authentication, FillUserData } from '../components';
-import { LoginBackground } from '../components/ui/Main/LoginBackground';
+import { Loading } from '../components/views';
+import { Authentication, FillUserData } from '../components/features';
+import { LoginBackground } from '../components/features/Authentication/LoginBackground';
 import { FOOTER_TEXT } from '../constants/index';
 import { useUser } from '../hooks';
 import { Logo } from '../icons';
-import { Loading } from '../views';
 
 export const LoginPage: React.FC = () => {
   const { user, loading } = useUser();

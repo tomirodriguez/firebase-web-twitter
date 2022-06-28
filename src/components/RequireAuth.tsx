@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useUser } from '../hooks';
-import { Loading } from '../views';
+import { Loading } from './views';
 
 export const RequireAuth: FC<PropsWithChildren> = ({ children }) => {
   const { user, loading } = useUser();

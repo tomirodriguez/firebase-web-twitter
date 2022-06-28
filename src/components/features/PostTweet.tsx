@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { MAX_TWEET_LENGTH } from '../../constants';
-import { PrimaryButton } from './Main/PrimaryButton';
-import { UserProfilePic } from './Main/UserProfilePic';
+import { PrimaryButton } from '../views/PrimaryButton';
+import { UserProfilePic } from '../views/UserProfilePic';
 
 type Props = {
   user: User;
