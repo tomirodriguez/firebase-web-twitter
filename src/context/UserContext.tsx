@@ -8,18 +8,20 @@ import {
 } from 'react';
 import { auth } from '../firebase';
 import { User as FirebaseUser } from 'firebase/auth';
-import { getUserData } from '../firebase/getUserData';
+import { getUserData } from '../firebase/firestore/getUserData';
+import { signInWithGoogle } from '../firebase/auth/signInWithGoogle';
+import { setUserData } from '../firebase/firestore/setUserData';
 
-const defaultFirebaseFunction = (): Promise<{}> =>
-  new Promise((resolve) =>
-    resolve({ success: false, errorKey: 'CONTEXT_LOADING_ERROR' })
-  );
+const defaultFirebaseFunction = (): Promise<void> =>
+  new Promise((resolve, reject) => reject());
 
 const defaultContext = {
   user: null,
   loading: true,
   tweet: defaultFirebaseFunction,
   logout: defaultFirebaseFunction,
+  signIn: defaultFirebaseFunction,
+  setUserProfile: defaultFirebaseFunction,
 };
 
 export const UserContext = createContext<UserContextType>(defaultContext);
@@ -32,7 +34,8 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     setLoading(true);
     if (fireUser) {
       try {
-        await getUserData(fireUser.uid);
+        const user = await getUserData(fireUser.uid);
+        setUser(user);
       } catch (error) {
         setUser({
           email: fireUser.email || '',
@@ -55,26 +58,41 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const tweet = (tweet: string): Promise<{}> => {
-    alert(`SE VA A TWITTER ${tweet}`);
-    return new Promise((resolve) => {
+  const tweet = (tweet: string): Promise<void> => {
+    return new Promise((_, reject) => {
       setTimeout(() => {
-        resolve({ success: true, errorKey: '' });
+        reject('To be implemented');
       }, 300);
     });
   };
 
-  const logout = (): Promise<{}> => {
+  const logout = (): Promise<void> => {
     setUser(null);
-    return new Promise((resolve) => {
+    return new Promise((_, reject) => {
       setTimeout(() => {
-        resolve({ success: true, errorKey: '' });
+        reject('To be implemented');
       }, 300);
     });
+  };
+
+  const signIn = async () => {
+    setLoading(true);
+    return signInWithGoogle().finally(() => setLoading(false));
+  };
+
+  const setUserProfile = async (user: User) => {
+    setLoading(true);
+    return setUserData(user)
+      .then(() => {
+        setUser(user);
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
-    <UserContext.Provider value={{ user, loading, tweet, logout }}>
+    <UserContext.Provider
+      value={{ user, loading, tweet, logout, signIn, setUserProfile }}
+    >
       {children}
     </UserContext.Provider>
   );

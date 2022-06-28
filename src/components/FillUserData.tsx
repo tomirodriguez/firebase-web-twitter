@@ -1,4 +1,5 @@
 import { FC, useState, SyntheticEvent } from 'react';
+import { useUser } from '../hooks';
 import { Logo } from '../icons';
 import { InputField, PrimaryButton } from './ui';
 
@@ -7,33 +8,47 @@ type Props = {
 };
 
 export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
+  const { setUserProfile, user } = useUser();
   const [name, setName] = useState(suggestedName);
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
   const [forceError, setForceError] = useState(false);
 
-  const nameValidation = (newName: string) => {
-    if (newName.length === 0) return { error: 'Name must be filled' };
+  if (!user) return null;
 
-    return { error: '' };
+  const nameValidation: InputValidation = (newName: string) => {
+    if (newName.length === 0)
+      return { errorMessage: 'Name must be filled', error: false };
+
+    return { errorMessage: '', error: false };
   };
 
-  const usernameValidation = (newUsername: string) => {
+  const usernameValidation: InputValidation = (newUsername: string) => {
     const cleanValue = newUsername.replace(/[^a-zA-Z\d_-]/g, '');
     if (cleanValue.length === 0) {
       setUsername('');
-      return { error: 'Username must be filled' };
+      return { errorMessage: 'Username must be filled', error: false };
     } else {
       setUsername('@' + cleanValue);
     }
 
-    return { error: '' };
+    return { errorMessage: '', error: false };
   };
 
   const handleFormSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
 
     setForceError(true);
+
+    const { error: nameHasError } = nameValidation(name);
+    const { error: usernameHasError } = nameValidation(username);
+
+    console.log('VA EL USER', nameHasError, usernameHasError);
+    if (nameHasError || usernameHasError) return;
+
+    console.log('VA EL USER');
+
+    setUserProfile({ ...user, username, name, bio });
   };
 
   return (

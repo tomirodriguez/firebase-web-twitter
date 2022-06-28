@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { CustomError } from '../utils/CustomError';
-import { auth } from './firebaseConfig';
+import { CustomError } from '../../utils/CustomError';
+import { auth } from '../firebaseConfig';
 
 export const signInWithGoogle = async (): Promise<void> => {
   const provider = new GoogleAuthProvider();

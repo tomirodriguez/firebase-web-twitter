@@ -4,11 +4,10 @@ import { LoginBackground } from '../components/ui/Main/LoginBackground';
 import { FOOTER_TEXT } from '../constants/index';
 import { useUser } from '../hooks';
 import { Logo } from '../icons';
+import { Loading } from '../views';
 
 export const LoginPage: React.FC = () => {
   const { user, loading } = useUser();
-
-  if (loading) return <pre>loading</pre>;
 
   if (user && user.username) return <Navigate to={'/home'} replace />;
 
@@ -45,6 +44,12 @@ export const LoginPage: React.FC = () => {
       <footer className="shrink-0 py-4 text-secondary-text text-sm text-center">
         {FOOTER_TEXT}
       </footer>
+
+      {loading && (
+        <div className="fixed w-full h-full opacity-80">
+          <Loading />
+        </div>
+      )}
     </main>
   );
 };

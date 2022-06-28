@@ -19,7 +19,7 @@ type Props = {
   autocomplete?: boolean;
   required?: boolean;
   maxLength?: number;
-  validation?: (value: string) => { error: string };
+  validation?: InputValidation;
   forceError?: boolean;
 };
 
@@ -33,7 +33,7 @@ export const InputField: FC<Props> = ({
   autocomplete = true,
   required = false,
   maxLength = INPUT_MAX_LENGTH,
-  validation = () => ({ error: '' }),
+  validation = () => ({ error: false, errorMessage: '' }),
   forceError = false,
 }) => {
   const id = label.replace(/\s/g, '').toLowerCase();
@@ -56,8 +56,8 @@ export const InputField: FC<Props> = ({
   };
 
   useEffect(() => {
-    const { error: validationError } = validation(forcedValue);
-    setError(validationError);
+    const { errorMessage } = validation(forcedValue);
+    setError(errorMessage);
   }, [forcedValue, validation, forceError]);
 
   const showError = error !== '' && (!firstInput || forceError);

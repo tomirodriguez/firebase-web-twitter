@@ -1,16 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './components';
-import { useUser } from './hooks';
 import { HomePage } from './pages';
 import { LoginPage } from './pages/Login';
-import { Loading } from './views';
 import { Header } from './views/Header';
 
 const App = () => {
-  const { loading } = useUser();
-
-  if (loading) return <Loading />;
-
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />

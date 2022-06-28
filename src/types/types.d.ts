@@ -20,6 +20,13 @@ type Tweet = {
 type UserContextType = {
   loading: boolean;
   user: User | null;
-  tweet: (tweet: string) => Promise<DbResponse>;
-  logout: () => Promise<DbResponse>;
+  tweet: (tweet: string) => Promise<void>;
+  logout: () => Promise<void>;
+  signIn: () => Promise<void>;
+  setUserProfile: (user: User) => Promise<void>;
+};
+
+type InputValidation = (value: string) => {
+  error: boolean;
+  errorMessage: string;
 };
