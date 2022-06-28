@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { SearchBar } from '../../components/ui';
-import { NewFollowersList } from './NewFollowersList';
+import { SearchBar } from '../components/ui';
+import { NewFollowersList } from '../components';
 
 export const HomeAside: FC = () => {
   return (

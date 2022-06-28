@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom';
+import { Authentication, FillUserData } from '../components';
 import { LoginBackground } from '../components/ui/Main/LoginBackground';
-import { useUser } from '../hooks';
-import { LoginView } from '../views';
 import { FOOTER_TEXT } from '../constants/index';
-import { FillUserData } from '../components';
+import { useUser } from '../hooks';
+import { Logo } from '../icons';
 
 export const LoginPage: React.FC = () => {
   const { user, loading } = useUser();
@@ -27,7 +27,16 @@ export const LoginPage: React.FC = () => {
             </div>
             <div className="shrink-0 w-full lg:w-1/2 h-full relative flex justify-center lg:justify-end">
               <div className="bg-black w-full justify-center lg:w-3/4 lg:min-w-[490px] shrink-0 h-full flex items-center">
-                <LoginView />
+                <div className="flex flex-col text-white p-8">
+                  <Logo size={42} />
+                  <h1 className="font-black text-6xl my-12">Happening now</h1>
+                  <h2 className="font-bold text-3xl mb-8">
+                    Join WebTwitter today.
+                  </h2>
+                  <div className="max-w-[300px]">
+                    <Authentication />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { HomeAside } from '../views';
-import { HomeMainContent } from '../views/Home/HomeMainContent';
+import { HomeMainContent } from '../views/HomeMainContent';
 import { MainLayout } from '../views/MainLayout';
 
 export const HomePage: React.FC = () => (

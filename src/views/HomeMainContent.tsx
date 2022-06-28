@@ -1,6 +1,6 @@
-import { PostTweet } from '../../components/ui';
-import { useUser } from '../../hooks';
-import { Feed } from './Feed';
+import { PostTweet } from '../components/ui';
+import { useUser } from '../hooks';
+import { Feed } from '../components';
 
 export const HomeMainContent = () => {
   const { user } = useUser();

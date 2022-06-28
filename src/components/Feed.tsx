@@ -1,5 +1,5 @@
-import { Tweet } from '../../components/ui/Main/Tweet';
-import { TWEETS } from '../../mock';
+import { Tweet } from './ui/Main/Tweet';
+import { TWEETS } from '../mock';
 
 export const Feed = () => {
   return (
