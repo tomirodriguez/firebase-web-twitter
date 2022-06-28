@@ -17,6 +17,26 @@ describe('<App>', () => {
     expect(window.location.pathname).toBe('/login');
   });
 
+  test('should redirect to login if user is logged but has no data', async () => {
+    render(
+      <TestingUserProvider
+        user={{
+          email: 'anemail@gmail.com',
+          name: '',
+          bio: '',
+          username: '',
+          id: '99',
+        }}
+      >
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </TestingUserProvider>
+    );
+
+    expect(window.location.pathname).toBe('/login');
+  });
+
   test('should redirect to home if path is "/"', async () => {
     render(
       <TestingUserProvider user={DUMMY_USER}>
