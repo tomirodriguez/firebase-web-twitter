@@ -1,3 +1,3 @@
 export * from './firebaseConfig';
 export * from './auth/signInWithGoogle';
-export * from './firestore/getUserData';
+export * from './firestore/user';

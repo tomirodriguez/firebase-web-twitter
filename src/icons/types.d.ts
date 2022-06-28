@@ -1,0 +1,3 @@
+type IconPath = {
+  path: string;
+};

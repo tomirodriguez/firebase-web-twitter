@@ -1,4 +1,4 @@
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 import {
   createContext,
   FC,
@@ -7,10 +7,8 @@ import {
   useState,
 } from 'react';
 import { auth } from '../firebase';
-import { User as FirebaseUser } from 'firebase/auth';
-import { getUserData } from '../firebase/firestore/getUserData';
 import { signInWithGoogle } from '../firebase/auth/signInWithGoogle';
-import { setUserData } from '../firebase/firestore/setUserData';
+import { fbGetUserProfile, fbSetUserProfile } from '../firebase/firestore/user';
 
 const defaultFirebaseFunction = (): Promise<void> =>
   new Promise((resolve, reject) => reject());
@@ -34,12 +32,13 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     setLoading(true);
     if (fireUser) {
       try {
-        const user = await getUserData(fireUser.uid);
+        const user = await fbGetUserProfile(fireUser.uid);
         setUser(user);
       } catch (error) {
         setUser({
           email: fireUser.email || '',
           id: fireUser.uid,
+          image: fireUser.photoURL || '',
           name: '',
           username: '',
           bio: '',
@@ -82,7 +81,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const setUserProfile = async (user: User) => {
     setLoading(true);
-    return setUserData(user)
+    return fbSetUserProfile(user)
       .then(() => {
         setUser(user);
       })

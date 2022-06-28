@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { DUMMY_USER } from './mock';
-import { TestingUserProvider } from './testing/TestingUserContext';
+import { TestingUserProvider } from './testing';
 import App from './App';
 
 describe('<App>', () => {

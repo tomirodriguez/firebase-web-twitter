@@ -1,7 +1,7 @@
 import { FC, useState, SyntheticEvent } from 'react';
-import { useUser } from '../../hooks';
-import { Logo } from '../../icons';
-import { InputField, PrimaryButton } from '../ui';
+import { useUser } from '../../../hooks';
+import { Logo } from '../../../icons';
+import { InputField, PrimaryButton } from '../../ui';
 
 type Props = {
   suggestedName?: string;
@@ -18,7 +18,7 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
 
   const nameValidation: InputValidation = (newName: string) => {
     if (newName.length === 0)
-      return { errorMessage: 'Name must be filled', error: false };
+      return { errorMessage: 'Name must be filled', error: true };
 
     return { errorMessage: '', error: false };
   };
@@ -27,7 +27,7 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
     const cleanValue = newUsername.replace(/[^a-zA-Z\d_-]/g, '');
     if (cleanValue.length === 0) {
       setUsername('');
-      return { errorMessage: 'Username must be filled', error: false };
+      return { errorMessage: 'Username must be filled', error: true };
     } else {
       setUsername('@' + cleanValue);
     }
@@ -43,12 +43,9 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
     const { error: nameHasError } = nameValidation(name);
     const { error: usernameHasError } = nameValidation(username);
 
-    console.log('VA EL USER', nameHasError, usernameHasError);
     if (nameHasError || usernameHasError) return;
 
-    console.log('VA EL USER');
-
-    setUserProfile({ ...user, username, name, bio });
+    setUserProfile({ ...user, username: username.replace('@', ''), name, bio });
   };
 
   return (

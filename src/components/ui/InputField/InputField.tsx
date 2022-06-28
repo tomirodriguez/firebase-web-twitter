@@ -6,8 +6,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import { ERROR } from '../../colors';
-import { INPUT_MAX_LENGTH } from '../../constants/index';
+import { ERROR } from '../../../colors';
+import { INPUT_MAX_LENGTH } from '../../../constants/index';
 
 type Props = {
   label: string;
@@ -97,6 +97,7 @@ export const InputField: FC<Props> = ({
           value={forcedValue}
           aria-errormessage="error-message"
           aria-invalid={showError}
+          aria-placeholder={placeholder}
           autoComplete={autocomplete ? 'on' : 'off'}
           required={required}
           maxLength={maxLength}

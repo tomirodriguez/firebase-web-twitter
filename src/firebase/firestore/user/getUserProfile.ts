@@ -1,8 +1,8 @@
 import { getDoc, doc, DocumentReference } from 'firebase/firestore';
-import { CustomError } from '../../utils';
-import { firestore } from '../firebaseConfig';
+import { CustomError } from '../../../utils';
+import { firestore } from '../../firebaseConfig';
 
-export const getUserData = async (id: string): Promise<User> => {
+export const fbGetUserProfile = async (id: string): Promise<User> => {
   const docRef = doc(
     firestore,
     'users',

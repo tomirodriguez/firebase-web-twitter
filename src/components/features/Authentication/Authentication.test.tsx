@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Authentication } from '..';
+import { Authentication } from '.';
 
-import { TestingUserProvider } from '../../../../testing/TestingUserContext';
+import { TestingUserProvider } from '../../../testing';
 
 describe('<Authentication>', () => {
   test('should redirect to login if no user is logged', async () => {
