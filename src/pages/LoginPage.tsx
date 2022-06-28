@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Loading } from '../components/views';
+import { Loading } from '../components/ui';
 import { Authentication, FillUserData } from '../components/features';
 import { LoginBackground } from '../components/features/Authentication/LoginBackground';
 import { FOOTER_TEXT } from '../constants/index';

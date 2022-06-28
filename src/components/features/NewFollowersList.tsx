@@ -1,5 +1,5 @@
 import { USERS } from '../../mock';
-import { Card, FollowUser } from '../views';
+import { Card, FollowUser } from '../ui';
 
 export const NewFollowersList = () => {
   return (

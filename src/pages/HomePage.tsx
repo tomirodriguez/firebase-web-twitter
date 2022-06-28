@@ -1,6 +1,6 @@
 import { SearchBar } from '../components';
 import { Feed, NewFollowersList, PostTweet } from '../components/features';
-import { MainLayout } from '../components/views/layout/MainLayout';
+import { MainLayout } from '../components/ui/layout/MainLayout';
 import { useUser } from '../hooks';
 
 export const HomePage: React.FC = () => {

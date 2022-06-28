@@ -1,4 +1,4 @@
-import { Tweet } from '../views/Tweet';
+import { Tweet } from '../ui/Tweet';
 import { TWEETS } from '../../mock';
 
 export const Feed = () => {

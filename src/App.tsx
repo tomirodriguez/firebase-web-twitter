@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './components';
-import { Header } from './components/views';
+import { Header } from './components/ui';
 import { HomePage, LoginPage } from './pages';
 
 const App = () => {

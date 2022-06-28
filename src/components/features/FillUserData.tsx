@@ -1,7 +1,7 @@
 import { FC, useState, SyntheticEvent } from 'react';
 import { useUser } from '../../hooks';
 import { Logo } from '../../icons';
-import { InputField, PrimaryButton } from '../views';
+import { InputField, PrimaryButton } from '../ui';
 
 type Props = {
   suggestedName?: string;
