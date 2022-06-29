@@ -23,6 +23,8 @@ const defaultContext: UserContextType = {
   signIn: defaultFirebaseFunction,
   setUserProfile: defaultFirebaseFunction,
   isFollowing: () => new Promise((_, reject) => reject()),
+  followUser: () => new Promise((_, reject) => reject()),
+  unfollowUser: () => new Promise((_, reject) => reject()),
 };
 
 export const UserContext = createContext<UserContextType>(defaultContext);
@@ -36,6 +38,8 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     signInWithGoogle,
     signOut: signOutFromFirebase,
     isFollowing: isFollowingFromFirestore,
+    followUser: followUserFirestore,
+    unfollowUser: unfollowUserFirestore,
   } = useContext(FirebaseContext);
 
   const onUserChange = useCallback(
@@ -103,6 +107,20 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     return isFollowingFromFirestore(user.username, username);
   };
 
+  const followUser = async (username: string) => {
+    if (!user)
+      throw new CustomError({ code: 'not_logged', message: 'Not logged in' });
+
+    return followUserFirestore(user, username);
+  };
+
+  const unfollowUser = async (username: string) => {
+    if (!user)
+      throw new CustomError({ code: 'not_logged', message: 'Not logged in' });
+
+    return unfollowUserFirestore(user, username);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -113,6 +131,8 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
         signIn,
         setUserProfile,
         isFollowing,
+        followUser,
+        unfollowUser,
       }}
     >
       {children}

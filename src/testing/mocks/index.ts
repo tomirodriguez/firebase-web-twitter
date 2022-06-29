@@ -17,3 +17,6 @@ export const DUMMY_USER: User = {
   followers: 0,
   following: 0,
 };
+
+export * from './users';
+export * from './tweets';

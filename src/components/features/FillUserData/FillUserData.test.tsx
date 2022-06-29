@@ -2,10 +2,9 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { TestingUserProvider } from '../../../testing';
-import { FillUserData } from './FillUserData';
 import { DUMMY_USER, EMPTY_PROFILE_USER } from '../../../testing/mocks';
 import { TestingFirebaseProvider } from '../../../testing/TestingFirebaseContext';
-import { UserProvider } from '../../../context';
+import { FillUserData } from './FillUserData';
 
 describe('<FillUserData>', () => {
   test('should not render if no user is logged', () => {

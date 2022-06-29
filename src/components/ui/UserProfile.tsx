@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { UserProfilePic } from '.';
 import { useUser } from '../../hooks';
-import { FollowButton } from '../features';
+import { FollowInteraction } from '../features';
 
 type Props = {
   username: string;
@@ -33,7 +33,9 @@ export const UserProfile: FC<Props> = ({
           <h1 className="font-bold text-xl mt-6">{name ?? `@${username}`}</h1>
           {name && <h2 className="text-sm text-secondary-text">@{username}</h2>}
         </div>
-        {user?.username !== username && <FollowButton username={username} />}
+        {user?.username !== username && (
+          <FollowInteraction username={username} />
+        )}
       </div>
 
       {name && (

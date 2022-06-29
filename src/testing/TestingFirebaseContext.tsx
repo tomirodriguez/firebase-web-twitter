@@ -15,6 +15,8 @@ export const TestingFirebaseProvider: FC<
     new Promise<void>((resolve) => resolve()),
   signOut = () => new Promise<void>((resolve) => resolve()),
   isFollowing = () => new Promise<boolean>((resolve) => resolve(true)),
+  followUser = () => new Promise<void>((resolve) => resolve()),
+  unfollowUser = () => new Promise<void>((resolve) => resolve()),
 }) => {
   return (
     <FirebaseContext.Provider
@@ -25,6 +27,8 @@ export const TestingFirebaseProvider: FC<
         signInWithGoogle,
         signOut,
         isFollowing,
+        followUser,
+        unfollowUser,
       }}
     >
       {children}

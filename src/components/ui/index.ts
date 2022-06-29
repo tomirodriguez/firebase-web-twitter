@@ -10,3 +10,5 @@ export * from './Tweet';
 export * from './UserProfile';
 export * from './UserProfilePic';
 export * from './Spinner';
+export * from './FollowButton';
+export * from './UnfollowButton';

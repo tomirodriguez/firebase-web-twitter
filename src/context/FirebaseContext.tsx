@@ -4,6 +4,8 @@ import {
   getUserProfileWithUsername,
   setUserProfile,
   isFollowing,
+  followUser,
+  unfollowUser,
 } from '../firebase/firestore/user';
 import { signInWithGoogle, signOut } from '../firebase/auth';
 
@@ -14,6 +16,8 @@ const defaultFirebaseContext: FirebaseContextType = {
   signInWithGoogle,
   signOut,
   isFollowing,
+  followUser,
+  unfollowUser,
 };
 
 export const FirebaseContext = createContext<FirebaseContextType>(

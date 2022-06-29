@@ -15,6 +15,7 @@ type InputState = {
 };
 
 export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
+  const [loading, setLoading] = useState(false);
   const { setUserProfile, user } = useUser();
   const { getUserProfile: getUser } = useUserProfile();
   const [name, setName] = useState<InputState>({
@@ -33,6 +34,7 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
   const handleFormSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
 
+    setLoading(true);
     setForceError(true);
 
     if (name.error !== '' || username.error !== '') return;
@@ -47,7 +49,7 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
         username: username.value,
         name: name.value,
         bio,
-      });
+      }).finally(() => setLoading(false));
     }
   };
 
@@ -113,7 +115,12 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
         />
       </div>
       <div className="w-2/3 text-white h-12">
-        <PrimaryButton text="Submit" title="Submit" type="submit" />
+        <PrimaryButton
+          text="Submit"
+          title="Submit"
+          type="submit"
+          disabled={loading}
+        />
       </div>
     </form>
   );

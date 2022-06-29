@@ -18,7 +18,7 @@ export const isFollowing = async (
       FOLLOWS_COLLECTION
     ) as CollectionReference<FirestoreFollows>,
     where('username', '==', user),
-    where('followers', 'array-contains', follower)
+    where('following', 'array-contains', follower)
   );
 
   const querySnapshot = await getDocs<FirestoreFollows>(q);

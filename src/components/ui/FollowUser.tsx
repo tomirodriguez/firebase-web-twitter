@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { FollowButton } from '../features';
+import { FollowInteraction } from '../features';
+// import { FollowInteraction } from '../features';
 import { UserProfilePic } from './UserProfilePic';
 
 type Props = {
@@ -22,7 +23,7 @@ export const FollowUser: FC<Props> = ({ user }) => {
         <h4 className="text-secondary-text">@{username}</h4>
       </div>
       <div className="shrink-0">
-        <FollowButton username={username} />
+        <FollowInteraction username={username} />
       </div>
     </article>
   );
