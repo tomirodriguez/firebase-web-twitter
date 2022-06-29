@@ -5,7 +5,8 @@ export const useUserProfile: UserProfileHook = (
   options = { type: 'USERNAME' }
 ) => {
   const { getUserProfileWithUsername } = useContext(FirebaseContext);
+
   return {
-    getUser: (user: string) => getUserProfileWithUsername(user),
+    getUserProfile: getUserProfileWithUsername,
   };
 };

@@ -10,6 +10,7 @@ import {
 } from 'react';
 import { auth } from '../firebase';
 import { FirebaseContext } from './FirebaseContext';
+import { CustomError } from '../utils/CustomError';
 
 const defaultFirebaseFunction = (): Promise<void> =>
   new Promise((_, reject) => reject());
@@ -21,6 +22,7 @@ const defaultContext: UserContextType = {
   signOut: defaultFirebaseFunction,
   signIn: defaultFirebaseFunction,
   setUserProfile: defaultFirebaseFunction,
+  isFollowing: () => new Promise((_, reject) => reject()),
 };
 
 export const UserContext = createContext<UserContextType>(defaultContext);
@@ -33,6 +35,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     setUserProfile: saveUserProfileInFirestore,
     signInWithGoogle,
     signOut: signOutFromFirebase,
+    isFollowing: isFollowingFromFirestore,
   } = useContext(FirebaseContext);
 
   const onUserChange = useCallback(
@@ -93,6 +96,13 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
       .finally(() => setLoading(false));
   };
 
+  const isFollowing = async (username: string) => {
+    if (!user)
+      throw new CustomError({ code: 'not_logged', message: 'Not logged in' });
+
+    return isFollowingFromFirestore(user.username, username);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -102,6 +112,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
         signOut,
         signIn,
         setUserProfile,
+        isFollowing,
       }}
     >
       {children}

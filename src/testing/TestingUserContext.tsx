@@ -15,12 +15,18 @@ export const TestingUserProvider: FC<
   signOut,
   signIn,
   setUserProfile,
+  isFollowing,
 }) => {
   const {
     signOut: fbSignOut,
     signInWithGoogle,
     setUserProfile: fbSetUserProfile,
+    isFollowing: fbIsFollowing,
   } = useContext(FirebaseContext);
+
+  const fbIsFollowingFn = (username: string) =>
+    fbIsFollowing(user?.username || '', username);
+
   return (
     <UserContext.Provider
       value={{
@@ -30,6 +36,7 @@ export const TestingUserProvider: FC<
         signOut: signOut || fbSignOut,
         signIn: signIn || signInWithGoogle,
         setUserProfile: setUserProfile || fbSetUserProfile,
+        isFollowing: isFollowing || fbIsFollowingFn,
       }}
     >
       {children}

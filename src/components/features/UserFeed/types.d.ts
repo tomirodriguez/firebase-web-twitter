@@ -1,0 +1,3 @@
+type UserProfileParams = {
+  username: string;
+};

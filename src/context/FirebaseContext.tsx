@@ -3,6 +3,7 @@ import {
   getUserProfileWithId,
   getUserProfileWithUsername,
   setUserProfile,
+  isFollowing,
 } from '../firebase/firestore/user';
 import { signInWithGoogle, signOut } from '../firebase/auth';
 
@@ -12,6 +13,7 @@ const defaultFirebaseContext: FirebaseContextType = {
   setUserProfile,
   signInWithGoogle,
   signOut,
+  isFollowing,
 };
 
 export const FirebaseContext = createContext<FirebaseContextType>(

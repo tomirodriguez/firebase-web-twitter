@@ -14,6 +14,7 @@ export const TestingFirebaseProvider: FC<
   setUserProfile: saveUserProfile = () =>
     new Promise<void>((resolve) => resolve()),
   signOut = () => new Promise<void>((resolve) => resolve()),
+  isFollowing = () => new Promise<boolean>((resolve) => resolve(true)),
 }) => {
   return (
     <FirebaseContext.Provider
@@ -23,6 +24,7 @@ export const TestingFirebaseProvider: FC<
         setUserProfile: saveUserProfile,
         signInWithGoogle,
         signOut,
+        isFollowing,
       }}
     >
       {children}

@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import { USERS_URL_PATH } from '../../constants/pahts';
 
 type Props = {
-  name: string;
   username: string;
+  name?: string;
   size?: number;
   src?: string;
   linkToProfile?: boolean;
 };
 
 export const UserProfilePic: FC<Props> = ({
-  src,
+  src: image,
   name,
   size = 48,
   username,
@@ -19,10 +19,10 @@ export const UserProfilePic: FC<Props> = ({
 }) => {
   const pictureContent = (
     <>
-      {src ? (
+      {image ? (
         <img
           className="rounded-full object-cover aspect-square"
-          src={src}
+          src={image}
           alt={name}
           width={size}
           height={size}
@@ -32,11 +32,11 @@ export const UserProfilePic: FC<Props> = ({
           className="aspect-square flex flex-col items-center justify-center border-2 border-transparent rounded-full"
           style={{
             width: size,
-            backgroundColor: 'brown',
+            backgroundColor: name ? 'brown' : 'gray',
             fontSize: size * 0.5,
           }}
         >
-          {name[0].toUpperCase()}
+          {name && name[0]?.toUpperCase()}
         </div>
       )}
     </>

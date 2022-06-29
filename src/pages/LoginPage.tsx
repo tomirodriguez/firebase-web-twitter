@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Loading } from '../components/ui';
+import { LoadingScreen } from '../components/ui';
 import { Authentication, FillUserData } from '../components/features';
 import { LoginBackground } from '../components/features/Authentication/LoginBackground';
 import { FOOTER_TEXT } from '../constants/index';
@@ -47,7 +47,7 @@ export const LoginPage: React.FC = () => {
 
       {loading && (
         <div className="fixed w-full h-full opacity-80">
-          <Loading />
+          <LoadingScreen />
         </div>
       )}
     </main>

@@ -16,7 +16,7 @@ type InputState = {
 
 export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
   const { setUserProfile, user } = useUser();
-  const { getUser } = useUserProfile();
+  const { getUserProfile: getUser } = useUserProfile();
   const [name, setName] = useState<InputState>({
     value: suggestedName,
     error: nameValidation(suggestedName),

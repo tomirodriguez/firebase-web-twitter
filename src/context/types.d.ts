@@ -5,6 +5,7 @@ type UserContextType = {
   signOut: () => Promise<void>;
   signIn: () => Promise<void>;
   setUserProfile: (user: User) => Promise<void>;
+  isFollowing: (username: string) => Promise<boolean>;
 };
 
 type FirebaseContextType = {
@@ -13,4 +14,5 @@ type FirebaseContextType = {
   setUserProfile: (user: User) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
+  isFollowing: (user: string, isFollowing: string) => Promise<boolean>;
 };

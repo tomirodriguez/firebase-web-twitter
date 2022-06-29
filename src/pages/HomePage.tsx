@@ -1,6 +1,4 @@
-import { SearchBar } from '../components';
-import { Feed, NewFollowersList, PostTweet } from '../components/features';
-import { MainLayout } from '../components/ui/layout/MainLayout';
+import { Feed, PostTweet } from '../components/features';
 import { useUser } from '../hooks';
 
 export const HomePage: React.FC = () => {
@@ -8,16 +6,7 @@ export const HomePage: React.FC = () => {
 
   if (!user) return null;
 
-  const aside = (
-    <aside className="flex flex-col shrink-0 min-h-screen h-full">
-      <SearchBar />
-      <div className="mt-4">
-        <NewFollowersList />
-      </div>
-    </aside>
-  );
-
-  const mainContent = (
+  return (
     <>
       <div className="px-4 border-b border-border py-2">
         <PostTweet user={user} />
@@ -25,6 +14,4 @@ export const HomePage: React.FC = () => {
       <Feed />
     </>
   );
-
-  return <MainLayout mainContent={mainContent} aside={aside} />;
 };
