@@ -11,6 +11,7 @@ export const PostTweet: FC<Props> = ({ user }) => {
   const [tweet, setTweet] = useState('');
   const isTweetValid = tweet.length <= MAX_TWEET_LENGTH && tweet.length > 0;
   const tweetInput = useRef<HTMLDivElement>(null);
+  const { image, name, username } = user;
 
   const setInputFocus = () => {
     tweetInput.current?.focus();
@@ -24,7 +25,7 @@ export const PostTweet: FC<Props> = ({ user }) => {
     <div>
       <div className="flex items-start">
         <div className="mr-4 shrink-0">
-          <UserProfilePic src={user.image} name={user.name} />
+          <UserProfilePic src={image} name={name} username={username} />
         </div>
         <div className="grow relative">
           <div

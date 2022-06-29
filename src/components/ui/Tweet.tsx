@@ -20,7 +20,7 @@ export const Tweet: FC<Props> = ({
   return (
     <article className="flex border-b border-border p-5 hover:bg-opacity-5 hover:bg-white cursor-pointer">
       <div className="w-12 mr-4 mb-1 aspect-square shrink-0">
-        <UserProfilePic src={image} name={author} />
+        <UserProfilePic src={image} name={author} username={username} />
       </div>
       <div className="flex flex-col">
         <div className="flex items-center">

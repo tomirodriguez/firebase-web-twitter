@@ -22,6 +22,9 @@ const App = () => {
                         element={<Navigate to="/home" replace />}
                       ></Route>
                       <Route path="/home" element={<HomePage />} />
+                      <Route path="users">
+                        <Route path=":id" element={<div>USER</div>} />
+                      </Route>
                       <Route
                         path="/about"
                         element={<div className="">ABOUT</div>}
