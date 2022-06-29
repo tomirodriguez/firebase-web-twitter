@@ -29,7 +29,7 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
   const [bio, setBio] = useState('');
   const [forceError, setForceError] = useState(false);
 
-  if (!user) return null;
+  if (!user || user.name || user.username) return null;
 
   const handleFormSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();

@@ -21,7 +21,7 @@ const defaultContext: UserContextType = {
   tweet: defaultFirebaseFunction,
   signOut: defaultFirebaseFunction,
   signIn: defaultFirebaseFunction,
-  setUserProfile: defaultFirebaseFunction,
+  setUserProfile: () => new Promise((_, reject) => reject()),
   isFollowing: () => new Promise((_, reject) => reject()),
   followUser: () => new Promise((_, reject) => reject()),
   unfollowUser: () => new Promise((_, reject) => reject()),
@@ -94,9 +94,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const setUserProfile = async (user: User) => {
     setLoading(true);
     return saveUserProfileInFirestore(user)
-      .then(() => {
-        setUser(user);
-      })
+      .then(() => setUser(user))
       .finally(() => setLoading(false));
   };
 
@@ -111,14 +109,20 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     if (!user)
       throw new CustomError({ code: 'not_logged', message: 'Not logged in' });
 
-    return followUserFirestore(user, username);
+    return followUserFirestore(user, username).then(() => {
+      const updatedUser: User = { ...user, following: user.following + 1 };
+      setUser(updatedUser);
+    });
   };
 
   const unfollowUser = async (username: string) => {
     if (!user)
       throw new CustomError({ code: 'not_logged', message: 'Not logged in' });
 
-    return unfollowUserFirestore(user, username);
+    return unfollowUserFirestore(user, username).then(() => {
+      const updatedUser: User = { ...user, following: user.following - 1 };
+      setUser(updatedUser);
+    });
   };
 
   return (

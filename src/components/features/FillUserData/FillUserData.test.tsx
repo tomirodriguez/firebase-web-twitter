@@ -2,14 +2,15 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { TestingUserProvider } from '../../../testing';
-import { DUMMY_USER, EMPTY_PROFILE_USER } from '../../../testing/mocks';
+import { EMPTY_PROFILE_USER } from '../../../testing/mocks';
 import { TestingFirebaseProvider } from '../../../testing/TestingFirebaseContext';
+import { USERS_DATABASE } from '../../../testing/utils/database';
 import { FillUserData } from './FillUserData';
 
 describe('<FillUserData>', () => {
   test('should not render if no user is logged', () => {
     const { container } = render(
-      <TestingUserProvider>
+      <TestingUserProvider user={null}>
         <BrowserRouter>
           <FillUserData />
         </BrowserRouter>
@@ -51,31 +52,12 @@ describe('<FillUserData>', () => {
 
   test('should store user profile data', async () => {
     const name = 'Mi nombre';
-    const username = 'username';
+    const username = 'new_user';
     const bio = 'Esta es mi bio';
 
-    const setUserProfile = jest.fn(async (user: User) => {
-      expect(user.name).toBe(name);
-      expect(user.username).toBe(username);
-      expect(user.bio).toBe(bio);
-      expect(user.email).toBe(EMPTY_PROFILE_USER.email);
-      expect(user.image).toBe(EMPTY_PROFILE_USER.image);
-      expect(user.id).toBe(EMPTY_PROFILE_USER.id);
-
-      return new Promise<void>((resolve) => resolve());
-    });
-
-    const getUserProfileWithUsername = () =>
-      new Promise<User | null>((resolve) => resolve(null));
-
-    render(
-      <TestingFirebaseProvider
-        getUserProfileWithUsername={getUserProfileWithUsername}
-      >
-        <TestingUserProvider
-          user={EMPTY_PROFILE_USER}
-          setUserProfile={setUserProfile}
-        >
+    const { container } = render(
+      <TestingFirebaseProvider>
+        <TestingUserProvider user={EMPTY_PROFILE_USER}>
           <BrowserRouter>
             <FillUserData />
           </BrowserRouter>
@@ -99,19 +81,15 @@ describe('<FillUserData>', () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(setUserProfile).toBeCalled();
+      expect(container).toBeEmptyDOMElement();
     });
   });
 
   test('should not be able to save two users with the same username', async () => {
-    const username = DUMMY_USER.username;
-    const getUserProfileWithUsername = () =>
-      new Promise<User | null>((resolve) => resolve(DUMMY_USER));
+    const username = USERS_DATABASE[0].username;
 
     render(
-      <TestingFirebaseProvider
-        getUserProfileWithUsername={getUserProfileWithUsername}
-      >
+      <TestingFirebaseProvider>
         <TestingUserProvider user={EMPTY_PROFILE_USER}>
           <BrowserRouter>
             <FillUserData />

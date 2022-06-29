@@ -1,7 +1,8 @@
-import { FC, PropsWithChildren, useContext } from 'react';
+import { FC, PropsWithChildren, useContext, useState } from 'react';
 import { UserContext } from '../context';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { DUMMY_USER } from './mocks';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const defaultFirebaseFunction = async () =>
   new Promise<void>((resolve) => resolve());
@@ -10,10 +11,9 @@ export const TestingUserProvider: FC<
   PropsWithChildren & Partial<UserContextType>
 > = ({
   children,
-  user = null,
+  user: loadedUser = DUMMY_USER,
   loading = false,
   tweet = defaultFirebaseFunction,
-  signOut,
   signIn,
   setUserProfile,
   isFollowing,
@@ -29,14 +29,40 @@ export const TestingUserProvider: FC<
     unfollowUser: fbUnfollowUser,
   } = useContext(FirebaseContext);
 
+  const [user, setUser] = useState(loadedUser);
+
+  const fbSetUserProfileFn = async (user: User) => {
+    if (!user) throw new Error();
+
+    return fbSetUserProfile(user).then(() => setUser(user));
+  };
+
   const fbIsFollowingFn = (username: string) =>
     fbIsFollowing(user?.username || '', username);
 
-  const fbFollowUserFn = (username: string) =>
-    fbFollowUser(user || DUMMY_USER, username);
+  const fbFollowUserFn = async (username: string) => {
+    if (!user) throw new Error();
+    return fbFollowUser(user || DUMMY_USER, username).then(() =>
+      setUser({
+        ...user,
+        following: user?.following + 1,
+      })
+    );
+  };
 
-  const fbUnfollowUserFn = (username: string) =>
-    fbUnfollowUser(user || DUMMY_USER, username);
+  const fbUnfollowUserFn = async (username: string) => {
+    if (!user) throw new Error();
+    return fbUnfollowUser(user || DUMMY_USER, username).then(() =>
+      setUser({
+        ...user,
+        following: user?.following - 1,
+      })
+    );
+  };
+
+  const signOut = async () => {
+    fbSignOut().then(() => setUser(null));
+  };
 
   return (
     <UserContext.Provider
@@ -44,9 +70,9 @@ export const TestingUserProvider: FC<
         user,
         loading,
         tweet,
-        signOut: signOut || fbSignOut,
+        signOut,
         signIn: signIn || signInWithGoogle,
-        setUserProfile: setUserProfile || fbSetUserProfile,
+        setUserProfile: setUserProfile || fbSetUserProfileFn,
         isFollowing: isFollowing || fbIsFollowingFn,
         followUser: followUser || fbFollowUserFn,
         unfollowUser: unfollowUser || fbUnfollowUserFn,
