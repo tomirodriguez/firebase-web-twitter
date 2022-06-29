@@ -3,17 +3,18 @@ import {
   createContext,
   FC,
   PropsWithChildren,
+  useCallback,
+  useContext,
   useEffect,
   useState,
 } from 'react';
 import { auth } from '../firebase';
-import { signInWithGoogle } from '../firebase/auth/signInWithGoogle';
-import { fbGetUserProfile, fbSetUserProfile } from '../firebase/firestore/user';
+import { FirebaseContext } from './FirebaseContext';
 
 const defaultFirebaseFunction = (): Promise<void> =>
-  new Promise((resolve, reject) => reject());
+  new Promise((_, reject) => reject());
 
-const defaultContext = {
+const defaultContext: UserContextType = {
   user: null,
   loading: true,
   tweet: defaultFirebaseFunction,
@@ -27,37 +28,43 @@ export const UserContext = createContext<UserContextType>(defaultContext);
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
+  const {
+    getUserProfileWithId,
+    saveUserProfile: saveUserProfileInFirestore,
+    signInWithGoogle,
+  } = useContext(FirebaseContext);
 
-  const onUserChange = async (fireUser: FirebaseUser | null) => {
-    setLoading(true);
-    if (fireUser) {
-      try {
-        const user = await fbGetUserProfile(fireUser.uid);
-        setUser(user);
-      } catch (error) {
-        setUser({
-          email: fireUser.email || '',
-          id: fireUser.uid,
-          image: fireUser.photoURL || '',
-          name: '',
-          username: '',
-          bio: '',
-          followers: 0,
-          following: 0,
-        });
+  const onUserChange = useCallback(
+    async (fireUser: FirebaseUser | null) => {
+      setLoading(true);
+      if (fireUser) {
+        const user = await getUserProfileWithId(fireUser.uid);
+        if (user) setUser(user);
+        else
+          setUser({
+            email: fireUser.email || '',
+            id: fireUser.uid,
+            image: fireUser.photoURL || '',
+            name: '',
+            username: '',
+            bio: '',
+            followers: 0,
+            following: 0,
+          });
+      } else {
+        setUser(null);
       }
-    } else {
-      setUser(null);
-    }
 
-    setLoading(false);
-  };
+      setLoading(false);
+    },
+    [getUserProfileWithId]
+  );
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, onUserChange);
 
     return unsubscribe;
-  }, []);
+  }, [onUserChange]);
 
   const tweet = (tweet: string): Promise<void> => {
     return new Promise((_, reject) => {
@@ -83,7 +90,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const setUserProfile = async (user: User) => {
     setLoading(true);
-    return fbSetUserProfile(user)
+    return saveUserProfileInFirestore(user)
       .then(() => {
         setUser(user);
       })
@@ -92,11 +99,16 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, loading, tweet, logout, signIn, setUserProfile }}
+      value={{
+        user,
+        loading,
+        tweet,
+        logout,
+        signIn,
+        setUserProfile,
+      }}
     >
       {children}
     </UserContext.Provider>
   );
 };
-
-export default UserProvider;

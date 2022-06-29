@@ -2,50 +2,64 @@ import { FC, useState, SyntheticEvent } from 'react';
 import { useUser } from '../../../hooks';
 import { Logo } from '../../../icons';
 import { InputField, PrimaryButton } from '../../ui';
+import { useUserProfile } from '../../../hooks/useUserProfile';
+import { nameValidation, usernameValidation } from './utils/index';
 
 type Props = {
   suggestedName?: string;
 };
 
+type InputState = {
+  value: string;
+  error: string;
+};
+
 export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
   const { setUserProfile, user } = useUser();
-  const [name, setName] = useState(suggestedName);
-  const [username, setUsername] = useState('');
+  const { getUser } = useUserProfile();
+  const [name, setName] = useState<InputState>({
+    value: suggestedName,
+    error: nameValidation(suggestedName),
+  });
+  const [username, setUsername] = useState<InputState>({
+    value: '',
+    error: usernameValidation(''),
+  });
   const [bio, setBio] = useState('');
   const [forceError, setForceError] = useState(false);
 
   if (!user) return null;
 
-  const nameValidation: InputValidation = (newName: string) => {
-    if (newName.length === 0)
-      return { errorMessage: 'Name must be filled', error: true };
-
-    return { errorMessage: '', error: false };
-  };
-
-  const usernameValidation: InputValidation = (newUsername: string) => {
-    const cleanValue = newUsername.replace(/[^a-zA-Z\d_-]/g, '');
-    if (cleanValue.length === 0) {
-      setUsername('');
-      return { errorMessage: 'Username must be filled', error: true };
-    } else {
-      setUsername('@' + cleanValue);
-    }
-
-    return { errorMessage: '', error: false };
-  };
-
-  const handleFormSubmit = (event: SyntheticEvent) => {
+  const handleFormSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
 
     setForceError(true);
 
-    const { error: nameHasError } = nameValidation(name);
-    const { error: usernameHasError } = nameValidation(username);
+    if (name.error !== '' || username.error !== '') return;
 
-    if (nameHasError || usernameHasError) return;
+    const existingUser = await getUser(username.value);
 
-    setUserProfile({ ...user, username: username.replace('@', ''), name, bio });
+    if (existingUser)
+      setUsername({ ...username, error: 'Username already taken' });
+    else {
+      setUserProfile({
+        ...user,
+        username: username.value,
+        name: name.value,
+        bio,
+      });
+    }
+  };
+
+  const handleNameChange = (value: string) => {
+    const error = nameValidation(value);
+    setName({ value, error });
+  };
+
+  const handleUsernameChange = (value: string) => {
+    const cleanUsername = value.replace('@', '');
+    const error = usernameValidation(cleanUsername);
+    setUsername({ value: cleanUsername, error });
   };
 
   return (
@@ -62,26 +76,26 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
       <div className="mb-4 w-full">
         <InputField
           label="name"
-          onChange={setName}
+          onChange={handleNameChange}
           placeholder="Your name"
           type={'text'}
-          value={name}
+          value={name.value}
           autocomplete={false}
-          validation={nameValidation}
           forceError={forceError}
+          error={name.error}
         />
       </div>
       <div className="mb-4 w-full">
         <InputField
           label="username"
-          onChange={setUsername}
+          onChange={handleUsernameChange}
           placeholder="Username"
           type={'text'}
-          value={username}
+          value={username.value.length > 0 ? `@${username.value}` : ''}
           autocomplete={false}
           maxLength={20}
-          validation={usernameValidation}
           forceError={forceError}
+          error={username.error}
         />
       </div>
 
@@ -95,6 +109,7 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
           autocomplete={false}
           maxLength={160}
           forceError={forceError}
+          error=""
         />
       </div>
       <div className="w-2/3 text-white h-12">

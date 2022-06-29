@@ -2,21 +2,23 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { SEO } from './components';
-import UserProvider from './context/UserContext';
-import './index.css';
+import { FirebaseProvider, UserProvider } from './context';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   // <React.StrictMode>
-  <UserProvider>
-    <BrowserRouter>
-      <SEO />
-      <App />
-    </BrowserRouter>
-  </UserProvider>
+  <FirebaseProvider>
+    <UserProvider>
+      <BrowserRouter>
+        <SEO />
+        <App />
+      </BrowserRouter>
+    </UserProvider>
+  </FirebaseProvider>
   // </React.StrictMode>
 );
 

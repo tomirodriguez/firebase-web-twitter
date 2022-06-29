@@ -2,7 +2,6 @@ import {
   ChangeEvent,
   FC,
   HTMLInputTypeAttribute,
-  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -19,8 +18,8 @@ type Props = {
   autocomplete?: boolean;
   required?: boolean;
   maxLength?: number;
-  validation?: InputValidation;
-  forceError?: boolean;
+  error: string;
+  forceError: boolean;
 };
 
 export const InputField: FC<Props> = ({
@@ -33,13 +32,12 @@ export const InputField: FC<Props> = ({
   autocomplete = true,
   required = false,
   maxLength = INPUT_MAX_LENGTH,
-  validation = () => ({ error: false, errorMessage: '' }),
   forceError = false,
+  error = '',
 }) => {
   const id = label.replace(/\s/g, '').toLowerCase();
   const [selected, setSelected] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [error, setError] = useState('');
   const [firstInput, setFirstInput] = useState(!forceError);
 
   const handleFocus = () => {
@@ -54,11 +52,6 @@ export const InputField: FC<Props> = ({
   const handleBlur = () => {
     if (firstInput) setFirstInput(false);
   };
-
-  useEffect(() => {
-    const { errorMessage } = validation(forcedValue);
-    setError(errorMessage);
-  }, [forcedValue, validation, forceError]);
 
   const showError = error !== '' && (!firstInput || forceError);
 

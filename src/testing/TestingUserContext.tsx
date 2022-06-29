@@ -1,7 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context';
 
-const defaultFirebaseFunction = () => new Promise<void>((resolve) => resolve());
+const defaultFirebaseFunction = async () =>
+  new Promise<void>((resolve) => resolve());
 
 export const TestingUserProvider: FC<
   PropsWithChildren & Partial<UserContextType>
@@ -12,11 +13,18 @@ export const TestingUserProvider: FC<
   tweet = defaultFirebaseFunction,
   logout = defaultFirebaseFunction,
   signIn = defaultFirebaseFunction,
-  setUserProfile = defaultFirebaseFunction,
+  setUserProfile = () => new Promise<void>((resolve) => resolve()),
 }) => {
   return (
     <UserContext.Provider
-      value={{ user, loading, tweet, logout, signIn, setUserProfile }}
+      value={{
+        user,
+        loading,
+        tweet,
+        logout,
+        signIn,
+        setUserProfile,
+      }}
     >
       {children}
     </UserContext.Provider>
