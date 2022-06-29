@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { USERS_URL_PATH } from '../../constants/pahts';
-import { User } from '../../icons';
 
 type Props = {
-  src: string | undefined;
   name: string;
   username: string;
   size?: number;
+  src?: string;
+  linkToProfile?: boolean;
 };
 
 export const UserProfilePic: FC<Props> = ({
@@ -15,9 +15,10 @@ export const UserProfilePic: FC<Props> = ({
   name,
   size = 48,
   username,
+  linkToProfile = true,
 }) => {
-  return (
-    <Link to={`${USERS_URL_PATH}${username}`}>
+  const pictureContent = (
+    <>
       {src ? (
         <img
           className="rounded-full object-cover aspect-square"
@@ -27,8 +28,23 @@ export const UserProfilePic: FC<Props> = ({
           height={size}
         />
       ) : (
-        <User size={size} />
+        <div
+          className="aspect-square flex flex-col items-center justify-center border-2 border-transparent rounded-full"
+          style={{
+            width: size,
+            backgroundColor: 'brown',
+            fontSize: size * 0.5,
+          }}
+        >
+          {name[0].toUpperCase()}
+        </div>
       )}
-    </Link>
+    </>
+  );
+
+  return linkToProfile ? (
+    <Link to={`${USERS_URL_PATH}${username}`}>{pictureContent}</Link>
+  ) : (
+    pictureContent
   );
 };

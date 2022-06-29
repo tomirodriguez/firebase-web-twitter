@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useUser } from '../../../hooks/useUser';
-import { User } from '../../../icons';
+import { UserProfilePic } from '../../ui';
 
 export const SignOut: FC = () => {
   const { user, signOut } = useUser();
@@ -17,17 +17,13 @@ export const SignOut: FC = () => {
       onClick={signOut}
     >
       <div className="shrink-0">
-        {image ? (
-          <img
-            className="rounded-full object-cover aspect-square"
-            src={image}
-            alt={name}
-            width={40}
-            height={40}
-          />
-        ) : (
-          <User size={40} />
-        )}
+        <UserProfilePic
+          size={40}
+          linkToProfile={false}
+          name={name}
+          src={image}
+          username={username}
+        />
       </div>
       <div className="grow text-left pl-4">
         <div className="text-sm font-bold">{name}</div>
