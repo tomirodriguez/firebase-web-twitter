@@ -3,16 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { TestingUserProvider } from '../../../testing';
 import { FillUserData } from './FillUserData';
+import { EMPTY_PROFILE_USER } from '../../../testing/mocks';
 
 describe('<FillUserData>', () => {
-  const DEFAULT_USER: User = {
-    email: 'unemail@gmail.com',
-    id: '99',
-    bio: '',
-    name: '',
-    username: '',
-  };
-
   test('should not render if no user is logged', () => {
     const { container } = render(
       <TestingUserProvider>
@@ -29,7 +22,10 @@ describe('<FillUserData>', () => {
     const setUserProfile = jest.fn();
 
     render(
-      <TestingUserProvider setUserProfile={setUserProfile} user={DEFAULT_USER}>
+      <TestingUserProvider
+        setUserProfile={setUserProfile}
+        user={EMPTY_PROFILE_USER}
+      >
         <BrowserRouter>
           <FillUserData />
         </BrowserRouter>
@@ -61,15 +57,18 @@ describe('<FillUserData>', () => {
       expect(user.name).toBe(name);
       expect(user.username).toBe(username);
       expect(user.bio).toBe(bio);
-      expect(user.email).toBe(DEFAULT_USER.email);
-      expect(user.image).toBe(DEFAULT_USER.image);
-      expect(user.id).toBe(DEFAULT_USER.id);
+      expect(user.email).toBe(EMPTY_PROFILE_USER.email);
+      expect(user.image).toBe(EMPTY_PROFILE_USER.image);
+      expect(user.id).toBe(EMPTY_PROFILE_USER.id);
 
       return new Promise<void>((resolve) => resolve());
     });
 
     render(
-      <TestingUserProvider setUserProfile={setUserProfile} user={DEFAULT_USER}>
+      <TestingUserProvider
+        setUserProfile={setUserProfile}
+        user={EMPTY_PROFILE_USER}
+      >
         <BrowserRouter>
           <FillUserData />
         </BrowserRouter>

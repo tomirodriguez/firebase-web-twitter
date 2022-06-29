@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { DUMMY_USER } from './mock';
 import { TestingUserProvider } from './testing';
 import App from './App';
+import { EMPTY_PROFILE_USER, DUMMY_USER } from './testing/mocks';
 
 describe('<App>', () => {
   test('should redirect to login if no user is logged', async () => {
@@ -19,15 +19,7 @@ describe('<App>', () => {
 
   test('should redirect to login if user is logged but has no data', async () => {
     render(
-      <TestingUserProvider
-        user={{
-          email: 'anemail@gmail.com',
-          name: '',
-          bio: '',
-          username: '',
-          id: '99',
-        }}
-      >
+      <TestingUserProvider user={EMPTY_PROFILE_USER}>
         <BrowserRouter>
           <App />
         </BrowserRouter>

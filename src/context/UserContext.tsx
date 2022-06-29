@@ -42,6 +42,8 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
           name: '',
           username: '',
           bio: '',
+          followers: 0,
+          following: 0,
         });
       }
     } else {

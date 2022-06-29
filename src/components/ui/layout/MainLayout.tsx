@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { TopBar } from '../..';
+import { TopBar } from '..';
 
 type Props = {
   mainContent: ReactNode;

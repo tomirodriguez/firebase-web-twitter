@@ -6,5 +6,6 @@ export * from './InputField';
 export * from './Loading';
 export * from './LogoLink';
 export * from './PrimaryButton';
+export * from './TopBar';
 export * from './Tweet';
 export * from './UserProfilePic';

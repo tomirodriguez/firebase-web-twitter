@@ -10,7 +10,7 @@ type Props = {
 export const UserProfilePic: FC<Props> = ({ src, name, size = 48 }) => {
   return src ? (
     <img
-      className="rounded-full"
+      className="rounded-full object-cover aspect-square"
       src={src}
       alt={name}
       width={size}

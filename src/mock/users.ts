@@ -6,6 +6,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'cynthia-39867',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '22',
@@ -14,6 +16,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'inness-22850',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '48',
@@ -22,6 +26,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'elsy-85974',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '68',
@@ -30,6 +36,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'ki-4630',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '46',
@@ -38,6 +46,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'dave-9061',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '23',
@@ -46,6 +56,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'oby-30778',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '17',
@@ -54,6 +66,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'lowe-7347',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '59',
@@ -62,6 +76,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'patty-58709',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '34',
@@ -70,6 +86,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'nevile-95940',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '45',
@@ -78,6 +96,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'towney-34137',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '43',
@@ -86,6 +106,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'kirby-98383',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '14',
@@ -94,6 +116,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'man-15177',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '41',
@@ -102,6 +126,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'pebrook-80176',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '18',
@@ -110,6 +136,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'lela-33877',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '24',
@@ -118,6 +146,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'harv-33951',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '52',
@@ -126,6 +156,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'barbette-34000',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '37',
@@ -134,6 +166,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'holt-3312',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '8',
@@ -142,6 +176,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'eachelle-51233',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '11',
@@ -150,6 +186,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'stepha-37759',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '25',
@@ -158,6 +196,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'marga-70324',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '26',
@@ -166,6 +206,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'nerissa-17301',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '95',
@@ -174,6 +216,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'van-22559',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '76',
@@ -182,6 +226,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'latrena-80852',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '71',
@@ -190,6 +236,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'derrek-17187',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '98',
@@ -198,6 +246,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'hobie-44890',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '96',
@@ -206,6 +256,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'blondell-2194',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '87',
@@ -214,6 +266,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'codie-85920',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '60',
@@ -222,6 +276,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'kettie-81283',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '36',
@@ -230,6 +286,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'barbette-26447',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '77',
@@ -238,6 +296,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'sara-ann-66028',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '32',
@@ -246,6 +306,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'fallon-68429',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '86',
@@ -254,6 +316,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'arliene-83302',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '62',
@@ -262,6 +326,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'kylie-33954',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '10',
@@ -270,6 +336,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'lacie-79907',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '65',
@@ -278,6 +346,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'aubry-93848',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '90',
@@ -286,6 +356,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'amalita-68475',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '16',
@@ -294,6 +366,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'skylar-33603',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '12',
@@ -302,6 +376,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'genny-43258',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '55',
@@ -310,6 +386,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'loreen-20395',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '3',
@@ -318,6 +396,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'cathrin-75681',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '78',
@@ -326,6 +406,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'abeu-83395',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '64',
@@ -334,6 +416,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'debra-61242',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '61',
@@ -342,6 +426,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'marshall-99383',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '5',
@@ -350,6 +436,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'sayers-23053',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '89',
@@ -358,6 +446,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'franklin-89700',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '35',
@@ -366,6 +456,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'mozes-57764',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '7',
@@ -374,6 +466,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'wolfie-2509',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '31',
@@ -382,6 +476,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'taylor-24061',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '74',
@@ -390,6 +486,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'des-52374',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '9',
@@ -398,6 +496,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'verney-1302',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '29',
@@ -406,6 +506,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'baillie-14398',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '58',
@@ -414,6 +516,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'yvonne-37545',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '63',
@@ -422,6 +526,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'horst-76174',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '93',
@@ -430,6 +536,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'edwin-50305',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '100',
@@ -438,6 +546,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'burgess-45826',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '47',
@@ -446,6 +556,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'astrix-35373',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '66',
@@ -454,6 +566,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'lutero-13668',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '13',
@@ -462,6 +576,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'arvie-23009',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '28',
@@ -470,6 +586,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'bathsheba-19467',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '85',
@@ -478,6 +596,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'malvina-45393',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '15',
@@ -486,6 +606,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'ammamaria-52694',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '40',
@@ -494,6 +616,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'taddeo-38305',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '73',
@@ -502,6 +626,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'corabelle-99129',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '42',
@@ -510,6 +636,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'nan-10532',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '94',
@@ -518,6 +646,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'mina-58458',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '53',
@@ -526,6 +656,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'tracie-80584',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '19',
@@ -534,6 +666,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'barnaby-45949',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '72',
@@ -542,6 +676,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'obed-80963',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '27',
@@ -550,6 +686,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'thoma-26395',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '91',
@@ -558,6 +696,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'levon-54420',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '20',
@@ -566,6 +706,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'shanan-59994',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '81',
@@ -574,6 +716,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'ferdie-12881',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '49',
@@ -582,6 +726,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'minor-32060',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '88',
@@ -590,6 +736,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'timotheus-76717',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '39',
@@ -598,6 +746,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'harrison-34900',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '70',
@@ -606,6 +756,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'branden-78654',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '33',
@@ -614,6 +766,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'nollie-3138',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '82',
@@ -622,6 +776,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/dddddd/000000',
     username: 'perla-99838',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '83',
@@ -630,6 +786,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'molli-55473',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '1',
@@ -638,6 +796,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'kelci-28085',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '4',
@@ -646,6 +806,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'lawrence-13768',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '54',
@@ -654,6 +816,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'cybill-75739',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '84',
@@ -662,6 +826,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'laura-54242',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '97',
@@ -670,6 +836,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'gertrude-79051',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '99',
@@ -678,6 +846,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'cacilia-48722',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '30',
@@ -686,6 +856,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'sibylla-82029',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '69',
@@ -694,6 +866,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'katalin-71326',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '38',
@@ -702,6 +876,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'cori-20321',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '75',
@@ -710,6 +886,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'naomi-71231',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '51',
@@ -718,6 +896,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'martynne-84657',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '44',
@@ -726,6 +906,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'rivalee-93426',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '67',
@@ -734,6 +916,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'lyell-56361',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '57',
@@ -742,6 +926,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'jorie-98719',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '92',
@@ -750,6 +936,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'dorothea-41761',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '2',
@@ -758,6 +946,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
     username: 'lynsey-23569',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '80',
@@ -766,6 +956,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'phil-58940',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '6',
@@ -774,6 +966,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'pepita-15670',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '50',
@@ -782,6 +976,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/cc0000/ffffff',
     username: 'faustina-18019',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '79',
@@ -790,6 +986,8 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'nevins-93421',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
   {
     id: '56',
@@ -798,5 +996,7 @@ export const USERS: User[] = [
     image: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
     username: 'loy-70047',
     bio: 'Pariatur irure proident deserunt sit adipisicing anim excepteur deserunt nostrud adipisicing ad sunt ex.',
+    followers: 0,
+    following: 0,
   },
 ];
