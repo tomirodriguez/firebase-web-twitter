@@ -1,7 +1,7 @@
 import { doc, DocumentReference, setDoc } from 'firebase/firestore';
 import { firestore } from '../../firebaseConfig';
 
-export const saveUserProfile = async (user: User): Promise<void> => {
+export const setUserProfile = async (user: User): Promise<void> => {
   const { id, ...userWithoutId } = user;
   const docRef = doc(
     firestore,

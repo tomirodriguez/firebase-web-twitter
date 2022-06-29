@@ -2,15 +2,16 @@ import { createContext, FC, PropsWithChildren } from 'react';
 import {
   getUserProfileWithId,
   getUserProfileWithUsername,
-  saveUserProfile,
+  setUserProfile,
 } from '../firebase/firestore/user';
-import { signInWithGoogle } from '../firebase/auth';
+import { signInWithGoogle, signOut } from '../firebase/auth';
 
 const defaultFirebaseContext: FirebaseContextType = {
   getUserProfileWithId,
   getUserProfileWithUsername,
-  saveUserProfile,
+  setUserProfile,
   signInWithGoogle,
+  signOut,
 };
 
 export const FirebaseContext = createContext<FirebaseContextType>(

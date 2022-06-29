@@ -11,15 +11,18 @@ export const TestingFirebaseProvider: FC<
   getUserProfileWithUsername = () =>
     new Promise<User>((resolve) => resolve(DUMMY_USER)),
   signInWithGoogle = () => new Promise<void>((resolve) => resolve()),
-  saveUserProfile = () => new Promise<void>((resolve) => resolve()),
+  setUserProfile: saveUserProfile = () =>
+    new Promise<void>((resolve) => resolve()),
+  signOut = () => new Promise<void>((resolve) => resolve()),
 }) => {
   return (
     <FirebaseContext.Provider
       value={{
         getUserProfileWithId,
         getUserProfileWithUsername,
-        saveUserProfile,
+        setUserProfile: saveUserProfile,
         signInWithGoogle,
+        signOut,
       }}
     >
       {children}

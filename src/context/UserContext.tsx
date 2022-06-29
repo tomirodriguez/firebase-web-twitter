@@ -18,7 +18,7 @@ const defaultContext: UserContextType = {
   user: null,
   loading: true,
   tweet: defaultFirebaseFunction,
-  logout: defaultFirebaseFunction,
+  signOut: defaultFirebaseFunction,
   signIn: defaultFirebaseFunction,
   setUserProfile: defaultFirebaseFunction,
 };
@@ -30,8 +30,9 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const {
     getUserProfileWithId,
-    saveUserProfile: saveUserProfileInFirestore,
+    setUserProfile: saveUserProfileInFirestore,
     signInWithGoogle,
+    signOut: signOutFromFirebase,
   } = useContext(FirebaseContext);
 
   const onUserChange = useCallback(
@@ -74,13 +75,8 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     });
   };
 
-  const logout = (): Promise<void> => {
-    setUser(null);
-    return new Promise((_, reject) => {
-      setTimeout(() => {
-        reject('To be implemented');
-      }, 300);
-    });
+  const signOut = (): Promise<void> => {
+    return signOutFromFirebase();
   };
 
   const signIn = async () => {
@@ -103,7 +99,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
         user,
         loading,
         tweet,
-        logout,
+        signOut,
         signIn,
         setUserProfile,
       }}
