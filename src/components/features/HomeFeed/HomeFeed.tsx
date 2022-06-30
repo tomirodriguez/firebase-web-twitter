@@ -38,9 +38,11 @@ export const HomeFeed: FC = () => {
   const saveNewTweet = useCallback(
     (newTweet: Tweet) => {
       if (newTweets.find((tweet) => newTweet.id === tweet.id)) return;
-      setNewTweets([newTweet, ...newTweets]);
+      if (newTweet.username === user?.username)
+        setTweets([newTweet, ...tweets]);
+      else setNewTweets([newTweet, ...newTweets]);
     },
-    [newTweets]
+    [newTweets, tweets, user]
   );
 
   useEffect(() => {
@@ -104,6 +106,12 @@ export const HomeFeed: FC = () => {
   const newTweetsCount = newTweets.length;
 
   const handleShowNewTweets = () => {
+    const convinedTweets = [...newTweets, ...tweets];
+    convinedTweets.sort((a, b) => {
+      if (a.timestamp < b.timestamp) return 1;
+      if (b.timestamp < a.timestamp) return -1;
+      return 0;
+    });
     setTweets([...newTweets, ...tweets]);
     setNewTweets([]);
   };
