@@ -57,7 +57,7 @@ const populate = async () => {
 
   Promise.all(promises).then(() => {
     batch.commit().then(() => {
-      console.log('DATABASE POPULATED');
+      console.info('DATABASE POPULATED');
       process.exit();
     });
   });

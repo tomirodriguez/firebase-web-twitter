@@ -16,7 +16,7 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
   const [followsDatabase, setFollowsDatabase] = useState(
     followsDatabaseInitialState
   );
-  const [timelineDatabase, setTimelineDatabase] = useState([]);
+  const [timelineDatabase, setTimelineDatabase] = useState<Tweet[]>([]);
 
   const getUserProfileWithId = async (id: string) => {
     return usersDatabase.find((user) => user.id === id) || null;
@@ -94,6 +94,10 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
 
   const postTweet = async () => {};
 
+  const getUserTweets = async (username: string) => {
+    return timelineDatabase.filter((tweet) => tweet.username === username);
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -106,6 +110,7 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
         followUser,
         unfollowUser,
         postTweet,
+        getUserTweets,
       }}
     >
       {children}

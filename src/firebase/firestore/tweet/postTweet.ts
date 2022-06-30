@@ -6,7 +6,7 @@ export const postTweet = async (user: User, tweet: string): Promise<void> => {
   const toPost: FirestoreTweet = {
     likes: 0,
     tweet,
-    user: user.id,
+    username: user.username,
     timestamp: serverTimestamp(),
   };
 

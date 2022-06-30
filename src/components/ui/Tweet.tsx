@@ -7,7 +7,7 @@ type Props = {
   username: string;
   message: string;
   date: Date;
-  image?: string;
+  image: string | undefined;
 };
 
 export const Tweet: FC<Props> = ({

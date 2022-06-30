@@ -10,7 +10,8 @@ type User = {
 };
 
 type Tweet = {
-  user: User;
+  id: string;
+  username: string;
   tweet: string;
   timestamp: Date;
   likes: number;
