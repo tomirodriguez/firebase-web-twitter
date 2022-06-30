@@ -40,6 +40,7 @@ export const UserFeed: FC<Props> = () => {
           username={username}
           name={user?.name}
           image={user?.image}
+          bio={user?.bio}
           followers={user?.followers}
           following={user?.following}
         />

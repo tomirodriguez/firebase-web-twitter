@@ -1,21 +1,13 @@
-import { doc, DocumentReference, writeBatch } from 'firebase/firestore';
-import { FOLLOWS_COLLECTION, USERS_COLLECTION } from '../../constants';
+import { writeBatch } from 'firebase/firestore';
 import { firestore } from '../../firebaseConfig';
+import { getFollowsRef, getUsersRef } from '../../utils';
 
 export const setUserProfile = async (user: User): Promise<void> => {
   const { id, ...userWithoutId } = user;
 
-  const userRef = doc(
-    firestore,
-    USERS_COLLECTION,
-    id
-  ) as DocumentReference<FirestoreUser>;
+  const userRef = getUsersRef(id);
 
-  const followsRef = doc(
-    firestore,
-    FOLLOWS_COLLECTION,
-    id
-  ) as DocumentReference<FirestoreFollows>;
+  const followsRef = getFollowsRef(id);
 
   const batch = writeBatch(firestore);
 

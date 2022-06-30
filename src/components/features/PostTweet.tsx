@@ -1,16 +1,20 @@
-import { ChangeEvent, FC, useRef, useState } from 'react';
+import { ChangeEvent, FC, useRef, useState, SyntheticEvent } from 'react';
 import { MAX_TWEET_LENGTH } from '../../constants';
 import { PrimaryButton } from '../ui/PrimaryButton';
 import { UserProfilePic } from '../ui/UserProfilePic';
+import { useUser } from '../../hooks/useUser';
+import { Spinner } from '../ui';
 
-type Props = {
-  user: User;
-};
-
-export const PostTweet: FC<Props> = ({ user }) => {
-  const [tweet, setTweet] = useState('');
-  const isTweetValid = tweet.length <= MAX_TWEET_LENGTH && tweet.length > 0;
+export const PostTweet: FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [tweetToPost, setTweetToPost] = useState('');
+  const isTweetValid =
+    tweetToPost.length <= MAX_TWEET_LENGTH && tweetToPost.length > 0;
   const tweetInput = useRef<HTMLDivElement>(null);
+  const { user, tweet } = useUser();
+
+  if (!user) return null;
+
   const { image, name, username } = user;
 
   const setInputFocus = () => {
@@ -18,49 +22,67 @@ export const PostTweet: FC<Props> = ({ user }) => {
   };
 
   const handleTweetChange = (event: ChangeEvent<HTMLDivElement>) => {
-    setTweet(event.target.innerText);
+    setTweetToPost(event.target.innerText);
+  };
+
+  const handleTweetSubmit = (event: SyntheticEvent) => {
+    event.preventDefault();
+    setLoading(true);
+    tweet(tweetToPost)
+      .then(() => setTweetToPost(''))
+      .finally(() => setLoading(false));
   };
 
   return (
-    <div>
+    <form onSubmit={handleTweetSubmit}>
       <div className="flex items-start">
         <div className="mr-4 shrink-0">
           <UserProfilePic src={image} name={name} username={username} />
         </div>
-        <div className="grow relative">
-          <div
-            className="w-full grow-0 break-words outline-none text-xl pt-2"
-            ref={tweetInput}
-            contentEditable
-            style={{
-              overflow: 'wrap',
-              userSelect: 'text',
-              overflowWrap: 'anywhere',
-            }}
-            onInput={handleTweetChange}
-            aria-errormessage="error-message"
-            aria-invalid={!isTweetValid}
-          />
-          {tweet.length === 0 && (
-            <span
-              className="absolute text-xl top-0 pt-2 text-secondary-text"
-              onClick={setInputFocus}
-            >
-              What's happening?
-            </span>
-          )}
-        </div>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <div className="grow relative">
+            <div
+              className="w-full grow-0 break-words outline-none text-xl pt-2"
+              ref={tweetInput}
+              contentEditable
+              style={{
+                overflow: 'wrap',
+                userSelect: 'text',
+                overflowWrap: 'anywhere',
+              }}
+              onInput={handleTweetChange}
+              title="Tweet"
+              aria-errormessage="error-message"
+              aria-invalid={!isTweetValid}
+            />
+            {tweetToPost.length === 0 && (
+              <span
+                className="absolute text-xl top-0 pt-2 text-secondary-text"
+                onClick={setInputFocus}
+              >
+                What's happening?
+              </span>
+            )}
+          </div>
+        )}
       </div>
       <div className="flex justify-end items-center">
-        {tweet.length > MAX_TWEET_LENGTH && (
+        {tweetToPost.length > MAX_TWEET_LENGTH && (
           <p id="error-message" className="text-error text-sm mr-3">
-            {MAX_TWEET_LENGTH - tweet.length}
+            {MAX_TWEET_LENGTH - tweetToPost.length}
           </p>
         )}
         <div className="w-20 h-9 text-sm">
-          <PrimaryButton title="Tweet" text="Tweet" disabled={!isTweetValid} />
+          <PrimaryButton
+            title="Tweet"
+            text="Tweet"
+            disabled={!isTweetValid}
+            type="submit"
+          />
         </div>
       </div>
-    </div>
+    </form>
   );
 };

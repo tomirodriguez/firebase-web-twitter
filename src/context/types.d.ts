@@ -19,4 +19,5 @@ type FirebaseContextType = {
   isFollowing: (user: string, isFollowing: string) => Promise<boolean>;
   followUser: (user: User, toFollow: string) => Promise<void>;
   unfollowUser: (user: User, toUnfollow: string) => Promise<void>;
+  postTweet: (user: User, tweet: string) => Promise<void>;
 };

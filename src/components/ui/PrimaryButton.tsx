@@ -17,7 +17,7 @@ export const PrimaryButton: React.FC<Props> = ({
     <button
       title={title}
       type={type}
-      className="w-full h-full transition-opacity rounded-full font-bold bg-primary-blue hover:opacity-90 disabled:opacity-50 appearance-none focus:border-2 focus:border-blue-200 outline-none"
+      className="w-full h-full transition-opacity rounded-full font-bold bg-primary-blue hover:opacity-90 disabled:opacity-50 appearance-none focus-visible:border-2 focus-visible:border-blue-200 outline-none"
       disabled={disabled}
     >
       {text}

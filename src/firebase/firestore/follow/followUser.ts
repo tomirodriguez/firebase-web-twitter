@@ -4,7 +4,7 @@ import { ALREADY_FOLLOWING, USER_DOESNT_EXISTS } from '../../errorKeys';
 import { firestore } from '../../firebaseConfig';
 import { getUserProfileWithUsername } from '../user';
 import { isFollowing } from './isFollowing';
-import { getFollowsRef, getUsersRef } from './utils';
+import { getFollowsRef, getUsersRef } from '../../utils';
 
 export const followUser = async (
   user: User,

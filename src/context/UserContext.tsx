@@ -40,6 +40,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     isFollowing: isFollowingFromFirestore,
     followUser: followUserFirestore,
     unfollowUser: unfollowUserFirestore,
+    postTweet,
   } = useContext(FirebaseContext);
 
   const onUserChange = useCallback(
@@ -73,14 +74,6 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
     return unsubscribe;
   }, [onUserChange]);
-
-  const tweet = (tweet: string): Promise<void> => {
-    return new Promise((_, reject) => {
-      setTimeout(() => {
-        reject('To be implemented');
-      }, 300);
-    });
-  };
 
   const signOut = (): Promise<void> => {
     return signOutFromFirebase();
@@ -123,6 +116,13 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
       const updatedUser: User = { ...user, following: user.following - 1 };
       setUser(updatedUser);
     });
+  };
+
+  const tweet = async (tweet: string) => {
+    if (!user)
+      throw new CustomError({ code: 'not_logged', message: 'Not logged in' });
+
+    return postTweet(user, tweet);
   };
 
   return (

@@ -2,7 +2,6 @@ import { FC, PropsWithChildren, useContext, useState } from 'react';
 import { UserContext } from '../context';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { DUMMY_USER } from './mocks';
-import { onAuthStateChanged } from 'firebase/auth';
 
 const defaultFirebaseFunction = async () =>
   new Promise<void>((resolve) => resolve());

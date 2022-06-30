@@ -3,7 +3,7 @@ import { CustomError } from '../../../utils/CustomError';
 import { firestore } from '../../firebaseConfig';
 import { getUserProfileWithUsername } from '../user/getUserProfileWithUsername';
 import { isFollowing } from './isFollowing';
-import { getFollowsRef, getUsersRef } from './utils';
+import { getFollowsRef, getUsersRef } from '../../utils';
 import { NOT_FOLLOWING, USER_DOESNT_EXISTS } from '../../errorKeys';
 
 export const unfollowUser = async (

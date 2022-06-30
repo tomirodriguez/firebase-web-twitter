@@ -7,6 +7,7 @@ type Props = {
   username: string;
   name?: string;
   image?: string;
+  bio?: string;
   following?: number;
   followers?: number;
 };
@@ -17,6 +18,7 @@ export const UserProfile: FC<Props> = ({
   followers,
   following,
   image,
+  bio,
 }) => {
   const { user } = useUser();
 
@@ -32,6 +34,7 @@ export const UserProfile: FC<Props> = ({
           />
           <h1 className="font-bold text-xl mt-6">{name ?? `@${username}`}</h1>
           {name && <h2 className="text-sm text-secondary-text">@{username}</h2>}
+          {bio && <p className="mt-4">{bio}</p>}
         </div>
         {user?.username !== username && (
           <FollowInteraction username={username} />

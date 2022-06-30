@@ -9,7 +9,7 @@ export const HomePage: React.FC = () => {
   return (
     <>
       <div className="px-4 border-b border-border py-2">
-        <PostTweet user={user} />
+        <PostTweet />
       </div>
       <Feed />
     </>

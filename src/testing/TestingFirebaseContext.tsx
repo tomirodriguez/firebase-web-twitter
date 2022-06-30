@@ -16,6 +16,7 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
   const [followsDatabase, setFollowsDatabase] = useState(
     followsDatabaseInitialState
   );
+  const [timelineDatabase, setTimelineDatabase] = useState([]);
 
   const getUserProfileWithId = async (id: string) => {
     return usersDatabase.find((user) => user.id === id) || null;
@@ -91,6 +92,8 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
     setFollowsDatabase(newFollowsDatabase);
   };
 
+  const postTweet = async () => {};
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -102,6 +105,7 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
         isFollowing,
         followUser,
         unfollowUser,
+        postTweet,
       }}
     >
       {children}
