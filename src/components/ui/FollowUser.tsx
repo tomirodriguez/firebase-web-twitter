@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { FollowInteraction } from '../features';
 // import { FollowInteraction } from '../features';
 import { UserProfilePic } from './UserProfilePic';
@@ -18,10 +19,10 @@ export const FollowUser: FC<Props> = ({ user }) => {
       <div className="aspect-square shrink-0">
         <UserProfilePic src={image} name={name} username={username} />
       </div>
-      <div className="grow px-5 flex flex-col">
+      <Link to={`/users/${username}`} className="grow px-5 flex flex-col">
         <h3>{user.name}</h3>
         <h4 className="text-secondary-text">@{username}</h4>
-      </div>
+      </Link>
       <div className="shrink-0">
         <FollowInteraction username={username} />
       </div>
