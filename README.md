@@ -9,17 +9,22 @@ First install the dependencias needed
 
 <h2>Setting .env variables</h2>
 
-Create two files: .env.local and .env.test.local. Both files must contain the .env.example under the local section
+You could run the following command
 
-<code>REACT_APP_API_KEY=demo-local</code>
-<code>REACT_APP_PROJECT_ID=demo-local</code>
+<code>yarn envs</code>
+
+Or do it manually using the .env.example file as a guide
 
 <h2>Running the project</h2>
 
 First of all, you should start firebase emulators:
 
-<code>firebase emulators:start --project "demo-local"</code>
+<code>yarn emulators</code>
 
 Once they are up, you can then run:
 
 <code>yarn start</code>
+
+Optionally, you could populate the database with mock data using the command
+
+<code>yarn populate</code>

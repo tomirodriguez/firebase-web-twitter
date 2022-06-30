@@ -1,5 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { CustomError } from '../../utils/CustomError';
+import { MISSING_CREDENTIALS } from '../errorKeys';
 import { auth } from '../firebaseConfig';
 
 export const signInWithGoogle = async (): Promise<void> => {
@@ -10,7 +11,7 @@ export const signInWithGoogle = async (): Promise<void> => {
 
     if (!credential)
       throw new CustomError({
-        code: 'missing_credential',
+        code: MISSING_CREDENTIALS,
         message: "Couldn't found credentials",
       });
   });

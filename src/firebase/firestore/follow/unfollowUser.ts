@@ -1,9 +1,10 @@
 import { arrayRemove, increment, runTransaction } from 'firebase/firestore';
 import { CustomError } from '../../../utils/CustomError';
 import { firestore } from '../../firebaseConfig';
-import { getUserProfileWithUsername } from './getUserProfileWithUsername';
+import { getUserProfileWithUsername } from '../user/getUserProfileWithUsername';
 import { isFollowing } from './isFollowing';
 import { getFollowsRef, getUsersRef } from './utils';
+import { NOT_FOLLOWING, USER_DOESNT_EXISTS } from '../../errorKeys';
 
 export const unfollowUser = async (
   user: User,
@@ -13,7 +14,7 @@ export const unfollowUser = async (
 
   if (!following)
     throw new CustomError({
-      code: 'not_following',
+      code: NOT_FOLLOWING,
       message: "You're not following this user",
     });
 
@@ -21,7 +22,7 @@ export const unfollowUser = async (
 
   if (!toFollowUser)
     throw new CustomError({
-      code: 'follow_not_exists',
+      code: USER_DOESNT_EXISTS,
       message: "You're trying to unfollow a non existent user",
     });
 

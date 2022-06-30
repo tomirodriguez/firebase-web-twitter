@@ -13,7 +13,7 @@ export const SignOut: FC = () => {
     <div
       aria-label="Sign out"
       role={'button'}
-      className="bg-red rounded-full p-3 mb-4 mr-4 flex items-center hover:bg-hover-white"
+      className="relative bg-red rounded-full p-3 mb-4 mr-4 flex items-center hover:bg-hover-white hover:border-error border border-transparent group"
       onClick={signOut}
     >
       <div className="shrink-0">
@@ -28,6 +28,9 @@ export const SignOut: FC = () => {
       <div className="grow text-left pl-4">
         <div className="text-sm font-bold">{name}</div>
         <div className="text-sm text-secondary-text">@{username}</div>
+      </div>
+      <div className="text-xs absolute right-0 mr-2 group-hover:visible invisible font-bold">
+        Log out
       </div>
     </div>
   );

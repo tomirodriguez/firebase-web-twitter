@@ -1,4 +1,4 @@
-export const USERS: User[] = [
+const USERS = [
   {
     id: '21',
     name: 'Cynthia',
@@ -1000,3 +1000,5 @@ export const USERS: User[] = [
     following: 0,
   },
 ];
+
+module.exports = USERS;

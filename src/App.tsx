@@ -4,15 +4,8 @@ import { NewFollowersList } from './components/features';
 import { UserFeed } from './components/features/UserFeed';
 import { Header, TopBar } from './components/ui';
 import { HomePage, LoginPage } from './pages';
-// import { populate } from './testing/utils/populate_firestore';
-import { useEffect } from 'react';
 
 const App = () => {
-  useEffect(() => {
-    // populate();
-    // if (process.env.REACT_APP_MOCK_DATABASE) populate();
-  }, []);
-
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />

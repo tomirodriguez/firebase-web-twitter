@@ -1,17 +1,21 @@
 import { FC, PropsWithChildren, useState } from 'react';
 import { FirebaseContext } from '../context';
-import { FOLLOWS_DATABASE, USERS_DATABASE } from './utils/database';
+import { FOLLOWS_DATABASE, USERS_DATABASE } from './mocks/database';
 
-export const TestingFirebaseProvider: FC<
-  PropsWithChildren & Partial<FirebaseContextType>
-> = ({
+type InitialState = {
+  usersDatabaseInitialState?: User[];
+  followsDatabaseInitialState?: FirestoreFollows[];
+};
+
+export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
   children,
-  signInWithGoogle = () => new Promise<void>((resolve) => resolve()),
-  signOut = () => new Promise<void>((resolve) => resolve()),
-  unfollowUser = () => new Promise<void>((resolve) => resolve()),
+  usersDatabaseInitialState = USERS_DATABASE,
+  followsDatabaseInitialState = FOLLOWS_DATABASE,
 }) => {
-  const [usersDatabase, setUsersDatabase] = useState(USERS_DATABASE);
-  const [followsDatabase, setFollowsDatabase] = useState(FOLLOWS_DATABASE);
+  const [usersDatabase, setUsersDatabase] = useState(usersDatabaseInitialState);
+  const [followsDatabase, setFollowsDatabase] = useState(
+    followsDatabaseInitialState
+  );
 
   const getUserProfileWithId = async (id: string) => {
     return usersDatabase.find((user) => user.id === id) || null;
@@ -58,14 +62,43 @@ export const TestingFirebaseProvider: FC<
     setFollowsDatabase(newFollowsDatabase);
   };
 
+  const unfollowUser = async (user: User, toFollow: string) => {
+    const newUsersDatabase = usersDatabase.map((dbUser) => {
+      if (user.username === dbUser.username)
+        return { ...dbUser, following: dbUser.following - 1 };
+      if (toFollow === dbUser.username)
+        return { ...dbUser, following: dbUser.followers - 1 };
+      return dbUser;
+    });
+
+    const newFollowsDatabase = followsDatabase.map((dbUser) => {
+      if (user.username === dbUser.username)
+        return {
+          ...dbUser,
+          following: dbUser.following.filter((follow) => follow !== toFollow),
+        };
+      if (toFollow === dbUser.username)
+        return {
+          ...dbUser,
+          followers: dbUser.followers.filter(
+            (follow) => follow !== user.username
+          ),
+        };
+      return dbUser;
+    });
+
+    setUsersDatabase(newUsersDatabase);
+    setFollowsDatabase(newFollowsDatabase);
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
         getUserProfileWithId,
         getUserProfileWithUsername,
         setUserProfile,
-        signInWithGoogle,
-        signOut,
+        signInWithGoogle: () => new Promise<void>((resolve) => resolve()),
+        signOut: () => new Promise<void>((resolve) => resolve()),
         isFollowing,
         followUser,
         unfollowUser,

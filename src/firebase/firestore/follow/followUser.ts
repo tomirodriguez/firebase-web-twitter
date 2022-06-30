@@ -1,7 +1,8 @@
 import { arrayUnion, increment, runTransaction } from 'firebase/firestore';
 import { CustomError } from '../../../utils/CustomError';
+import { ALREADY_FOLLOWING, USER_DOESNT_EXISTS } from '../../errorKeys';
 import { firestore } from '../../firebaseConfig';
-import { getUserProfileWithUsername } from './getUserProfileWithUsername';
+import { getUserProfileWithUsername } from '../user';
 import { isFollowing } from './isFollowing';
 import { getFollowsRef, getUsersRef } from './utils';
 
@@ -13,7 +14,7 @@ export const followUser = async (
 
   if (following)
     throw new CustomError({
-      code: 'already_following',
+      code: ALREADY_FOLLOWING,
       message: "You're already following this user",
     });
 
@@ -21,7 +22,7 @@ export const followUser = async (
 
   if (!toFollowUser)
     throw new CustomError({
-      code: 'follow_not_exists',
+      code: USER_DOESNT_EXISTS,
       message: "You're trying to follow a non existent user",
     });
 

@@ -3,10 +3,12 @@ import {
   getUserProfileWithId,
   getUserProfileWithUsername,
   setUserProfile,
+} from '../firebase/firestore/user';
+import {
   isFollowing,
   followUser,
   unfollowUser,
-} from '../firebase/firestore/user';
+} from '../firebase/firestore/follow';
 import { signInWithGoogle, signOut } from '../firebase/auth';
 
 const defaultFirebaseContext: FirebaseContextType = {

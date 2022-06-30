@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { TestingUserProvider } from '../../../testing';
 import { EMPTY_PROFILE_USER } from '../../../testing/mocks';
 import { TestingFirebaseProvider } from '../../../testing/TestingFirebaseContext';
-import { USERS_DATABASE } from '../../../testing/utils/database';
+import { USERS_DATABASE } from '../../../testing/mocks/database';
 import { FillUserData } from './FillUserData';
 
 describe('<FillUserData>', () => {
