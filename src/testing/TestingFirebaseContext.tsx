@@ -98,6 +98,27 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
     return timelineDatabase.filter((tweet) => tweet.username === username);
   };
 
+  const getHomeFeed = async (user: User) => {
+    const userFriends = followsDatabase.find(
+      (data) => data.username === user.username
+    );
+
+    if (!userFriends) throw new Error();
+
+    const usersToSearch = [userFriends, user.username];
+    return timelineDatabase.filter((tweet) =>
+      usersToSearch.includes(tweet.username)
+    );
+  };
+
+  const onHomeFeedChange = async () => {
+    return [];
+  };
+
+  const getFollowingUsers = async () => {
+    return [];
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -111,6 +132,9 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
         unfollowUser,
         postTweet,
         getUserTweets,
+        getHomeFeed,
+        onHomeFeedChange,
+        getFollowingUsers,
       }}
     >
       {children}

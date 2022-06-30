@@ -1,4 +1,4 @@
-import { serverTimestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 import { TIMELINE_COLLECTION } from '../../constants';
 import { addToCollection } from '../../utils';
 
@@ -7,7 +7,7 @@ export const postTweet = async (user: User, tweet: string): Promise<void> => {
     likes: 0,
     tweet,
     username: user.username,
-    timestamp: serverTimestamp(),
+    timestamp: Timestamp.now(),
   };
 
   return addToCollection(TIMELINE_COLLECTION, toPost);

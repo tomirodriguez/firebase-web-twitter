@@ -1,4 +1,4 @@
-import { Card, FollowUser } from '../ui';
+import { Card } from '../ui';
 
 export const NewFollowersList = () => {
   return (

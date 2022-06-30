@@ -9,8 +9,8 @@ import {
   useState,
 } from 'react';
 import { auth } from '../firebase';
-import { FirebaseContext } from './FirebaseContext';
 import { CustomError } from '../utils/CustomError';
+import { FirebaseContext } from './FirebaseContext';
 
 const defaultFirebaseFunction = (): Promise<void> =>
   new Promise((_, reject) => reject());

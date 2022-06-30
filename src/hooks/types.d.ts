@@ -5,3 +5,7 @@ type UserProfileHook = (options?: { type: 'ID' | 'USERNAME' }) => {
 type UserTweetsHook = () => {
   getUserTweets: (username: string) => Promise<Tweet[]>;
 };
+
+type HomeFeedHook = () => {
+  getFeed: (user: User) => Promise<Tweet[]>;
+};
