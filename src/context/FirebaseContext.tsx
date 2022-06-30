@@ -9,6 +9,7 @@ import {
   followUser,
   unfollowUser,
   getFollowingUsernames,
+  getNewFollowers,
 } from '../firebase/firestore/follow';
 import { signInWithGoogle, signOut } from '../firebase/auth';
 import {
@@ -32,6 +33,7 @@ const defaultFirebaseContext: FirebaseContextType = {
   getHomeFeed,
   onHomeFeedChange,
   getFollowingUsernames,
+  getNewFollowers,
 };
 
 export const FirebaseContext = createContext<FirebaseContextType>(

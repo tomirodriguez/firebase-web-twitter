@@ -1,7 +1,7 @@
 import { FC, useContext, useEffect, useState, useCallback } from 'react';
 import { FirebaseContext } from '../../../context/FirebaseContext';
 import { useUser } from '../../../hooks';
-import { Spinner, Tweet } from '../../ui';
+import { ShowMoreButton, Spinner, Tweet } from '../../ui';
 import { Timestamp } from 'firebase/firestore';
 
 export const HomeFeed: FC = () => {
@@ -169,12 +169,9 @@ export const HomeFeed: FC = () => {
         </div>
       ) : (
         !noMoreTweets && (
-          <button
-            onClick={handleShowMore}
-            className="w-full py-4 border-b border-border text-primary-blue hover:bg-hover-white"
-          >
-            Show more
-          </button>
+          <div className="border-b border-border">
+            <ShowMoreButton onShowMore={handleShowMore} />
+          </div>
         )
       )}
     </div>

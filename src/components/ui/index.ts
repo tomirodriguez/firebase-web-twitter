@@ -12,3 +12,4 @@ export * from './UserProfilePic';
 export * from './Spinner';
 export * from './FollowButton';
 export * from './UnfollowButton';
+export * from './ShowMoreButton';
