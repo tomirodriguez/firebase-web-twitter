@@ -21,13 +21,14 @@ type FirebaseContextType = {
   unfollowUser: (user: User, toUnfollow: string) => Promise<void>;
   postTweet: (user: User, tweet: string) => Promise<void>;
   getUserTweets: (username: string) => Promise<Tweet[]>;
-  getHomeFeed: (user: User) => Promise<Tweet[]>;
-  getFollowingUsers: (user: User) => Promise<User[]>;
+  getHomeFeed: (
+    user: User,
+    options?: { size?: number; timestamp: Timestamp }
+  ) => Promise<Tweet[]>;
+  getFollowingUsernames: (user: User) => Promise<string[]>;
   onHomeFeedChange: (
     user: User,
-    observer: (tweets: Tweet[]) => void,
-    following: string[],
-    size: number = 20,
-    offset: number = 0
+    observer: (tweets: Tweet) => void,
+    following: string[]
   ) => Unsubscribe;
 };

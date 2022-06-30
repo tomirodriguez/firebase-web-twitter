@@ -1,61 +1,127 @@
 import { FC, useContext, useEffect, useState, useCallback } from 'react';
 import { FirebaseContext } from '../../../context/FirebaseContext';
-import { useUser } from '../../../hooks/useUser';
+import { useUser } from '../../../hooks';
 import { Spinner, Tweet } from '../../ui';
+import { Timestamp } from 'firebase/firestore';
 
 export const HomeFeed: FC = () => {
   const { user } = useUser();
-  const [newTweets, setNewTweets] = useState<Tweet[]>([]);
-  const [tweets, setTweets] = useState<Tweet[]>([]);
-  const { onHomeFeedChange, getFollowingUsers } = useContext(FirebaseContext);
-  const [followingUsers, setFollowingUsers] = useState<User[]>([]);
-  const [loadingFollowingUsers, setLoadingFollowingUsers] = useState(true);
-  const [loading, setLoading] = useState(true);
 
-  const loadTweets = useCallback(
-    (tweetsListened: Tweet[]) => {
-      if (loading) setTweets(tweetsListened);
-      else setNewTweets(tweetsListened);
-      setLoading(false);
+  const [loading, setLoading] = useState(true);
+  const [loadingFollowingUsers, setLoadingFollowingUsers] = useState(true);
+  const [loadingShowMore, setLoadingShowMore] = useState(false);
+
+  const [tweets, setTweets] = useState<Tweet[]>([]);
+  const [newTweets, setNewTweets] = useState<Tweet[]>([]);
+  const [noMoreTweets, setNoMoreTweets] = useState(false);
+
+  const [followingUsernames, setFollowingUsernames] = useState<string[]>([]);
+  const [feedUsers, setFeedUsers] = useState<Map<string, User>>(
+    new Map<string, User>()
+  );
+
+  const {
+    onHomeFeedChange,
+    getFollowingUsernames,
+    getUserProfileWithUsername,
+    getHomeFeed,
+  } = useContext(FirebaseContext);
+
+  useEffect(() => {
+    if (!user) return;
+
+    getHomeFeed(user)
+      .then(setTweets)
+      .finally(() => setLoading(false));
+  }, [user, getHomeFeed]);
+
+  const saveNewTweet = useCallback(
+    (newTweet: Tweet) => {
+      if (newTweets.find((tweet) => newTweet.id === tweet.id)) return;
+      setNewTweets([newTweet, ...newTweets]);
     },
-    [loading]
+    [newTweets]
   );
 
   useEffect(() => {
-    if (!user || loadingFollowingUsers) return;
+    if (!user || loadingFollowingUsers || loading) return;
 
-    const followingUsernames = followingUsers.map(
-      (followingUser) => followingUser.username
-    );
-
-    const unsubcsribe = onHomeFeedChange(user, loadTweets, [
+    const unsubcsribe = onHomeFeedChange(user, saveNewTweet, [
       ...followingUsernames,
-      user.username,
     ]);
 
-    return unsubcsribe;
+    return () => unsubcsribe;
   }, [
     user,
     onHomeFeedChange,
     loadingFollowingUsers,
-    followingUsers,
-    loadTweets,
+    followingUsernames,
+    loading,
+    saveNewTweet,
   ]);
 
   useEffect(() => {
     if (!user) return;
 
-    getFollowingUsers(user)
-      .then((users) => setFollowingUsers(users))
+    const feedUsersWithUser = new Map<string, User>();
+    feedUsersWithUser.set(user.username, user);
+    setFeedUsers(feedUsersWithUser);
+    getFollowingUsernames(user)
+      .then((users) => setFollowingUsernames(users))
       .finally(() => setLoadingFollowingUsers(false));
-  }, [user, getFollowingUsers]);
+  }, [user, getFollowingUsernames]);
+
+  const getUsersData = useCallback(async () => {
+    if (feedUsers.size === followingUsernames.length + 1) return;
+
+    const updatedFeedUsers = new Map(feedUsers);
+
+    const promises: Promise<void>[] = [];
+
+    tweets.forEach((tweet) => {
+      if (!updatedFeedUsers.has(tweet.username)) {
+        promises.push(
+          getUserProfileWithUsername(tweet.username).then((user) => {
+            if (user) {
+              updatedFeedUsers.set(user.username, user);
+            }
+          })
+        );
+      }
+    });
+
+    await Promise.all(promises);
+
+    setFeedUsers(updatedFeedUsers);
+  }, [tweets, feedUsers, getUserProfileWithUsername, followingUsernames]);
+
+  useEffect(() => {
+    if (!loading) getUsersData();
+  }, [loading, getUsersData]);
 
   if (!user) return null;
 
-  const newTweetsCount = newTweets.length - tweets.length;
+  const newTweetsCount = newTweets.length;
 
   const handleShowNewTweets = () => {
-    setTweets(newTweets);
+    setTweets([...newTweets, ...tweets]);
+    setNewTweets([]);
+  };
+
+  const handleShowMore = () => {
+    const lastTweet = tweets.slice(-1)[0];
+
+    const timestamp = lastTweet
+      ? Timestamp.fromDate(lastTweet.timestamp)
+      : Timestamp.now();
+
+    setLoadingShowMore(true);
+    getHomeFeed(user, { size: 10, timestamp })
+      .then((moreTweets) => {
+        setTweets([...tweets, ...moreTweets]);
+        if (moreTweets.length === 0) setNoMoreTweets(true);
+      })
+      .finally(() => setLoadingShowMore(false));
   };
 
   return loading ? (
@@ -63,7 +129,7 @@ export const HomeFeed: FC = () => {
       <Spinner />
     </div>
   ) : (
-    <div>
+    <div className="mb-12">
       {newTweetsCount > 0 && (
         <button
           onClick={handleShowNewTweets}
@@ -73,20 +139,36 @@ export const HomeFeed: FC = () => {
         }`}</button>
       )}
       <ul>
-        {tweets.map((tweet) => {
+        {[...tweets].map((tweet) => {
+          const userAuthor = feedUsers.get(tweet.username);
+
           return (
             <li key={tweet.id}>
               <Tweet
                 username={tweet.username}
-                author={''}
+                author={userAuthor?.name || ''}
                 message={tweet.tweet}
                 date={tweet.timestamp}
-                image={undefined}
+                image={userAuthor?.image}
               />
             </li>
           );
         })}
       </ul>
+      {loadingShowMore ? (
+        <div className="w-full py-12 flex items-center justify-center">
+          <Spinner />
+        </div>
+      ) : (
+        !noMoreTweets && (
+          <button
+            onClick={handleShowMore}
+            className="w-full py-4 border-b border-border text-primary-blue hover:bg-hover-white"
+          >
+            Show more
+          </button>
+        )
+      )}
     </div>
   );
 };

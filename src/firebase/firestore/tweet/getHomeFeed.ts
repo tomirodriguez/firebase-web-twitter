@@ -5,7 +5,7 @@ import {
   limit,
   orderBy,
   query,
-  startAt,
+  startAfter,
   Timestamp,
   where,
 } from 'firebase/firestore';
@@ -16,11 +16,14 @@ import { getDoc } from 'firebase/firestore';
 import { CustomError } from '../../../utils';
 import { USER_DOESNT_EXISTS } from '../../errorKeys';
 
-export const getHomeFeed = async (
-  user: User,
-  size: number = 20,
-  offset: number = 0
-): Promise<Tweet[]> => {
+type Options = {
+  size?: number;
+  timestamp?: Timestamp;
+};
+
+type HomeFeedType = (user: User, options?: Options) => Promise<Tweet[]>;
+
+export const getHomeFeed: HomeFeedType = async (user: User, options) => {
   const followsDocRef = getFollowsRef(user.id);
   const followsDocSnap = await getDoc(followsDocRef);
 
@@ -39,10 +42,10 @@ export const getHomeFeed = async (
       firestore,
       TIMELINE_COLLECTION
     ) as CollectionReference<FirestoreTweet>,
-    where('username', 'in', followingAndUser),
-    orderBy('timestamp'),
-    limit(size),
-    startAt(offset)
+    orderBy('timestamp', 'desc'),
+    startAfter(options?.timestamp || Timestamp.now()),
+    limit(options?.size || 20),
+    where('username', 'in', followingAndUser)
   );
 
   const querySnapshot = await getDocs<FirestoreTweet>(q);

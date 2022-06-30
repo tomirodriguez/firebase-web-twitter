@@ -8,7 +8,7 @@ import {
   isFollowing,
   followUser,
   unfollowUser,
-  getFollowingUsers,
+  getFollowingUsernames,
 } from '../firebase/firestore/follow';
 import { signInWithGoogle, signOut } from '../firebase/auth';
 import {
@@ -31,7 +31,7 @@ const defaultFirebaseContext: FirebaseContextType = {
   getUserTweets,
   getHomeFeed,
   onHomeFeedChange,
-  getFollowingUsers,
+  getFollowingUsernames,
 };
 
 export const FirebaseContext = createContext<FirebaseContextType>(

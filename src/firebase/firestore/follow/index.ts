@@ -1,4 +1,4 @@
 export * from './followUser';
 export * from './isFollowing';
 export * from './unfollowUser';
-export * from './getFollowingUsers';
+export * from './getFollowingUsernames';

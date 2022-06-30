@@ -5,7 +5,6 @@ import {
   onSnapshot,
   orderBy,
   query,
-  startAt,
   Timestamp,
   Unsubscribe,
   where,
@@ -15,10 +14,8 @@ import { firestore } from '../../firebaseConfig';
 
 export const onHomeFeedChange = (
   user: User,
-  observer: any,
-  following: string[],
-  size: number = 20,
-  offset: number = 0
+  observer: (tweet: Tweet) => void,
+  following: string[]
 ): Unsubscribe => {
   const followingAndUser = [...following, user.username];
 
@@ -28,10 +25,11 @@ export const onHomeFeedChange = (
       TIMELINE_COLLECTION
     ) as CollectionReference<FirestoreTweet>,
     where('username', 'in', followingAndUser),
-    orderBy('timestamp'),
-    limit(size),
-    startAt(offset)
+    orderBy('timestamp', 'desc'),
+    limit(1)
   );
+
+  let firstCall = true;
 
   return onSnapshot<FirestoreTweet>(q, (querySnapshot) => {
     const tweets: Tweet[] = [];
@@ -58,12 +56,7 @@ export const onHomeFeedChange = (
       tweets.push(tweet);
     });
 
-    const sortedTweets = tweets.sort((a, b) => {
-      if (a.timestamp > b.timestamp) return -1;
-      if (b.timestamp > a.timestamp) return 1;
-      else return 0;
-    });
-
-    observer(sortedTweets);
+    if (!firstCall) observer(tweets[0]);
+    else firstCall = false;
   });
 };
