@@ -17,11 +17,13 @@ Or do it manually using the .env.example file as a guide
 
 <h2>Running the project</h2>
 
-First of all, you should start firebase emulators:
+If you follow the default setup and use Firebase emulators, first of all, you should start firebase emulators:
 
 <code>yarn emulators</code>
 
-Once they are up, you can then run:
+If you want to use your own project, you should setup your .env.local and env.test.local files with it's own data, using the .env.production as a template
+
+Once they are up or your firebase project configured, you can then run:
 
 <code>yarn start</code>
 
