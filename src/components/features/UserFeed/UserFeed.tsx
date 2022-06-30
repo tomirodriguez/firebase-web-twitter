@@ -41,9 +41,32 @@ export const UserFeed: FC<Props> = () => {
     if (user) loadUserTweets();
   }, [user, loadUserTweets]);
 
+  const loadTweets = () => {
+    if (!user) return null;
+    return loadingUserTweets ? (
+      <div className="w-full flex justify-center mt-20">
+        <Spinner />
+      </div>
+    ) : (
+      <ul className="border-t border-border">
+        {tweets.map((tweet) => (
+          <li key={tweet.id}>
+            <Tweet
+              image={user.image}
+              author={user.name}
+              username={tweet.username}
+              message={tweet.tweet}
+              date={tweet.timestamp}
+            />
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className="flex flex-col">
-      {loadingUserProfile || !user ? (
+      {loadingUserProfile ? (
         <div className="w-full flex justify-center mt-20">
           <Spinner />
         </div>
@@ -57,25 +80,7 @@ export const UserFeed: FC<Props> = () => {
             followers={user?.followers}
             following={user?.following}
           />
-          {loadingUserTweets ? (
-            <div className="w-full flex justify-center mt-20">
-              <Spinner />
-            </div>
-          ) : (
-            <ul className="border-t border-border">
-              {tweets.map((tweet) => (
-                <li key={tweet.id}>
-                  <Tweet
-                    image={user.image}
-                    author={user.name}
-                    username={tweet.username}
-                    message={tweet.tweet}
-                    date={tweet.timestamp}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
+          {loadTweets()}
         </>
       )}
     </div>

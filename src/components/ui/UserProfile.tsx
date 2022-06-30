@@ -36,12 +36,12 @@ export const UserProfile: FC<Props> = ({
           {name && <h2 className="text-sm text-secondary-text">@{username}</h2>}
           {bio && <p className="mt-4">{bio}</p>}
         </div>
-        {user?.username !== username && (
+        {user?.username !== username && name && (
           <FollowInteraction username={username} />
         )}
       </div>
 
-      {name && (
+      {name ? (
         <div className="flex w-full text-xs text-secondary-text items-center mt-2">
           <div className="mr-4">
             <span className="font-bold text-white text-sm">{following}</span>{' '}
@@ -51,6 +51,13 @@ export const UserProfile: FC<Props> = ({
             <span className="font-bold text-white text-sm">{followers}</span>{' '}
             Followers
           </div>
+        </div>
+      ) : (
+        <div className="mt-6 w-3/4 mx-auto">
+          <p className="text-4xl font-black">This account doesn’t exist</p>
+          <p className="text-md text-secondary-text mt-2">
+            Try searching for another.
+          </p>
         </div>
       )}
     </div>
