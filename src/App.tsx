@@ -30,10 +30,22 @@ const App = () => {
                           <Route path="users">
                             <Route path=":username" element={<UserFeed />} />
                           </Route>
+                          <Route path="followers">
+                            <Route
+                              path=":username"
+                              element={<div>FOLLOWERS</div>}
+                            />
+                          </Route>
+                          <Route path="following">
+                            <Route
+                              path=":username"
+                              element={<div>FOLLOWING</div>}
+                            />
+                          </Route>
                           <Route
-                            path="/about"
-                            element={<div className="">ABOUT</div>}
-                          />
+                            path="people"
+                            element={<div>DISCOVER</div>}
+                          ></Route>
                         </Routes>
                       </RequireAuth>
                     </div>

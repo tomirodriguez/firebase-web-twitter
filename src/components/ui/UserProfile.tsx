@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { UserProfilePic } from '.';
 import { useUser } from '../../hooks';
 import { FollowInteraction } from '../features';
@@ -43,14 +44,14 @@ export const UserProfile: FC<Props> = ({
 
       {name ? (
         <div className="flex w-full text-xs text-secondary-text items-center mt-2">
-          <div className="mr-4">
+          <Link className="mr-4 hover:underline" to={`/following/${username}`}>
             <span className="font-bold text-white text-sm">{following}</span>{' '}
             Following
-          </div>
-          <div>
+          </Link>
+          <Link className="hover:underline" to={`/followers/${username}`}>
             <span className="font-bold text-white text-sm">{followers}</span>{' '}
             Followers
-          </div>
+          </Link>
         </div>
       ) : (
         <div className="mt-6 w-3/4 mx-auto">

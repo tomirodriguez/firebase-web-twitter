@@ -1,4 +1,4 @@
-import { iHome, iProfile } from '../../../../icons';
+import { iExplore, iHome, iProfile } from '../../../../icons';
 
 type NavBarSection = {
   name: string;
@@ -14,8 +14,26 @@ export const getNavBarSections = (username: string): NavBarSection[] => [
     icon: iHome,
   },
   {
+    name: 'Discover',
+    path: '/people',
+    icon: iExplore,
+    fillOnPath: false,
+  },
+  {
     name: 'Profile',
     path: '/users/' + username,
+    icon: iProfile,
+    fillOnPath: false,
+  },
+  {
+    name: 'Followers',
+    path: '/followers/' + username,
+    icon: iProfile,
+    fillOnPath: false,
+  },
+  {
+    name: 'Following',
+    path: '/following/' + username,
     icon: iProfile,
     fillOnPath: false,
   },
