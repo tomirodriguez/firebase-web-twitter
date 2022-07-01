@@ -1,11 +1,20 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { RequireAuth, SearchBar } from './components';
-import { NewFollowersList } from './components/features';
-import { UserFeed } from './components/features/UserFeed';
-import { Header, TopBar } from './components/ui';
-import { DiscoverPage, HomePage, LoginPage } from './pages';
-import { FollowersPage } from './pages/FollowersPage';
-import { FollowingPage } from './pages/FollowingPage';
+import { RequireAuth } from './components';
+import {
+  NewFollowersList,
+  SearchBar,
+  SignOut,
+  UserFeed,
+} from './components/features';
+import { NavBar, TopBar } from './components/ui';
+import { Aside, Header, Main, MainSection } from './components/ui/layouts';
+import {
+  DiscoverPage,
+  FollowersPage,
+  FollowingPage,
+  HomePage,
+  LoginPage,
+} from './pages';
 
 const App = () => {
   return (
@@ -14,13 +23,16 @@ const App = () => {
       <Route
         path="*"
         element={
-          <div className="bg-main-dark text-slate-100 flex flex-col">
-            <div className="md:mx-auto w-full md:w-auto max-w-[1300px]">
-              <div className="md:mx-5 flex text-primary-white">
-                <Header />
-                <main className="min-h-screen main-content">
+          <div className="bg-main-dark text-slate-100 flex flex-col overflow-x-hidden">
+            <div className="container mx-auto flex text-primary-white">
+              <div className="md:mx-4 flex w-full">
+                <Header>
+                  <NavBar />
+                  <SignOut />
+                </Header>
+                <Main>
                   <div className="flex justify-between h-full">
-                    <div className="center-size shrink-0 border-r border-border">
+                    <MainSection>
                       <TopBar />
                       <RequireAuth>
                         <Routes>
@@ -50,17 +62,16 @@ const App = () => {
                           ></Route>
                         </Routes>
                       </RequireAuth>
-                    </div>
-                    <div className="hidden lg:block aside-size min-h-screen">
-                      <aside className="lg:flex flex-col shrink-0 min-h-screen h-full">
-                        <SearchBar />
-                        <div className="mt-4">
-                          <NewFollowersList />
-                        </div>
-                      </aside>
-                    </div>
+                    </MainSection>
+
+                    <Aside>
+                      <SearchBar />
+                      <div className="mt-4">
+                        <NewFollowersList />
+                      </div>
+                    </Aside>
                   </div>
-                </main>
+                </Main>
               </div>
             </div>
           </div>

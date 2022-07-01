@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Icon from '../../../../icons';
-import { useIsCurrentSection } from '../../../../hooks';
+import Icon from '../../../icons';
+import { useIsCurrentSection } from '../../../hooks';
 
 type Props = {
   icon: IconPath;

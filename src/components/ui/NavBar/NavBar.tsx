@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LogoLink } from '../../LogoLink';
-import { PrimaryButton } from '../../PrimaryButton';
+import { LogoLink } from '../LogoLink';
+import { PrimaryButton } from '../PrimaryButton';
 import { getNavBarSections } from './constants';
 import { NavBarItem } from './NavBarItem';
-import { useUser } from '../../../../hooks/useUser';
-import Icons, { iPen } from '../../../../icons';
+import { useUser } from '../../../hooks/useUser';
+import Icons, { iPen } from '../../../icons';
 
 export const NavBar: FC = () => {
   const navigate = useNavigate();

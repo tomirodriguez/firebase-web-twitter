@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { PRIMARY_BLUE, SECONDARY_TEXT } from '../colors';
-import Icon, { iSearch } from '../icons';
+import { PRIMARY_BLUE, SECONDARY_TEXT } from '../../colors';
+import Icon, { iSearch } from '../../icons';
 
 export const SearchBar = () => {
   const [isFocused, setIsFocused] = useState(false);

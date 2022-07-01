@@ -1,6 +1,6 @@
 export * from './Card';
 export * from './FollowUser';
-export * from './Header';
+export * from './NavBar';
 export * from './InputField';
 export * from './LoadingScreen';
 export * from './LogoLink';
