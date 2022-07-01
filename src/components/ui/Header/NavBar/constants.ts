@@ -1,4 +1,4 @@
-import { iExplore, iHome } from '../../../../icons';
+import { iHome, iProfile } from '../../../../icons';
 
 type NavBarSection = {
   name: string;
@@ -7,41 +7,16 @@ type NavBarSection = {
   fillOnPath?: boolean;
 };
 
-export const navBarSections: NavBarSection[] = [
+export const getNavBarSections = (username: string): NavBarSection[] => [
   {
     name: 'Inicio',
     path: '/home',
     icon: iHome,
   },
   {
-    name: 'Explorar',
-    path: '/explorar',
-    icon: iExplore,
+    name: 'Profile',
+    path: '/users/' + username,
+    icon: iProfile,
     fillOnPath: false,
-  },
-  {
-    name: 'Notificaciones',
-    path: '/notificaciones',
-    icon: iHome,
-  },
-  {
-    name: 'Mensajes',
-    path: '/mensajes',
-    icon: iHome,
-  },
-  {
-    name: 'Guardados',
-    path: '/guardados',
-    icon: iHome,
-  },
-  {
-    name: 'Listas',
-    path: '/listas',
-    icon: iHome,
-  },
-  {
-    name: 'Perfil',
-    path: '/perfil',
-    icon: iHome,
   },
 ];
