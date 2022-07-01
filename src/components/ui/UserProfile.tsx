@@ -37,9 +37,11 @@ export const UserProfile: FC<Props> = ({
           {name && <h2 className="text-sm text-secondary-text">@{username}</h2>}
           {bio && <p className="mt-4">{bio}</p>}
         </div>
-        {user?.username !== username && name && (
-          <FollowInteraction username={username} />
-        )}
+        <div className="shrink-0">
+          {user?.username !== username && name && (
+            <FollowInteraction username={username} />
+          )}
+        </div>
       </div>
 
       {name ? (
