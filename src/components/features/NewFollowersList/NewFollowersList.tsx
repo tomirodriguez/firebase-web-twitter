@@ -28,18 +28,26 @@ export const NewFollowersList = () => {
   ) : (
     <div className="mb-4">
       <Card title="Who to follow">
-        <ul>
-          {followList.map((newUser) => (
-            <li key={newUser.id}>
-              <FollowUser user={newUser} showBio={false} />
-            </li>
-          ))}
-        </ul>
-        <ShowMoreButton
-          onShowMore={() => {
-            navigate('/people');
-          }}
-        />
+        {followList.length > 0 ? (
+          <>
+            <ul>
+              {followList.map((newUser) => (
+                <li key={newUser.id}>
+                  <FollowUser user={newUser} showBio={false} />
+                </li>
+              ))}
+            </ul>
+            <ShowMoreButton
+              onShowMore={() => {
+                navigate('/people');
+              }}
+            />
+          </>
+        ) : (
+          <div className="text-xl text-center">
+            There's no one to follow. Try again later.
+          </div>
+        )}
       </Card>
     </div>
   );
