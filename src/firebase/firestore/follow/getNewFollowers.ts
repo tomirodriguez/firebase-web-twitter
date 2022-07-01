@@ -5,7 +5,7 @@ import {
   getDocs,
   limit,
   query,
-  Timestamp,
+  startAfter,
   where,
 } from 'firebase/firestore';
 import { CustomError } from '../../../utils';
@@ -13,10 +13,11 @@ import { FOLLOWS_COLLECTION } from '../../constants';
 import { USER_DOESNT_EXIST } from '../../errorKeys';
 import { firestore } from '../../firebaseConfig';
 import { getFollowsRef, getUsersRef } from '../../utils';
+import { orderBy } from 'firebase/firestore';
 
 type Options = {
   size?: number;
-  timestamp?: Timestamp;
+  lastUser?: User;
 };
 
 export const getNewFollowers = async (
@@ -35,14 +36,19 @@ export const getNewFollowers = async (
 
   const followingUsers = userDoc.data().following;
 
-  const q = query<FirestoreFollows>(
+  let q = query<FirestoreFollows>(
     collection(
       firestore,
       FOLLOWS_COLLECTION
     ) as CollectionReference<FirestoreFollows>,
+    orderBy('username'),
     where('username', 'not-in', [...followingUsers, user.username]),
-    limit(options?.size || 3)
+    limit(options?.size || 10)
   );
+
+  if (options?.lastUser) {
+    q = query(q, startAfter(options.lastUser.username));
+  }
 
   const querySnapshot = await getDocs<FirestoreFollows>(q);
 

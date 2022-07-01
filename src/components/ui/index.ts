@@ -13,3 +13,4 @@ export * from './Spinner';
 export * from './FollowButton';
 export * from './UnfollowButton';
 export * from './ShowMoreButton';
+export * from './UserList';

@@ -26,7 +26,10 @@ type FirebaseContextType = {
     options?: { size?: number; timestamp: Timestamp }
   ) => Promise<Tweet[]>;
   getFollowingUsernames: (user: User) => Promise<string[]>;
-  getNewFollowers: (user: User) => Promise<User[]>;
+  getNewFollowers: (
+    user: User,
+    options?: { size?: number; lastUser?: User }
+  ) => Promise<User[]>;
   onHomeFeedChange: (
     user: User,
     observer: (tweets: Tweet) => void,

@@ -14,7 +14,7 @@ export const NewFollowersList = () => {
   useEffect(() => {
     if (!user || !loading) return;
 
-    getNewFollowers(user)
+    getNewFollowers(user, { size: 3 })
       .then(setFollowList)
       .finally(() => setLoading(false));
   }, [user, getNewFollowers, loading]);
@@ -31,7 +31,7 @@ export const NewFollowersList = () => {
         <ul>
           {followList.map((newUser) => (
             <li key={newUser.id}>
-              <FollowUser user={newUser} />
+              <FollowUser user={newUser} showBio={false} />
             </li>
           ))}
         </ul>

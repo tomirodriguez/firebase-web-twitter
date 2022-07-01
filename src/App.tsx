@@ -3,7 +3,7 @@ import { RequireAuth, SearchBar } from './components';
 import { NewFollowersList } from './components/features';
 import { UserFeed } from './components/features/UserFeed';
 import { Header, TopBar } from './components/ui';
-import { HomePage, LoginPage } from './pages';
+import { DiscoverPage, HomePage, LoginPage } from './pages';
 
 const App = () => {
   return (
@@ -44,7 +44,7 @@ const App = () => {
                           </Route>
                           <Route
                             path="people"
-                            element={<div>DISCOVER</div>}
+                            element={<DiscoverPage />}
                           ></Route>
                         </Routes>
                       </RequireAuth>
