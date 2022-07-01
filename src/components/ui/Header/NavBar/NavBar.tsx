@@ -5,6 +5,7 @@ import { PrimaryButton } from '../../PrimaryButton';
 import { getNavBarSections } from './constants';
 import { NavBarItem } from './NavBarItem';
 import { useUser } from '../../../../hooks/useUser';
+import Icons, { iPen } from '../../../../icons';
 
 export const NavBar: FC = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export const NavBar: FC = () => {
 
   return (
     <>
-      <div className="px-3">
+      <div className="lg:px-3 flex flex-col items-center">
         <h1>
           <span hidden>WebTwitter</span>
           <LogoLink />
@@ -36,8 +37,19 @@ export const NavBar: FC = () => {
             )
           )}
         </nav>
-        <div className="w-5/6 h-14 pt-1 my-2 text-lg ">
-          <PrimaryButton title="Tweet" text="Tweet" onClick={handleClick} />
+        <div className="w-[50px] h-[50px] xl:w-5/6 xl:h-14 xl:pt-1 my-2 text-lg aspect-square">
+          <PrimaryButton
+            title="Tweet"
+            text={
+              <div>
+                <span className="xl:hidden flex justify-center">
+                  <Icons icon={iPen} />
+                </span>
+                <span className="hidden xl:block">Tweet</span>
+              </div>
+            }
+            onClick={handleClick}
+          />
         </div>
       </div>
     </>

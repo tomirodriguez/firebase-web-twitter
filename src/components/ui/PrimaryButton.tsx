@@ -1,8 +1,9 @@
 import React from 'react';
+import { ReactNode } from 'react';
 
 type Props = {
   title: string;
-  text: string;
+  text: ReactNode;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;

@@ -15,11 +15,11 @@ const App = () => {
         path="*"
         element={
           <div className="bg-main-dark text-slate-100 flex flex-col">
-            <div className="container mx-auto max-w-[1300px]">
-              <div className="mx-5 flex text-primary-white">
+            <div className="md:mx-auto w-full md:w-auto max-w-[1300px]">
+              <div className="md:mx-5 flex text-primary-white">
                 <Header />
-                <main className="min-h-screen w-full">
-                  <div className="flex justify-between">
+                <main className="min-h-screen main-content">
+                  <div className="flex justify-between h-full">
                     <div className="center-size shrink-0 border-r border-border">
                       <TopBar />
                       <RequireAuth>
@@ -51,8 +51,8 @@ const App = () => {
                         </Routes>
                       </RequireAuth>
                     </div>
-                    <div className="aside-size min-h-screen">
-                      <aside className="flex flex-col shrink-0 min-h-screen h-full">
+                    <div className="hidden lg:block aside-size min-h-screen">
+                      <aside className="lg:flex flex-col shrink-0 min-h-screen h-full">
                         <SearchBar />
                         <div className="mt-4">
                           <NewFollowersList />
