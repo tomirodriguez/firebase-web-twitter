@@ -123,6 +123,14 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
     return [];
   };
 
+  const getFollowingUsers = async () => {
+    return [];
+  };
+
+  const getFollowersUsers = async () => {
+    return [];
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -140,6 +148,8 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
         onHomeFeedChange,
         getFollowingUsernames,
         getNewFollowers,
+        getFollowingUsers,
+        getFollowersUsers,
       }}
     >
       {children}

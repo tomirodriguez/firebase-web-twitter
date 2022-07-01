@@ -4,6 +4,8 @@ import { NewFollowersList } from './components/features';
 import { UserFeed } from './components/features/UserFeed';
 import { Header, TopBar } from './components/ui';
 import { DiscoverPage, HomePage, LoginPage } from './pages';
+import { FollowersPage } from './pages/FollowersPage';
+import { FollowingPage } from './pages/FollowingPage';
 
 const App = () => {
   return (
@@ -33,13 +35,13 @@ const App = () => {
                           <Route path="followers">
                             <Route
                               path=":username"
-                              element={<div>FOLLOWERS</div>}
+                              element={<FollowersPage />}
                             />
                           </Route>
                           <Route path="following">
                             <Route
                               path=":username"
-                              element={<div>FOLLOWING</div>}
+                              element={<FollowingPage />}
                             />
                           </Route>
                           <Route
