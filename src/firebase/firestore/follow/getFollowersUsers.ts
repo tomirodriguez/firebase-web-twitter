@@ -1,6 +1,7 @@
 import {
   collection,
   CollectionReference,
+  documentId,
   getDoc,
   getDocs,
   limit,
@@ -43,7 +44,7 @@ export const getFollowersUsers = async (
       firestore,
       FOLLOWS_COLLECTION
     ) as CollectionReference<FirestoreFollows>,
-    orderBy('username'),
+    orderBy(documentId()),
     where('username', 'in', [...followersUsers]),
     limit(options?.size || 10)
   );
