@@ -44,7 +44,7 @@ export const NewFollowersList = () => {
             />
           </>
         ) : (
-          <div className="text-xl text-center">
+          <div className="text-xl text-center px-6 py-4">
             There's no one to follow. Try again later.
           </div>
         )}
