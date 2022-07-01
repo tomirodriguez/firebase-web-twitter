@@ -2,10 +2,10 @@ import {
   collection,
   CollectionReference,
   documentId,
-  FieldPath,
   getDoc,
   getDocs,
   limit,
+  orderBy,
   query,
   startAfter,
   where,
@@ -15,7 +15,6 @@ import { FOLLOWS_COLLECTION } from '../../constants';
 import { USER_DOESNT_EXIST } from '../../errorKeys';
 import { firestore } from '../../firebaseConfig';
 import { getFollowsRef, getUsersRef } from '../../utils';
-import { orderBy } from 'firebase/firestore';
 
 type Options = {
   size?: number;
