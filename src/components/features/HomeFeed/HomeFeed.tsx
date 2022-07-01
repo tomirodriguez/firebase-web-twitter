@@ -38,12 +38,25 @@ export const HomeFeed: FC = () => {
   const saveNewTweet = useCallback(
     (newTweet: Tweet) => {
       if (newTweets.find((tweet) => newTweet.id === tweet.id)) return;
-      if (newTweet.username === user?.username)
-        setTweets([newTweet, ...tweets]);
+
+      const isMyTweet = newTweet.username === user?.username;
+
+      if (isMyTweet) setTweets([newTweet, ...tweets]);
       else setNewTweets([newTweet, ...newTweets]);
     },
     [newTweets, tweets, user]
   );
+
+  useEffect(() => {
+    const filteredNewTweets = newTweets.filter((newTweet) => {
+      const isShowing = tweets.find((tweet) => tweet.id === newTweet.id);
+      if (isShowing) return false;
+      return true;
+    });
+
+    if (filteredNewTweets.length !== newTweets.length)
+      setNewTweets(filteredNewTweets);
+  }, [newTweets, tweets]);
 
   useEffect(() => {
     if (!user || loadingFollowingUsers || loading) return;
