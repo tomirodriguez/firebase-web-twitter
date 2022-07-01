@@ -36,6 +36,8 @@ export const getFollowingUsers = async (
 
   const followingUsers = userDoc.data().following;
 
+  if (followingUsers.length === 0) return [];
+
   let q = query<FirestoreFollows>(
     collection(
       firestore,
