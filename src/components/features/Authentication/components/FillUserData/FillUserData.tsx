@@ -1,12 +1,11 @@
-import { FC, useState, SyntheticEvent } from 'react';
-import { useUser } from '../../../hooks';
-import { Logo } from '../../../icons';
-import { InputField, PrimaryButton } from '../../ui';
-import { useUserProfile } from '../../../hooks/useUserProfile';
+import { FC, SyntheticEvent, useState } from 'react';
+import { Logo } from '../../../../../icons';
+import { InputField, PrimaryButton } from '../../../../ui';
 import { nameValidation, usernameValidation } from './utils/index';
 
 type Props = {
   suggestedName?: string;
+  onProfileSubmitted: OnUserProfileDataSubmited;
 };
 
 type InputState = {
@@ -14,10 +13,12 @@ type InputState = {
   error: string;
 };
 
-export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
+export const FillUserData: FC<Props> = ({
+  suggestedName = '',
+  onProfileSubmitted,
+}) => {
   const [loading, setLoading] = useState(false);
-  const { setUserProfile, user } = useUser();
-  const { getUserProfile: getUser } = useUserProfile();
+
   const [name, setName] = useState<InputState>({
     value: suggestedName,
     error: nameValidation(suggestedName),
@@ -29,8 +30,6 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
   const [bio, setBio] = useState('');
   const [forceError, setForceError] = useState(false);
 
-  if (!user || user.name || user.username) return null;
-
   const handleFormSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
 
@@ -39,18 +38,15 @@ export const FillUserData: FC<Props> = ({ suggestedName = '' }) => {
 
     if (name.error !== '' || username.error !== '') return;
 
-    const existingUser = await getUser(username.value);
-
-    if (existingUser)
-      setUsername({ ...username, error: 'Username already taken' });
-    else {
-      setUserProfile({
-        ...user,
-        username: username.value,
-        name: name.value,
-        bio,
-      }).finally(() => setLoading(false));
-    }
+    onProfileSubmitted({ name: name.value, username: username.value, bio })
+      .then((response) => {
+        const { error, field } = response;
+        if (error) {
+          if (field === 'name') setName({ ...name, error });
+          else if (field === 'username') setUsername({ ...name, error });
+        }
+      })
+      .finally(() => setLoading(false));
   };
 
   const handleNameChange = (value: string) => {

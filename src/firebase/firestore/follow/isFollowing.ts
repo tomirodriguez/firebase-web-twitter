@@ -1,29 +1,14 @@
-import {
-  collection,
-  CollectionReference,
-  getDocs,
-  query,
-  where,
-} from 'firebase/firestore';
-import { firestore } from '../../firebaseConfig';
-import { FOLLOWS_COLLECTION } from '../../constants';
+import { getDocs, query, where } from 'firebase/firestore';
+import { getFollowsCollectionRef } from './getRefs';
 
-export const isFollowing = async (
-  user: string,
-  follower: string
-): Promise<boolean> => {
-  const q = query<FirestoreFollows>(
-    collection(
-      firestore,
-      FOLLOWS_COLLECTION
-    ) as CollectionReference<FirestoreFollows>,
-    where('username', '==', user),
-    where('following', 'array-contains', follower)
+export const isFollowing: IsFollowing = async ({ username, following }) => {
+  const followQuery = query<FirestoreFollow>(
+    getFollowsCollectionRef(),
+    where('username', '==', username),
+    where('following', '==', following)
   );
 
-  const querySnapshot = await getDocs<FirestoreFollows>(q);
+  const querySnapshot = await getDocs<FirestoreFollow>(followQuery);
 
-  if (querySnapshot.size === 0) return false;
-
-  return true;
+  return querySnapshot.size !== 0;
 };

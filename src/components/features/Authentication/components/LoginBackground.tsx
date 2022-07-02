@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Logo } from '../../../icons/Logo';
-import Background from '../../../images/login_bg.png';
+import { Logo } from '../../../../icons/Logo';
+import Background from '../../../../images/login_bg.png';
 
 export const LoginBackground: FC = () => {
   return (

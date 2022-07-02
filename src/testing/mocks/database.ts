@@ -13,7 +13,7 @@ export const USERS_DATABASE: User[] = [
   },
 ];
 
-export const FOLLOWS_DATABASE: FirestoreFollows[] = [
-  { followers: [], following: [], username: DUMMY_USER.username },
-  { followers: [], following: [], username: 'other_username' },
+export const FOLLOWS_DATABASE: FirestoreFollow[] = [
+  // { followers: [], following: [], username: DUMMY_USER.username },
+  // { followers: [], following: [], username: 'other_username' },
 ];

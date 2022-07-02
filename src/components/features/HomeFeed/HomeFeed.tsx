@@ -20,12 +20,8 @@ export const HomeFeed: FC = () => {
     new Map<string, User>()
   );
 
-  const {
-    onHomeFeedChange,
-    getFollowingUsernames,
-    getUserProfileWithUsername,
-    getHomeFeed,
-  } = useContext(FirebaseContext);
+  const { onHomeFeedChange, getFollowingUsernames, getUser, getHomeFeed } =
+    useContext(FirebaseContext);
 
   useEffect(() => {
     if (!user) return;
@@ -96,7 +92,7 @@ export const HomeFeed: FC = () => {
     tweets.forEach((tweet) => {
       if (!updatedFeedUsers.has(tweet.username)) {
         promises.push(
-          getUserProfileWithUsername(tweet.username).then((user) => {
+          getUser({ username: tweet.username }).then((user) => {
             if (user) {
               updatedFeedUsers.set(user.username, user);
             }
@@ -108,7 +104,7 @@ export const HomeFeed: FC = () => {
     await Promise.all(promises);
 
     setFeedUsers(updatedFeedUsers);
-  }, [tweets, feedUsers, getUserProfileWithUsername, followingUsernames]);
+  }, [tweets, feedUsers, getUser, followingUsernames]);
 
   useEffect(() => {
     if (!loading) getUsersData();

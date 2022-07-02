@@ -1,8 +1,17 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 import { useContext } from 'react';
-import { UserContext } from '../context/UserContext';
+import { DatabaseContext } from '../context/DatabaseContext';
 
-export const useUser = (): UserContextType => {
-  const context = useContext(UserContext);
+export const useUser: UseUserHook = () => {
+  const { loading, user } = useSelector((state: RootState) => state.user);
+  const { signOut } = useContext(DatabaseContext);
 
-  return context;
+  return {
+    user,
+    loading,
+    signOut,
+    updateProfile: async () => {},
+    tweet: async () => {},
+  };
 };

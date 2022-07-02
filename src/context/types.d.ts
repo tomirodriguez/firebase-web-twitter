@@ -1,25 +1,19 @@
-type UserContextType = {
-  loading: boolean;
-  user: User | null;
-  tweet: (tweet: string) => Promise<void>;
-  signOut: () => Promise<void>;
-  signIn: () => Promise<void>;
-  setUserProfile: (user: User) => Promise<void>;
-  isFollowing: (username: string) => Promise<boolean>;
-  followUser: (username: string) => Promise<void>;
-  unfollowUser: (username: string) => Promise<void>;
-};
+type RemoveObserver = () => void;
 
-type FirebaseContextType = {
-  getUserProfileWithId: (id: string) => Promise<User | null>;
-  getUserProfileWithUsername: (username: string) => Promise<User | null>;
-  setUserProfile: (user: User) => Promise<void>;
+type UserLoginObserver = (user: User | null) => void;
+
+type DatabaseContext = {
+  userLoginObserver: (observer: UserLoginObserver) => RemoveObserver;
+
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
-  isFollowing: (user: string, isFollowing: string) => Promise<boolean>;
-  followUser: (user: User, toFollow: string) => Promise<void>;
-  unfollowUser: (user: User, toUnfollow: string) => Promise<void>;
-  postTweet: (user: User, tweet: string) => Promise<void>;
+  addUser: (user: User) => Promise<void>;
+  getUser: GetUser;
+  followUser: FollowUser;
+  unfollowUser: UnfollowUser;
+  isFollowing: IsFollowing;
+  postTweet: PostTweet;
+
   getUserTweets: (username: string) => Promise<Tweet[]>;
   getHomeFeed: (
     user: User,
@@ -44,3 +38,62 @@ type FirebaseContextType = {
     following: string[]
   ) => Unsubscribe;
 };
+
+type AddUser = (user: User) => Promise<void>;
+
+type GetUser = ({
+  id,
+  username,
+}: {
+  id?: string;
+  username?: string;
+}) => Promise<User | null>;
+
+type IsFollowing = ({
+  username,
+  following,
+}: {
+  username: string;
+  following: string;
+}) => Promise<boolean>;
+
+type FollowUser = ({
+  user,
+  toFollowUsername,
+}: {
+  user: User;
+  toFollowUsername: string;
+}) => Promise<void>;
+
+type UnfollowUser = ({
+  user,
+  toUnfollowUser,
+}: {
+  user: User;
+  toUnfollowUser: string;
+}) => Promise<void>;
+
+type PaginationOptions<T> = {
+  size?: number;
+  after: T;
+};
+
+type GetPeopleToFollow = ({
+  user,
+  options,
+}: {
+  user: User;
+  size?: number;
+  startingAt?: QueryDocumentSnapshot<FirestoreUser>;
+}) => Promise<{
+  users: User[];
+  lastVisible: QueryDocumentSnapshot<FirestoreUser>;
+}>;
+
+type PostTweet = ({
+  username,
+  tweet,
+}: {
+  username: string;
+  tweet: string;
+}) => Promise<void>;

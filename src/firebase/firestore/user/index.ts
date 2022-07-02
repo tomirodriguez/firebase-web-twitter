@@ -1,3 +1,3 @@
-export * from './getUserProfileWithId';
-export * from './getUserProfileWithUsername';
-export * from './setUserProfile';
+export * from './getUser';
+export * from './getRefs';
+export * from './addUser';

@@ -1,7 +1,8 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { useUserProfile, useUserTweets } from '../../../hooks';
+import { useUserTweets } from '../../../hooks';
 import { Spinner, Tweet, UserProfile } from '../../ui';
+import { FirebaseContext } from '../../../context/FirebaseContext';
 
 type Props = {};
 
@@ -9,20 +10,20 @@ export const UserFeed: FC<Props> = () => {
   const { username = '' } = useParams<UserProfileParams>();
   const [user, setUser] = useState<User | null>(null);
   const [tweets, setTweets] = useState<Tweet[]>([]);
-  const { getUserProfile } = useUserProfile();
   const { getUserTweets } = useUserTweets();
   const [loadingUserProfile, setLoadingUserProfile] = useState(true);
   const [loadingUserTweets, setLoadingUserTweets] = useState(true);
+  const { getUser } = useContext(FirebaseContext);
 
   const loadUserFeed = useCallback(async () => {
     const loadUserProfile = async () => {
-      const user = await getUserProfile(username);
+      const user = await getUser({ username });
       setUser(user);
       setLoadingUserProfile(false);
     };
 
     await loadUserProfile();
-  }, [getUserProfile, username]);
+  }, [getUser, username]);
 
   const loadUserTweets = useCallback(async () => {
     if (!user) return;

@@ -6,8 +6,9 @@ import {
   SignOut,
   UserFeed,
 } from './components/features';
-import { NavBar, TopBar } from './components/ui';
+import { LoadingScreen, NavBar, TopBar } from './components/ui';
 import { Aside, Header, Main, MainSection } from './components/ui/layouts';
+import { useUser } from './hooks';
 import {
   DiscoverPage,
   FollowersPage,
@@ -17,24 +18,28 @@ import {
 } from './pages';
 
 const App = () => {
+  const { loading } = useUser();
+
+  if (loading) return <LoadingScreen />;
+
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route
         path="*"
         element={
-          <div className="bg-main-dark text-slate-100 flex flex-col overflow-x-hidden">
-            <div className="container mx-auto flex text-primary-white">
-              <div className="md:mx-4 flex w-full">
-                <Header>
-                  <NavBar />
-                  <SignOut />
-                </Header>
-                <Main>
-                  <div className="flex justify-between h-full">
-                    <MainSection>
-                      <TopBar />
-                      <RequireAuth>
+          <RequireAuth>
+            <div className="bg-main-dark text-slate-100 flex flex-col overflow-x-hidden">
+              <div className="container mx-auto flex text-primary-white">
+                <div className="md:mx-4 flex w-full">
+                  <Header>
+                    <NavBar />
+                    <SignOut />
+                  </Header>
+                  <Main>
+                    <div className="flex justify-between h-full">
+                      <MainSection>
+                        <TopBar />
                         <Routes>
                           <Route
                             path="/"
@@ -61,20 +66,20 @@ const App = () => {
                             element={<DiscoverPage />}
                           ></Route>
                         </Routes>
-                      </RequireAuth>
-                    </MainSection>
+                      </MainSection>
 
-                    <Aside>
-                      <SearchBar />
-                      <div className="mt-4">
-                        <NewFollowersList />
-                      </div>
-                    </Aside>
-                  </div>
-                </Main>
+                      <Aside>
+                        <SearchBar />
+                        <div className="mt-4">
+                          <NewFollowersList />
+                        </div>
+                      </Aside>
+                    </div>
+                  </Main>
+                </div>
               </div>
             </div>
-          </div>
+          </RequireAuth>
         }
       />
     </Routes>

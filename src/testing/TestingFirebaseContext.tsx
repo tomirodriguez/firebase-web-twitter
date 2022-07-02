@@ -4,7 +4,7 @@ import { FOLLOWS_DATABASE, USERS_DATABASE } from './mocks/database';
 
 type InitialState = {
   usersDatabaseInitialState?: User[];
-  followsDatabaseInitialState?: FirestoreFollows[];
+  followsDatabaseInitialState?: FirestoreFollow[];
 };
 
 export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
@@ -34,62 +34,61 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
     setUsersDatabase([...usersDatabase, user]);
   };
 
-  const isFollowing = async (username: string, isFollowing: string) => {
-    const user = followsDatabase.find((dbUser) => dbUser.username === username);
+  const isFollowing = async () => {
+    // const user = followsDatabase.find((dbUser) => dbUser.username === username);
 
-    if (!user) throw new Error();
+    // if (!user) throw new Error();
 
-    return user.following.includes(isFollowing);
+    return true;
+    // return user.following.includes(isFollowing);
   };
 
-  const followUser = async (user: User, toFollow: string) => {
-    const newUsersDatabase = usersDatabase.map((dbUser) => {
-      if (user.username === dbUser.username)
-        return { ...dbUser, following: dbUser.following + 1 };
-      if (toFollow === dbUser.username)
-        return { ...dbUser, following: dbUser.followers + 1 };
-      return dbUser;
-    });
-
-    const newFollowsDatabase = followsDatabase.map((dbUser) => {
-      if (user.username === dbUser.username)
-        return { ...dbUser, following: [...dbUser.following, toFollow] };
-      if (toFollow === dbUser.username)
-        return { ...dbUser, followers: [...dbUser.followers, user.username] };
-      return dbUser;
-    });
-
-    setUsersDatabase(newUsersDatabase);
-    setFollowsDatabase(newFollowsDatabase);
+  const followUser = async () => {
+    // const newUsersDatabase = usersDatabase.map((dbUser) => {
+    //   if (user.username === dbUser.username)
+    //     return { ...dbUser, following: dbUser.following + 1 };
+    //   if (toFollow === dbUser.username)
+    //     return { ...dbUser, following: dbUser.followers + 1 };
+    //   return dbUser;
+    // });
+    // const newFollowsDatabase = followsDatabase.map((dbUser) => {
+    //   if (user.username === dbUser.username)
+    //     return { ...dbUser, following: [...dbUser.following, toFollow] };
+    //   if (toFollow === dbUser.username)
+    //     return { ...dbUser, followers: [...dbUser.followers, user.username] };
+    //   return dbUser;
+    // });
+    // setUsersDatabase(newUsersDatabase);
+    // setFollowsDatabase(newFollowsDatabase);
   };
 
-  const unfollowUser = async (user: User, toFollow: string) => {
-    const newUsersDatabase = usersDatabase.map((dbUser) => {
-      if (user.username === dbUser.username)
-        return { ...dbUser, following: dbUser.following - 1 };
-      if (toFollow === dbUser.username)
-        return { ...dbUser, following: dbUser.followers - 1 };
-      return dbUser;
-    });
-
-    const newFollowsDatabase = followsDatabase.map((dbUser) => {
-      if (user.username === dbUser.username)
-        return {
-          ...dbUser,
-          following: dbUser.following.filter((follow) => follow !== toFollow),
-        };
-      if (toFollow === dbUser.username)
-        return {
-          ...dbUser,
-          followers: dbUser.followers.filter(
-            (follow) => follow !== user.username
-          ),
-        };
-      return dbUser;
-    });
-
-    setUsersDatabase(newUsersDatabase);
-    setFollowsDatabase(newFollowsDatabase);
+  const unfollowUser = async () => {
+    // const newUsersDatabase = usersDatabase.map((dbUser) => {
+    //   if (user.username === dbUser.username)
+    //     return { ...dbUser, following: dbUser.following - 1 };
+    //   if (toFollow === dbUser.username)
+    //     return { ...dbUser, following: dbUser.followers - 1 };
+    //   return dbUser;
+    // });
+    // const newFollowsDatabase = followsDatabase.map((dbUser) => {
+    //   if (user.username === dbUser.username)
+    //     return {
+    //       ...dbUser,
+    //       following: dbUser.following.filter(
+    //         (follow: string) => follow !== toFollow
+    //       ),
+    //     };
+    //   if (toFollow === dbUser.username)
+    //     return {
+    //       ...dbUser,
+    //       followers: dbUser.followers.filter(
+    //         (follow: string) => follow !== user.username
+    //       ),
+    //     };
+    //   return dbUser;
+    // });
+    // setUsersDatabase(newUsersDatabase);
+    // setFollowsDatabase(newFollowsDatabase);
   };
 
   const postTweet = async () => {};
@@ -134,9 +133,9 @@ export const TestingFirebaseProvider: FC<PropsWithChildren & InitialState> = ({
   return (
     <FirebaseContext.Provider
       value={{
-        getUserProfileWithId,
-        getUserProfileWithUsername,
-        setUserProfile,
+        userLoginObserver: () => () => {},
+        addUser: async () => {},
+        getUser: async () => null,
         signInWithGoogle: () => new Promise<void>((resolve) => resolve()),
         signOut: () => new Promise<void>((resolve) => resolve()),
         isFollowing,

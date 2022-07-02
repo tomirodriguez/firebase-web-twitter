@@ -8,13 +8,12 @@ export const FollowersPage: FC = () => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
   const [showShowMoreButton, setShowShowMoreButton] = useState(true);
-  const { getFollowersUsers, getUserProfileWithUsername } =
-    useContext(FirebaseContext);
+  const { getFollowersUsers, getUser } = useContext(FirebaseContext);
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    getUserProfileWithUsername(username).then(setUser);
-  }, [username, getUserProfileWithUsername]);
+    getUser({ username }).then(setUser);
+  }, [username, getUser]);
 
   useEffect(() => {
     if (!user || !loading) return;

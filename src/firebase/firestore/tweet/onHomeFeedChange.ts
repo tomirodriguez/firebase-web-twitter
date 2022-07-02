@@ -9,7 +9,7 @@ import {
   Unsubscribe,
   where,
 } from 'firebase/firestore';
-import { TIMELINE_COLLECTION } from '../../constants';
+import { TWEETS_COLLECTION } from '../constants';
 import { firestore } from '../../firebaseConfig';
 
 export const onHomeFeedChange = (
@@ -22,7 +22,7 @@ export const onHomeFeedChange = (
   const q = query<FirestoreTweet>(
     collection(
       firestore,
-      TIMELINE_COLLECTION
+      TWEETS_COLLECTION
     ) as CollectionReference<FirestoreTweet>,
     where('username', 'in', followingAndUser),
     orderBy('timestamp', 'desc'),
@@ -35,16 +35,11 @@ export const onHomeFeedChange = (
     const tweets: Tweet[] = [];
 
     querySnapshot.forEach((doc) => {
-      const {
-        likes,
-        timestamp,
-        tweet: message,
-        username: docUsername,
-      } = doc.data();
+      const { likes, date, tweet: message, username: docUsername } = doc.data();
 
-      if (!timestamp) return;
+      if (!date) return;
 
-      const { seconds, nanoseconds } = timestamp;
+      const { seconds, nanoseconds } = date;
 
       const tweet: Tweet = {
         id: doc.id,

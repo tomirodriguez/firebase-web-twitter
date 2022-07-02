@@ -10,7 +10,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { firestore } from '../../firebaseConfig';
-import { TIMELINE_COLLECTION } from '../../constants';
+import { TWEETS_COLLECTION } from '../constants';
 
 export const getUserTweets = async (
   username: string,
@@ -20,7 +20,7 @@ export const getUserTweets = async (
   const q = query<FirestoreTweet>(
     collection(
       firestore,
-      TIMELINE_COLLECTION
+      TWEETS_COLLECTION
     ) as CollectionReference<FirestoreTweet>,
     where('username', '==', username),
     orderBy('timestamp'),
@@ -33,14 +33,9 @@ export const getUserTweets = async (
   const tweets: Tweet[] = [];
 
   querySnapshot.forEach((doc) => {
-    const {
-      likes,
-      timestamp,
-      tweet: message,
-      username: docUsername,
-    } = doc.data();
+    const { likes, date, tweet: message, username: docUsername } = doc.data();
 
-    const { seconds, nanoseconds } = timestamp;
+    const { seconds, nanoseconds } = date;
 
     const tweet: Tweet = {
       id: doc.id,

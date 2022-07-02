@@ -83,7 +83,7 @@ export const InputField: FC<Props> = ({
         <input
           ref={inputRef}
           onChange={handleChange}
-          className="outline-none bg-transparent w-full px-4 text-md text-white focus:border-primary-blue h-18 z-10"
+          className="outline-none bg-transparent w-full px-4 text-lg pt-2 text-white focus:border-primary-blue h-18 z-10"
           id={id}
           name={id}
           type={type}

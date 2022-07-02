@@ -12,6 +12,7 @@ const {
   doc,
   Timestamp,
   collection,
+  addDoc,
 } = require('firebase/firestore');
 const { USERS } = require('./constants');
 
@@ -118,13 +119,16 @@ const populate = async () => {
 
         const userRef = doc(firestore, 'users', id);
 
-        const followsRef = doc(firestore, 'follows', id);
-
         batch.set(userRef, { ...userWithoutId });
-        batch.set(followsRef, {
-          username: user.username,
-          followers: followersUsernames,
-          following: followingUsernames,
+
+        followingUsernames.forEach((following) => {
+          const docRef = doc(collection(firestore, 'follows'));
+          const dbFollow = {
+            timestamp: Timestamp.now(),
+            username: user.username,
+            following,
+          };
+          promises.push(batch.set(docRef, dbFollow));
         });
       });
 
@@ -147,12 +151,11 @@ const populate = async () => {
     promises.push(batch.set(docRef, dbTweet));
   });
 
-  Promise.all(promises).then(() => {
-    batch.commit().then(() => {
-      console.info('DATABASE POPULATED');
-      process.exit();
-    });
-  });
+  await Promise.all(promises);
+
+  await batch.commit();
+  console.info('DATABASE POPULATED');
+  process.exit();
 };
 
 module.exports.populate = populate;

@@ -1,52 +1,44 @@
-import { arrayRemove, increment, runTransaction } from 'firebase/firestore';
-import { CustomError } from '../../../utils/CustomError';
+import {
+  getDocs,
+  increment,
+  query,
+  Timestamp,
+  where,
+  writeBatch,
+} from 'firebase/firestore';
 import { firestore } from '../../firebaseConfig';
-import { getUserProfileWithUsername } from '../user/getUserProfileWithUsername';
-import { isFollowing } from './isFollowing';
-import { getFollowsRef, getUsersRef } from '../../utils';
-import { NOT_FOLLOWING, USER_DOESNT_EXISTS } from '../../errorKeys';
+import { UNFOLLOW_INEXISTENT_USER } from '../errors';
+import { getUser, getUserRef } from '../user';
+import { getFollowRef, getFollowsCollectionRef } from './getRefs';
 
-export const unfollowUser = async (
-  user: User,
-  toFollow: string
-): Promise<void> => {
-  const following = await isFollowing(user.username, toFollow);
+export const unfollowUser: UnfollowUser = async ({
+  user,
+  toUnfollowUser,
+}): Promise<void> => {
+  const userToUnfollow = await getUser({ username: toUnfollowUser });
 
-  if (!following)
-    throw new CustomError({
-      code: NOT_FOLLOWING,
-      message: "You're not following this user",
-    });
+  if (!userToUnfollow) throw UNFOLLOW_INEXISTENT_USER;
 
-  const toFollowUser = await getUserProfileWithUsername(toFollow);
+  const followQuery = query<FirestoreFollow>(
+    getFollowsCollectionRef(),
+    where('username', '==', user.username),
+    where('following', '==', toUnfollowUser)
+  );
 
-  if (!toFollowUser)
-    throw new CustomError({
-      code: USER_DOESNT_EXISTS,
-      message: "You're trying to unfollow a non existent user",
-    });
+  const querySnapshot = await getDocs<FirestoreFollow>(followQuery);
 
-  return runTransaction(firestore, async (transaction) => {
-    // user data
-    const userDocRef = getUsersRef(user.id);
-    const userFollowsDocRef = getFollowsRef(user.id);
+  if (querySnapshot.size === 0) return;
 
-    // to follow data
-    const toFollowDocRef = getUsersRef(toFollowUser.id);
-    const toFollowFollowsDocRef = getFollowsRef(toFollowUser.id);
+  const followRefId = querySnapshot.docs[0].id;
 
-    transaction.update(userDocRef, { following: increment(-1) });
+  const userRef = getUserRef(user.id);
+  const userToFollowRef = getUserRef(userToUnfollow.id);
 
-    transaction.update(userFollowsDocRef, {
-      following: arrayRemove(toFollow),
-    });
+  const batch = writeBatch(firestore);
 
-    transaction.update(toFollowDocRef, {
-      followers: increment(-1),
-    });
+  batch.update(userRef, { following: increment(-11) });
+  batch.update(userToFollowRef, { followers: increment(-11) });
+  batch.delete(getFollowRef(followRefId));
 
-    transaction.update(toFollowFollowsDocRef, {
-      followers: arrayRemove(user.username),
-    });
-  });
+  return batch.commit();
 };

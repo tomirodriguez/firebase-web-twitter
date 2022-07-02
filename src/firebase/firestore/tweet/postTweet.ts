@@ -1,14 +1,15 @@
-import { Timestamp } from 'firebase/firestore';
-import { TIMELINE_COLLECTION } from '../../constants';
-import { addToCollection } from '../../utils';
+import { setDoc, Timestamp } from 'firebase/firestore';
+import { TWEETS_COLLECTION } from '../constants';
+import { getRef } from '../utils/getRefs';
 
-export const postTweet = async (user: User, tweet: string): Promise<void> => {
+export const postTweet: PostTweet = async ({ username, tweet }) => {
+  const timelineRef = getRef<FirestoreTweet>(TWEETS_COLLECTION);
   const toPost: FirestoreTweet = {
     likes: 0,
     tweet,
-    username: user.username,
-    timestamp: Timestamp.now(),
+    username,
+    date: Timestamp.now(),
   };
 
-  return addToCollection(TIMELINE_COLLECTION, toPost);
+  return setDoc(timelineRef, toPost);
 };

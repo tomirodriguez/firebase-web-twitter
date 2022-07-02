@@ -1,10 +1,13 @@
 import ReactDOM from 'react-dom/client';
+import { FirebaseProvider } from './context';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App';
 import { SEO } from './components';
-import { FirebaseProvider, UserProvider } from './context';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from './store';
 import './index.css';
+import { DatabaseProvider } from './context/DatabaseContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,12 +15,14 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
   <FirebaseProvider>
-    <UserProvider>
-      <BrowserRouter>
-        <SEO />
-        <App />
-      </BrowserRouter>
-    </UserProvider>
+    <Provider store={store}>
+      <DatabaseProvider>
+        <BrowserRouter>
+          <SEO />
+          <App />
+        </BrowserRouter>
+      </DatabaseProvider>
+    </Provider>
   </FirebaseProvider>
   // </React.StrictMode>
 );

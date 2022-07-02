@@ -16,3 +16,10 @@ type Tweet = {
   timestamp: Date;
   likes: number;
 };
+
+type Follow = {
+  id: string;
+  timestamp: Date;
+  username: string;
+  followUsername: string;
+};
