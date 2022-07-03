@@ -57,7 +57,7 @@ export const UserFeed: FC<Props> = () => {
               author={user.name}
               username={tweet.username}
               message={tweet.tweet}
-              date={tweet.timestamp}
+              date={tweet.date}
             />
           </li>
         ))}

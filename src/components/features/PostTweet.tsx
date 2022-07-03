@@ -8,14 +8,16 @@ import { Spinner } from '../ui';
 export const PostTweet: FC = () => {
   const [loading, setLoading] = useState(false);
   const [tweetToPost, setTweetToPost] = useState('');
-  const isTweetValid =
-    tweetToPost.length <= MAX_TWEET_LENGTH && tweetToPost.length > 0;
+  const { user, tweet } = useUser();
+
   const tweetInput = useRef<HTMLDivElement>(null);
-  const { user } = useUser();
 
   if (!user) return null;
 
   const { image, name, username } = user;
+
+  const isTweetValid =
+    tweetToPost.length <= MAX_TWEET_LENGTH && tweetToPost.length > 0;
 
   const setInputFocus = () => {
     tweetInput.current?.focus();
@@ -27,10 +29,10 @@ export const PostTweet: FC = () => {
 
   const handleTweetSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
-    // setLoading(true);
-    // tweet(tweetToPost)
-    //   .then(() => setTweetToPost(''))
-    //   .finally(() => setLoading(false));
+    setLoading(true);
+    tweet(tweetToPost)
+      .then(() => setTweetToPost(''))
+      .finally(() => setLoading(false));
   };
 
   return (

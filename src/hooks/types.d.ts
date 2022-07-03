@@ -24,6 +24,7 @@ type UseUserHook = () => {
   unfollow: (username: string) => Promise<void>;
   getFeedBeforeDate: GetFeedBeforeDate;
   discoverPeople: DiscoverPeople;
+  tweet: (tweet: string) => Promise<void>;
 };
 
 type DiscoverPeople = (size?: number) => Promise<User[]>;

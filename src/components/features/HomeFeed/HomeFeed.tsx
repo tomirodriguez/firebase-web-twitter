@@ -1,8 +1,7 @@
-import { FC, useContext, useEffect, useState, useCallback } from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { FirebaseContext } from '../../../context/FirebaseContext';
 import { useUser } from '../../../hooks';
 import { ShowMoreButton, Spinner, Tweet } from '../../ui';
-import { Timestamp } from 'firebase/firestore';
 
 export const HomeFeed: FC = () => {
   const { user, getFeedBeforeDate } = useUser();
@@ -91,8 +90,8 @@ export const HomeFeed: FC = () => {
   const handleShowNewTweets = () => {
     const convinedTweets = [...newTweets, ...tweets];
     convinedTweets.sort((a, b) => {
-      if (a.timestamp < b.timestamp) return 1;
-      if (b.timestamp < a.timestamp) return -1;
+      if (a.date < b.date) return 1;
+      if (b.date < a.date) return -1;
       return 0;
     });
     setTweets([...newTweets, ...tweets]);
@@ -103,7 +102,7 @@ export const HomeFeed: FC = () => {
     const lastTweet = tweets.slice(-1)[0];
 
     setLoadingShowMore(true);
-    getFeedBeforeDate({ size: 10, date: lastTweet.timestamp })
+    getFeedBeforeDate({ size: 10, date: lastTweet.date })
       .then((moreTweets) => {
         setTweets([...tweets, ...moreTweets]);
         if (moreTweets.length === 0) setNoMoreTweets(true);
@@ -135,7 +134,7 @@ export const HomeFeed: FC = () => {
                 username={tweet.username}
                 author={userAuthor?.name || ''}
                 message={tweet.tweet}
-                date={tweet.timestamp}
+                date={tweet.date}
                 image={userAuthor?.image}
               />
             </li>

@@ -7,11 +7,11 @@ type DatabaseContext = {
   followUser: FollowUser;
   unfollowUser: UnfollowUser;
   isFollowing: IsFollowing;
-  postTweet: PostTweet;
   getTweets: GetTweets;
   getNotFollowingPeople: GetNotFollowingPeople;
   getFollowings: GetFollowings;
   getFollowers: GetFollowers;
+  postTweet: PostTweet;
 
   getUserTweets: (username: string) => Promise<Tweet[]>;
 

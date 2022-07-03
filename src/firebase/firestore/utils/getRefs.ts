@@ -11,7 +11,7 @@ export const getRef = <T>(
   id?: string
 ): DocumentReference<T> => {
   if (id) return doc(firestore, collection, id) as DocumentReference<T>;
-  else return doc(firestore, collection) as DocumentReference<T>;
+  else return doc(getCollectionRef(collection)) as DocumentReference<T>;
 };
 
 export const getCollectionRef = <T>(

@@ -14,7 +14,7 @@ type Tweet = {
   id: string;
   username: string;
   tweet: string;
-  timestamp: Date;
+  date: Date;
   likes: number;
 };
 

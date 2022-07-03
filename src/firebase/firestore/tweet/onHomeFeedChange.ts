@@ -46,7 +46,7 @@ export const onHomeFeedChange = (
         likes,
         username: docUsername,
         tweet: message,
-        timestamp: new Timestamp(seconds, nanoseconds).toDate(),
+        date: new Timestamp(seconds, nanoseconds).toDate(),
       };
       tweets.push(tweet);
     });

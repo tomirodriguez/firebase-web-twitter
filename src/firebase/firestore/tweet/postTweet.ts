@@ -1,9 +1,8 @@
 import { setDoc } from 'firebase/firestore';
-import { TWEETS_COLLECTION } from '../constants';
-import { getRef } from '../utils/getRefs';
+import { getTweetRef } from './utils/getRefs';
 
 export const postTweet: PostTweet = async ({ username, tweet }) => {
-  const timelineRef = getRef<FirestoreTweet>(TWEETS_COLLECTION);
+  const timelineRef = getTweetRef();
   const toPost: FirestoreTweet = {
     likes: 0,
     tweet,
