@@ -29,7 +29,7 @@ const App = () => {
         path="*"
         element={
           <RequireAuth>
-            <div className="bg-main-dark text-slate-100 flex flex-col overflow-x-hidden">
+            <div className="bg-main-dark text-slate-100 flex flex-col">
               <div className="container mx-auto flex text-primary-white">
                 <div className="md:mx-4 flex w-full">
                   <Header>
