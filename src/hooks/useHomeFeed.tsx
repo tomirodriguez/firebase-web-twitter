@@ -106,10 +106,10 @@ export const useHomeFeed: UseHomeFeedHook = () => {
   }, [user, onHomeFeedChange, newTweets, feed, hiddenFeed, followingUsernames]);
 
   const showNewestTweets = useCallback(() => {
-    setFeed([...newTweets, ...feed]);
-    setHiddenFeed([...newTweets, ...hiddenFeed]);
-    setNewTweets([]);
-  }, [feed, hiddenFeed, newTweets]);
+    // setFeed([...newTweets, ...feed]);
+    // setHiddenFeed([...newTweets, ...hiddenFeed]);
+    //   // setNewTweets([]);
+  }, []);
 
   return {
     loading,
