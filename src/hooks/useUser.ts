@@ -40,11 +40,14 @@ export const useUser: UseUserHook = () => {
     [user, unfollowUser]
   );
 
-  const tweet = useCallback(async (tweet: string) => {
-    if (!user) throw new Error('no user');
+  const tweet = useCallback(
+    async (tweet: string) => {
+      if (!user) throw new Error('no user');
 
-    return await postTweet({ username: user.username, tweet });
-  }, []);
+      return await postTweet({ username: user.username, tweet });
+    },
+    [postTweet, user]
+  );
 
   const getFeedBeforeDate: GetFeedBeforeDate = useCallback(
     async (options = {}) => {

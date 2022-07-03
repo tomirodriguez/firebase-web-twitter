@@ -23,7 +23,7 @@ export const getUserTweets = async (
       TWEETS_COLLECTION
     ) as CollectionReference<FirestoreTweet>,
     where('username', '==', username),
-    orderBy('timestamp'),
+    orderBy('date'),
     limit(size),
     startAt(offset)
   );

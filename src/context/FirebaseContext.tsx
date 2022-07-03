@@ -29,7 +29,7 @@ const defaultFirebaseContext: DatabaseContext = {
   isFollowing,
   postTweet,
   getUserTweets,
-  getTweets: getTweets,
+  getTweets,
   onHomeFeedChange,
   getNotFollowingPeople,
   getFollowings,
