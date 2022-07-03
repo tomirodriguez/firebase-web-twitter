@@ -18,7 +18,7 @@ export const useHomeFeed: UseHomeFeedHook = () => {
 
   const getFeed = useCallback(
     async (size: number, date: Date) => {
-      if (followingUsernames.length === 0 || !user) {
+      if (!user) {
         setMoreLeft(false);
         return [];
       }
@@ -77,7 +77,7 @@ export const useHomeFeed: UseHomeFeedHook = () => {
   }, [newTweets, feed]);
 
   useEffect(() => {
-    if (!user || followingUsernames.length === 0) return () => {};
+    if (!user) return () => {};
 
     const observer = (listenedTweet: Tweet) => {
       const tweetsWithSameId = feed.filter(
