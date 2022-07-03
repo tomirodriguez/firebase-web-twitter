@@ -7,10 +7,9 @@ import { ShowMoreButton, Spinner, Tweet } from '../../ui';
 export const HomeFeed: FC = () => {
   const { user } = useUser();
   const { findUser } = useFindUser();
-  const { feed, loading } = useHomeFeed();
+  const { feed, loading, showMore } = useHomeFeed();
 
   const [loadingShowMore, setLoadingShowMore] = useState(false);
-
   const [newTweets, setNewTweets] = useState<Tweet[]>([]);
   const [noMoreTweets, setNoMoreTweets] = useState(false);
 
@@ -117,16 +116,9 @@ export const HomeFeed: FC = () => {
     // setNewTweets([]);
   };
 
-  const handleShowMore = () => {
-    // const lastTweet = tweets.slice(-1)[0];
-    // setLoadingShowMore(true);
-    // getFeedBeforeDate({ size: 10, date: lastTweet.date })
-    //   .then((moreTweets) => {
-    //     setTweets([...tweets, ...moreTweets]);
-    //     if (moreTweets.length === 0) setNoMoreTweets(true);
-    //   })
-    //   .finally(() => setLoadingShowMore(false));
-  };
+  // const handleShowMore = () => {
+  //  sho
+  // };
 
   return loading ? (
     <div className="w-full py-12 flex items-center justify-center">
@@ -166,7 +158,7 @@ export const HomeFeed: FC = () => {
       ) : (
         !noMoreTweets && (
           <div className="border-b border-border">
-            <ShowMoreButton onShowMore={handleShowMore} />
+            <ShowMoreButton onShowMore={showMore} />
           </div>
         )
       )}

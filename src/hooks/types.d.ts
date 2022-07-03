@@ -14,7 +14,7 @@ type UserTweetsHook = () => {
 type UseHomeFeedHook = () => {
   loading: boolean;
   feed: Tweet[];
-  showMore: () => Promise<Tweet[]>;
+  showMore: () => Promise<void>;
 };
 
 type UseUserHook = () => {

@@ -61,5 +61,4 @@ export const getFollowings: GetFollowings = async (username, options) => {
   // );
 
   // return users;
-  return [];
 };

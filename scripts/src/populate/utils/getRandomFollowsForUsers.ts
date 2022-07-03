@@ -1,4 +1,5 @@
 import { Follow, User } from '../../types';
+import { randomDate } from './getRandomDate';
 import { randomArrayOfNumbers, randomNumber } from './utils';
 
 export const getRandomFollowsForUsers = (users: User[]): Follow[] => {
@@ -15,7 +16,7 @@ export const getRandomFollowsForUsers = (users: User[]): Follow[] => {
 
       if (user.username === followUsername) return;
       follows.push({
-        date: new Date(),
+        date: randomDate(),
         username: user.username,
         follow: followUsername,
       });

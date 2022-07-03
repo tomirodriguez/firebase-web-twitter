@@ -1,7 +1,7 @@
 import { getDocs, query, where } from 'firebase/firestore';
 import { CustomError } from '../../../utils';
 import { USERS_COLLECTION } from '../constants';
-import { INVALID_CALL, USER_DOESNT_EXIST_ERROR } from '../errors';
+import { INVALID_CALL } from '../errors';
 import { getDocument } from '../utils';
 import { getUserCollectionRef } from './getRefs';
 

@@ -10,6 +10,8 @@ import { auth, firestore } from './firebaseConfig';
 import { getRandomFollowsForUsers } from './utils';
 import { USERS, TWEETS } from './utils/mocks';
 import { randomNumber } from './utils/utils';
+import { Timestamp } from 'firebase/firestore';
+import { randomDate } from './utils/getRandomDate';
 
 const USERS_TO_POPULATE = 10;
 const TOTAL_TWEETS = 50;
@@ -42,7 +44,7 @@ const populate = async () => {
   follows.forEach((follow) => {
     batch.set(
       doc(firestore, 'follows', `${followId++}`) as DocumentReference<Follow>,
-      { ...follow }
+      { ...follow, date: Timestamp.fromDate(follow.date) }
     );
     batch.update(
       doc(firestore, 'users', follow.username) as DocumentReference<User>,
@@ -59,7 +61,7 @@ const populate = async () => {
   while (tweets.length < TOTAL_TWEETS) {
     tweets.push({
       likes: 0,
-      date: new Date(),
+      date: randomDate(),
       tweet: TWEETS[randomNumber(TWEETS.length)],
       username: users[randomNumber(users.length)].username,
     });
@@ -69,7 +71,7 @@ const populate = async () => {
   tweets.forEach((tweet) => {
     batch.set(
       doc(firestore, 'timeline', `${tweetId++}`) as DocumentReference<Tweet>,
-      tweet
+      { ...tweet, date: Timestamp.fromDate(tweet.date) }
     );
   });
 

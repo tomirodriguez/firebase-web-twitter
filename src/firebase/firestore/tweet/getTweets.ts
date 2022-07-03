@@ -19,7 +19,7 @@ export const getTweets: GetTweets = async (usernames, options) => {
       TWEETS_COLLECTION
     ) as CollectionReference<FirestoreTweet>,
     orderBy('date', 'desc'),
-    startAfter(options?.date || new Date()),
+    startAfter(Timestamp.fromDate(options?.date || new Date())),
     limit(options?.size || 20),
     where('username', 'in', usernames)
   );
