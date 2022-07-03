@@ -1,6 +1,4 @@
 import {
-  collection,
-  CollectionReference,
   limit,
   onSnapshot,
   orderBy,
@@ -9,49 +7,47 @@ import {
   Unsubscribe,
   where,
 } from 'firebase/firestore';
-import { TWEETS_COLLECTION } from '../constants';
-import { firestore } from '../../firebaseConfig';
+import { getTweetsCollectionRef } from './utils';
 
-export const onHomeFeedChange = (
-  user: User,
-  observer: (tweet: Tweet) => void,
-  following: string[]
-): Unsubscribe => {
+export const onHomeFeedChange: OnHomeFeedChange = (
+  user,
+  observer,
+  following
+) => {
   const followingAndUser = [...following, user.username];
 
-  const q = query<FirestoreTweet>(
-    collection(
-      firestore,
-      TWEETS_COLLECTION
-    ) as CollectionReference<FirestoreTweet>,
-    where('username', 'in', followingAndUser),
-    orderBy('timestamp', 'desc'),
+  const chunkSize = 10;
+
+  let q = query<FirestoreTweet>(
+    getTweetsCollectionRef(),
+    orderBy('date', 'desc'),
     limit(1)
   );
 
-  let firstCall = true;
+  const unsubscritions: Unsubscribe[] = [];
 
-  return onSnapshot<FirestoreTweet>(q, (querySnapshot) => {
-    const tweets: Tweet[] = [];
+  for (let i = 0; i < followingAndUser.length; i += chunkSize) {
+    const chunk = followingAndUser.slice(i, i + chunkSize);
+    const newQuery = query(q, where('username', 'in', chunk));
 
-    querySnapshot.forEach((doc) => {
-      const { likes, date, tweet: message, username: docUsername } = doc.data();
+    const unsubscribe = onSnapshot<FirestoreTweet>(
+      newQuery,
+      (querySnapshot) => {
+        const { likes, username, tweet, date } = querySnapshot.docs[0].data();
+        const { seconds, nanoseconds } = date;
 
-      if (!date) return;
+        observer({
+          likes,
+          username,
+          tweet,
+          id: querySnapshot.docs[0].id,
+          date: new Timestamp(seconds, nanoseconds).toDate(),
+        });
+      }
+    );
 
-      const { seconds, nanoseconds } = date;
+    unsubscritions.push(unsubscribe);
+  }
 
-      const tweet: Tweet = {
-        id: doc.id,
-        likes,
-        username: docUsername,
-        tweet: message,
-        date: new Timestamp(seconds, nanoseconds).toDate(),
-      };
-      tweets.push(tweet);
-    });
-
-    if (!firstCall) observer(tweets[0]);
-    else firstCall = false;
-  });
+  return unsubscritions;
 };

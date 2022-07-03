@@ -28,7 +28,7 @@ export const Tweet: FC<Props> = ({
           <span className="text-secondary-text pl-2">@{username}</span>
           <span className="text-secondary-text px-2">·</span>
           <time className="text-secondary-text">
-            {fecha.format(date, 'MMM dd')}
+            {fecha.format(date, 'MMM DD')}
           </time>
         </div>
         <p>{message}</p>

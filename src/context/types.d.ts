@@ -13,15 +13,15 @@ type DatabaseContext = {
   getFollowers: GetFollowers;
   postTweet: PostTweet;
   getFollowingsUsernames: GetFollowingsUsernames;
-
+  onHomeFeedChange: OnHomeFeedChange;
   getUserTweets: (username: string) => Promise<Tweet[]>;
-
-  onHomeFeedChange: (
-    user: User,
-    observer: (tweets: Tweet) => void,
-    following: string[]
-  ) => Unsubscribe;
 };
+
+type OnHomeFeedChange = (
+  user: User,
+  observer: (tweets: Tweet) => void,
+  following: string[]
+) => Unsubscribe[];
 
 type Options = { size?: number; date?: Date };
 

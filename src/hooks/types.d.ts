@@ -22,6 +22,9 @@ type UseHomeFeedHook = () => {
   loading: boolean;
   feed: Tweet[];
   showMore: () => Promise<void>;
+  showNewestTweets: () => void;
+  moreLeft: boolean;
+  newTweetsCount: number;
 };
 
 type UseUserHook = () => {

@@ -173,7 +173,7 @@ export const DatabaseTestContext: FC<
     return [];
   };
 
-  const onHomeFeedChange = async () => {
+  const onHomeFeedChange: OnHomeFeedChange = () => {
     return [];
   };
 

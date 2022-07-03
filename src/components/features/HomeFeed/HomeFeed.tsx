@@ -7,11 +7,16 @@ import { ShowMoreButton, Spinner, Tweet } from '../../ui';
 export const HomeFeed: FC = () => {
   const { user } = useUser();
   const { findUser } = useFindUser();
-  const { feed, loading, showMore } = useHomeFeed();
+  const {
+    feed,
+    loading,
+    showMore,
+    moreLeft,
+    showNewestTweets,
+    newTweetsCount,
+  } = useHomeFeed();
 
   const [loadingShowMore, setLoadingShowMore] = useState(false);
-  const [newTweets, setNewTweets] = useState<Tweet[]>([]);
-  const [noMoreTweets, setNoMoreTweets] = useState(false);
 
   const [feedUsers, setFeedUsers] = useState<Map<string, User>>(
     new Map<string, User>()
@@ -46,16 +51,18 @@ export const HomeFeed: FC = () => {
     updateUsersData();
   }, [updateUsersData]);
 
+  const handleShowMore = () => {
+    setLoadingShowMore(true);
+    showMore().finally(() => setLoadingShowMore(false));
+  };
+
   // const saveNewTweet = useCallback(
   //   (newTweet: Tweet) => {
   //     if (newTweets.find((tweet) => newTweet.id === tweet.id)) return;
 
-  //     const isMyTweet = newTweet.username === user?.username;
-
-  //     if (isMyTweet) setTweets([newTweet, ...tweets]);
-  //     else setNewTweets([newTweet, ...newTweets]);
+  //     setNewTweets([newTweet, ...newTweets]);
   //   },
-  //   [newTweets, tweets, user]
+  //   [newTweets]
   // );
 
   // useEffect(() => {
@@ -69,55 +76,24 @@ export const HomeFeed: FC = () => {
   // }, [newTweets, tweets]);
 
   // useEffect(() => {
-  //   if (!user || loadingFollowingUsers || loading) return;
+  //   const unsubcsribe = onHomeFeedUpdate(saveNewTweet);
 
-  // const unsubcsribe = onHomeFeedChange(user, saveNewTweet, [
-  //   ...followingUsernames,
-  // ]);
+  //   return unsubcsribe;
+  // }, [saveNewTweet, onHomeFeedUpdate]);
 
-  // return () => unsubcsribe;
-  // }, [user, onHomeFeedChange, loadingFollowingUsers, loading, saveNewTweet]);
+  // if (!user) return null;
 
-  // const getUsersData = useCallback(async () => {
-  // if (feedUsers.size === followingUsernames.length + 1) return;
-  // const updatedFeedUsers = new Map(feedUsers);
-  // const promises: Promise<void>[] = [];
-  // tweets.forEach((tweet) => {
-  //   if (!updatedFeedUsers.has(tweet.username)) {
-  //     promises.push(
-  //       getUser({ username: tweet.username }).then((user) => {
-  //         if (user) {
-  //           updatedFeedUsers.set(user.username, user);
-  //         }
-  //       })
-  //     );
-  //   }
-  // });
-  // await Promise.all(promises);
-  // setFeedUsers(updatedFeedUsers);
-  // }, [feed, feedUsers, getUser]);
+  // const newTweetsCount = newTweets.length;
 
-  // useEffect(() => {
-  // if (!loading) getUsersData();
-  // }, [loading, getUsersData]);
-
-  if (!user) return null;
-
-  const newTweetsCount = newTweets.length;
-
-  const handleShowNewTweets = () => {
-    // const convinedTweets = [...newTweets, ...feed];
-    // convinedTweets.sort((a, b) => {
-    //   if (a.date < b.date) return 1;
-    //   if (b.date < a.date) return -1;
-    //   return 0;
-    // });
-    // setTweets([...newTweets, ...feed]);
-    // setNewTweets([]);
-  };
-
-  // const handleShowMore = () => {
-  //  sho
+  // const handleShowNewTweets = () => {
+  //   const convinedTweets = [...newTweets, ...feed];
+  //   convinedTweets.sort((a, b) => {
+  //     if (a.date < b.date) return 1;
+  //     if (b.date < a.date) return -1;
+  //     return 0;
+  //   });
+  //   setTweets([...newTweets, ...feed]);
+  //   setNewTweets([]);
   // };
 
   return loading ? (
@@ -128,7 +104,7 @@ export const HomeFeed: FC = () => {
     <div className="mb-12">
       {newTweetsCount > 0 && (
         <button
-          onClick={handleShowNewTweets}
+          onClick={showNewestTweets}
           className="w-full py-4 border-b border-border text-primary-blue hover:bg-hover-white"
         >{`Show ${newTweetsCount} Tweet${
           newTweetsCount > 1 ? 's' : ''
@@ -156,9 +132,9 @@ export const HomeFeed: FC = () => {
           <Spinner />
         </div>
       ) : (
-        !noMoreTweets && (
+        !moreLeft && (
           <div className="border-b border-border">
-            <ShowMoreButton onShowMore={showMore} />
+            <ShowMoreButton onShowMore={() => handleShowMore} />
           </div>
         )
       )}

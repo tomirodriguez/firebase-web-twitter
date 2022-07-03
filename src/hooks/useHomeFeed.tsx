@@ -4,17 +4,31 @@ import { DatabaseContext } from '../context/DatabaseContext';
 
 export const useHomeFeed: UseHomeFeedHook = () => {
   const { user } = useUser();
-  const { getTweets, getFollowingsUsernames } = useContext(DatabaseContext);
+  const { getTweets, getFollowingsUsernames, onHomeFeedChange } =
+    useContext(DatabaseContext);
   const [loading, setLoading] = useState(true);
   const [lastTweet, setLastTweet] = useState<Tweet | null>(null);
   const [feed, setFeed] = useState<Tweet[]>([]);
   const [hiddenFeed, setHiddenFeed] = useState<Tweet[]>([]);
   const [followingUsernames, setFollowingUsernames] = useState<string[]>([]);
+  const [moreLeft, setMoreLeft] = useState(true);
+  const [newTweets, setNewTweets] = useState<Tweet[]>([]);
+
+  useEffect(() => {}, []);
 
   const getFeed = useCallback(
     async (size: number, date: Date) => {
-      if (followingUsernames.length === 0 || !user) return [];
-      return getTweets([...followingUsernames, user.username], { size, date });
+      if (followingUsernames.length === 0 || !user) {
+        setMoreLeft(false);
+        return [];
+      }
+      return getTweets([...followingUsernames, user.username], {
+        size,
+        date,
+      }).then((newTweets) => {
+        if (newTweets.length === 0) setMoreLeft(false);
+        return newTweets;
+      });
     },
     [getTweets, user, followingUsernames]
   );
@@ -53,5 +67,54 @@ export const useHomeFeed: UseHomeFeedHook = () => {
       });
   }, [lastTweet, getFeed, feed, hiddenFeed]);
 
-  return { loading, showMore, feed };
+  useEffect(() => {
+    const uniqueTweets = newTweets.filter((newTweet) => {
+      const isInFeed = feed.find((tweet) => tweet.id === newTweet.id);
+      return !isInFeed;
+    });
+
+    if (uniqueTweets.length !== newTweets.length) setNewTweets(uniqueTweets);
+  }, [newTweets, feed]);
+
+  useEffect(() => {
+    if (!user || followingUsernames.length === 0) return () => {};
+
+    const observer = (listenedTweet: Tweet) => {
+      const tweetsWithSameId = feed.filter(
+        (tweet) => tweet.id === listenedTweet.id
+      );
+
+      if (tweetsWithSameId.length !== 0) return;
+
+      const isMyTweet = listenedTweet.username === user?.username;
+
+      if (isMyTweet) {
+        setFeed([listenedTweet, ...feed]);
+        setHiddenFeed([listenedTweet, ...hiddenFeed]);
+      } else {
+        setNewTweets([listenedTweet, ...newTweets]);
+      }
+    };
+
+    const unsubscriptions = onHomeFeedChange(
+      user,
+      observer,
+      followingUsernames
+    );
+
+    return () => unsubscriptions.forEach((unsubscription) => unsubscription());
+  }, [user, onHomeFeedChange, newTweets, feed, hiddenFeed, followingUsernames]);
+
+  const showNewestTweets = () => {
+    console.log({ newTweets });
+  };
+
+  return {
+    loading,
+    showMore,
+    feed,
+    moreLeft,
+    newTweetsCount: newTweets.length,
+    showNewestTweets,
+  };
 };

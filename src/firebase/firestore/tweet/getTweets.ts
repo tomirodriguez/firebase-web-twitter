@@ -22,11 +22,7 @@ export const getTweets: GetTweets = async (usernames, options) => {
 
   const tweets: Tweet[] = [];
 
-  for (
-    let i = 0;
-    i < usernames.length && tweets.length < size;
-    i += chunkSize
-  ) {
+  for (let i = 0; i < usernames.length; i += chunkSize) {
     const chunk = usernames.slice(i, i + chunkSize);
     const newQuery = query(q, where('username', 'in', chunk));
 
@@ -47,5 +43,13 @@ export const getTweets: GetTweets = async (usernames, options) => {
     });
   }
 
-  return tweets;
+  const sortByDate = (array: Tweet[]) => {
+    return array.sort((a, b) => {
+      if (a.date < b.date) return 1;
+      if (b.date < a.date) return -1;
+      return 0;
+    });
+  };
+
+  return sortByDate(tweets);
 };
