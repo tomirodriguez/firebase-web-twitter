@@ -12,7 +12,6 @@ export const useUser: UseUserHook = () => {
     followUser,
     unfollowUser,
     postTweet,
-    getNotFollowingPeople,
   } = useContext(DatabaseContext);
 
   const isFollowing = useCallback(
@@ -49,14 +48,6 @@ export const useUser: UseUserHook = () => {
     [postTweet, user]
   );
 
-  const discoverPeople: DiscoverPeople = useCallback(
-    async (size = 2) => {
-      if (!user) throw new Error('no user');
-      return getNotFollowingPeople(user?.username);
-    },
-    [user, getNotFollowingPeople]
-  );
-
   return {
     user,
     loading,
@@ -64,7 +55,6 @@ export const useUser: UseUserHook = () => {
     isFollowing,
     follow,
     unfollow,
-    discoverPeople,
     tweet,
   };
 };

@@ -6,7 +6,6 @@ import {
   followUser,
   getFollowers,
   getFollowings,
-  getNotFollowingPeople,
   isFollowing,
   unfollowUser,
   getFollowingsUsernames,
@@ -17,7 +16,7 @@ import {
   onHomeFeedChange,
   postTweet,
 } from '../firebase/firestore/tweet';
-import { addUser, getUser } from '../firebase/firestore/user';
+import { addUser, getUser, getUsers } from '../firebase/firestore/user';
 
 const defaultFirebaseContext: DatabaseContext = {
   userLoginObserver: () => () => {},
@@ -32,7 +31,7 @@ const defaultFirebaseContext: DatabaseContext = {
   getUserTweets,
   getTweets,
   onHomeFeedChange,
-  getNotFollowingPeople,
+  getUsers,
   getFollowings,
   getFollowers,
   getFollowingsUsernames,

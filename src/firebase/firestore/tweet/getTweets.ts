@@ -1,6 +1,4 @@
 import {
-  collection,
-  CollectionReference,
   getDocs,
   limit,
   orderBy,
@@ -9,27 +7,26 @@ import {
   Timestamp,
   where,
 } from 'firebase/firestore';
-import { firestore } from '../../firebaseConfig';
-import { TWEETS_COLLECTION } from '../constants';
+import { getTweetsCollectionRef } from './utils/getRefs';
 
 export const getTweets: GetTweets = async (usernames, options) => {
   const chunkSize = 10;
-
-  console.log({ usernames });
+  const size = options?.size || 20;
 
   let q = query<FirestoreTweet>(
-    collection(
-      firestore,
-      TWEETS_COLLECTION
-    ) as CollectionReference<FirestoreTweet>,
+    getTweetsCollectionRef(),
     orderBy('date', 'desc'),
     startAfter(Timestamp.fromDate(options?.date || new Date())),
-    limit(options?.size || 20)
+    limit(size)
   );
 
   const tweets: Tweet[] = [];
 
-  for (let i = 0; i < usernames.length; i += chunkSize) {
+  for (
+    let i = 0;
+    i < usernames.length && tweets.length < size;
+    i += chunkSize
+  ) {
     const chunk = usernames.slice(i, i + chunkSize);
     const newQuery = query(q, where('username', 'in', chunk));
 

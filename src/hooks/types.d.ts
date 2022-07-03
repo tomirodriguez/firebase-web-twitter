@@ -11,6 +11,12 @@ type UserTweetsHook = () => {
   getUserTweets: (username: string) => Promise<Tweet[]>;
 };
 
+type UseDiscoverHook = (initialSearch: number) => {
+  loading: boolean;
+  users: User[];
+  showMore: () => Promise<void>;
+};
+
 type UseHomeFeedHook = () => {
   loading: boolean;
   feed: Tweet[];
@@ -25,7 +31,6 @@ type UseUserHook = () => {
   follow: (username: string) => Promise<void>;
   unfollow: (username: string) => Promise<void>;
   tweet: (tweet: string) => Promise<void>;
-  discoverPeople: DiscoverPeople;
 };
 
 type DiscoverPeople = (size?: number) => Promise<User[]>;

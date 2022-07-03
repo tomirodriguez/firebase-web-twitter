@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { DatabaseContext } from '../context/DatabaseContext';
 import { userLoaded } from '../reducers';
 import { EMPTY_PROFILE_USER } from './mocks/users';
-import { getNotFollowingPeople } from '../firebase/firestore/follow/getNotFollowingPeople';
 
 type InitialState = {
   user?: User | null;
@@ -194,7 +193,7 @@ export const DatabaseTestContext: FC<
     return [];
   };
 
-  const getNotFollowingPeople = async () => {
+  const getUsers = async () => {
     return [];
   };
 
@@ -216,7 +215,7 @@ export const DatabaseTestContext: FC<
         postTweet,
         getUserTweets,
         onHomeFeedChange,
-        getNotFollowingPeople,
+        getUsers,
         getFollowings,
         getFollowers,
         getTweets,

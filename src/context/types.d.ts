@@ -8,7 +8,7 @@ type DatabaseContext = {
   unfollowUser: UnfollowUser;
   isFollowing: IsFollowing;
   getTweets: GetTweets;
-  getNotFollowingPeople: GetNotFollowingPeople;
+  getUsers: GetUsers;
   getFollowings: GetFollowings;
   getFollowers: GetFollowers;
   postTweet: PostTweet;
@@ -37,10 +37,11 @@ type GetFollowings = (
   options?: { size?: number; lastUser?: string }
 ) => Promise<User[]>;
 
-type GetNotFollowingPeople = (
-  username: string,
-  options?: Options
-) => Promise<User[]>;
+type GetUsers = (options?: {
+  size?: number;
+  user?: User;
+  excluse?: string[];
+}) => Promise<User[]>;
 
 type GetFollowingUsernames = (username: string) => Promise<string[]>;
 
