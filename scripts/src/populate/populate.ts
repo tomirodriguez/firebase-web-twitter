@@ -13,14 +13,14 @@ import { randomNumber } from './utils/utils';
 import { Timestamp } from 'firebase/firestore';
 import { randomDate } from './utils/getRandomDate';
 
-const USERS_TO_POPULATE = 10;
-const TOTAL_TWEETS = 50;
+const USERS_TO_POPULATE = 30;
+const TOTAL_TWEETS = 100;
 
 const populate = async () => {
   const users = USERS.filter((_, index) => index < USERS_TO_POPULATE);
   const follows = getRandomFollowsForUsers(users);
 
-  const batch = writeBatch(firestore);
+  let batch = writeBatch(firestore);
 
   const authUsers = Promise.all(
     users.map(async (user) => {
@@ -40,6 +40,10 @@ const populate = async () => {
     batch.set(doc(firestore, 'users', authUser.username), { ...authUser });
   });
 
+  await batch.commit();
+
+  batch = writeBatch(firestore);
+
   let followId = 0;
   follows.forEach((follow) => {
     batch.set(
@@ -56,6 +60,8 @@ const populate = async () => {
     );
   });
 
+  await batch.commit();
+
   const tweets: Tweet[] = [];
 
   while (tweets.length < TOTAL_TWEETS) {
@@ -66,6 +72,8 @@ const populate = async () => {
       username: users[randomNumber(users.length)].username,
     });
   }
+
+  batch = writeBatch(firestore);
 
   let tweetId = 0;
   tweets.forEach((tweet) => {
