@@ -1,4 +1,4 @@
-import { setDoc, Timestamp } from 'firebase/firestore';
+import { setDoc } from 'firebase/firestore';
 import { TWEETS_COLLECTION } from '../constants';
 import { getRef } from '../utils/getRefs';
 
@@ -8,7 +8,7 @@ export const postTweet: PostTweet = async ({ username, tweet }) => {
     likes: 0,
     tweet,
     username,
-    date: Timestamp.now(),
+    date: new Date(),
   };
 
   return setDoc(timelineRef, toPost);

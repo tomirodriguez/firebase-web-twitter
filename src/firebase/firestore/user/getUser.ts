@@ -1,13 +1,13 @@
 import { getDocs, query, where } from 'firebase/firestore';
 import { CustomError } from '../../../utils';
 import { USERS_COLLECTION } from '../constants';
-import { INVALID_CALL } from '../errors';
+import { INVALID_CALL, USER_DOESNT_EXIST_ERROR } from '../errors';
 import { getDocument } from '../utils';
 import { getUserCollectionRef } from './getRefs';
 
 const getUserWithUsername = async (username: string) => {
   return getDocument<User>(USERS_COLLECTION, username).then((doc) => {
-    if (!doc.exists()) return null;
+    if (!doc.exists()) throw USER_DOESNT_EXIST_ERROR;
     return { ...doc.data() };
   });
 };
@@ -23,6 +23,7 @@ const getUserWithId = async (id: string) => {
     user = { ...snap.data() };
   });
 
+  if (!user) throw USER_DOESNT_EXIST_ERROR;
   return user;
 };
 

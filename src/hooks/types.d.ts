@@ -1,5 +1,10 @@
-type UserProfileHook = (options?: { type: 'ID' | 'USERNAME' }) => {
-  getUserProfile: (user: string) => Promise<User | null>;
+type UseFollowingsHook = () => {
+  getFollowings: (username: string, size?: number) => Promise<User[]>;
+  loading: boolean;
+};
+type UseFollowersHook = () => {
+  getFollowers: (username: string, size?: number) => Promise<User[]>;
+  loading: boolean;
 };
 
 type UserTweetsHook = () => {
@@ -17,4 +22,13 @@ type UseUserHook = () => {
   isFollowing: (username: string) => Promise<boolean>;
   follow: (username: string) => Promise<void>;
   unfollow: (username: string) => Promise<void>;
+  getFeedBeforeDate: GetFeedBeforeDate;
+  discoverPeople: DiscoverPeople;
 };
+
+type DiscoverPeople = (size?: number) => Promise<User[]>;
+
+type GetFeedBeforeDate = (options?: {
+  date?: Date;
+  size?: number;
+}) => Promise<Tweet[]>;

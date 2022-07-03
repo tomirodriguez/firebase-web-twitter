@@ -1,14 +1,9 @@
 import {
-  DocumentReference,
-  doc,
   collection,
   CollectionReference,
+  doc,
+  DocumentReference,
 } from 'firebase/firestore';
-import {
-  USERS_COLLECTION,
-  FOLLOWS_COLLECTION,
-  TWEETS_COLLECTION,
-} from '../constants';
 import { firestore } from '../../firebaseConfig';
 
 export const getRef = <T>(

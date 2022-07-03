@@ -6,7 +6,7 @@ type FirestoreTweet = {
 };
 
 type FirestoreFollow = {
-  timestamp: FieldValue;
+  date: FieldValue;
   username: string;
-  following: string;
+  follow: string;
 };

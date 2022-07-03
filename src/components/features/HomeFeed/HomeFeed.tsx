@@ -5,7 +5,7 @@ import { ShowMoreButton, Spinner, Tweet } from '../../ui';
 import { Timestamp } from 'firebase/firestore';
 
 export const HomeFeed: FC = () => {
-  const { user } = useUser();
+  const { user, getFeedBeforeDate } = useUser();
 
   const [loading, setLoading] = useState(true);
   const [loadingFollowingUsers, setLoadingFollowingUsers] = useState(true);
@@ -15,21 +15,19 @@ export const HomeFeed: FC = () => {
   const [newTweets, setNewTweets] = useState<Tweet[]>([]);
   const [noMoreTweets, setNoMoreTweets] = useState(false);
 
-  const [followingUsernames, setFollowingUsernames] = useState<string[]>([]);
   const [feedUsers, setFeedUsers] = useState<Map<string, User>>(
     new Map<string, User>()
   );
 
-  const { onHomeFeedChange, getFollowingUsernames, getUser, getHomeFeed } =
-    useContext(FirebaseContext);
+  const { onHomeFeedChange, getUser } = useContext(FirebaseContext);
 
   useEffect(() => {
     if (!user) return;
 
-    // getHomeFeed(user)
-    //   .then(setTweets)
-    //   .finally(() => setLoading(false));
-  }, [user, getHomeFeed]);
+    getFeedBeforeDate()
+      .then(setTweets)
+      .finally(() => setLoading(false));
+  }, [user, getFeedBeforeDate]);
 
   const saveNewTweet = useCallback(
     (newTweet: Tweet) => {
@@ -44,14 +42,13 @@ export const HomeFeed: FC = () => {
   );
 
   useEffect(() => {
-    const filteredNewTweets = newTweets.filter((newTweet) => {
-      const isShowing = tweets.find((tweet) => tweet.id === newTweet.id);
-      if (isShowing) return false;
-      return true;
-    });
-
-    if (filteredNewTweets.length !== newTweets.length)
-      setNewTweets(filteredNewTweets);
+    // const filteredNewTweets = newTweets.filter((newTweet) => {
+    //   const isShowing = tweets.find((tweet) => tweet.id === newTweet.id);
+    //   if (isShowing) return false;
+    //   return true;
+    // });
+    // if (filteredNewTweets.length !== newTweets.length)
+    //   setNewTweets(filteredNewTweets);
   }, [newTweets, tweets]);
 
   useEffect(() => {
@@ -62,49 +59,26 @@ export const HomeFeed: FC = () => {
     // ]);
 
     // return () => unsubcsribe;
-  }, [
-    user,
-    onHomeFeedChange,
-    loadingFollowingUsers,
-    followingUsernames,
-    loading,
-    saveNewTweet,
-  ]);
-
-  useEffect(() => {
-    if (!user) return;
-
-    // const feedUsersWithUser = new Map<string, User>();
-    // feedUsersWithUser.set(user.username, user);
-    // setFeedUsers(feedUsersWithUser);
-    // getFollowingUsernames(user)
-    //   .then((users) => setFollowingUsernames(users))
-    //   .finally(() => setLoadingFollowingUsers(false));
-  }, [user, getFollowingUsernames]);
+  }, [user, onHomeFeedChange, loadingFollowingUsers, loading, saveNewTweet]);
 
   const getUsersData = useCallback(async () => {
-    if (feedUsers.size === followingUsernames.length + 1) return;
-
-    const updatedFeedUsers = new Map(feedUsers);
-
-    const promises: Promise<void>[] = [];
-
-    tweets.forEach((tweet) => {
-      if (!updatedFeedUsers.has(tweet.username)) {
-        promises.push(
-          getUser({ username: tweet.username }).then((user) => {
-            if (user) {
-              updatedFeedUsers.set(user.username, user);
-            }
-          })
-        );
-      }
-    });
-
-    await Promise.all(promises);
-
-    setFeedUsers(updatedFeedUsers);
-  }, [tweets, feedUsers, getUser, followingUsernames]);
+    // if (feedUsers.size === followingUsernames.length + 1) return;
+    // const updatedFeedUsers = new Map(feedUsers);
+    // const promises: Promise<void>[] = [];
+    // tweets.forEach((tweet) => {
+    //   if (!updatedFeedUsers.has(tweet.username)) {
+    //     promises.push(
+    //       getUser({ username: tweet.username }).then((user) => {
+    //         if (user) {
+    //           updatedFeedUsers.set(user.username, user);
+    //         }
+    //       })
+    //     );
+    //   }
+    // });
+    // await Promise.all(promises);
+    // setFeedUsers(updatedFeedUsers);
+  }, [tweets, feedUsers, getUser]);
 
   useEffect(() => {
     // if (!loading) getUsersData();
@@ -128,12 +102,8 @@ export const HomeFeed: FC = () => {
   const handleShowMore = () => {
     const lastTweet = tweets.slice(-1)[0];
 
-    const timestamp = lastTweet
-      ? Timestamp.fromDate(lastTweet.timestamp)
-      : Timestamp.now();
-
     setLoadingShowMore(true);
-    getHomeFeed(user, { size: 10, timestamp })
+    getFeedBeforeDate({ size: 10, date: lastTweet.timestamp })
       .then((moreTweets) => {
         setTweets([...tweets, ...moreTweets]);
         if (moreTweets.length === 0) setNoMoreTweets(true);

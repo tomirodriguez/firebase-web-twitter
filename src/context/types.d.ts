@@ -1,39 +1,47 @@
 type DatabaseContext = {
   userLoginObserver: (observer: UserLoginObserver) => RemoveObserver;
-
   signInWithGoogle: () => Promise<void>;
   signOut: SignOut;
-  addUser: (user: User) => Promise<void>;
+  addUser: AddUser;
   getUser: GetUser;
   followUser: FollowUser;
   unfollowUser: UnfollowUser;
   isFollowing: IsFollowing;
   postTweet: PostTweet;
+  getTweets: GetTweets;
+  getNotFollowingPeople: GetNotFollowingPeople;
+  getFollowings: GetFollowings;
+  getFollowers: GetFollowers;
 
   getUserTweets: (username: string) => Promise<Tweet[]>;
-  getHomeFeed: (
-    user: User,
-    options?: { size?: number; timestamp: Timestamp }
-  ) => Promise<Tweet[]>;
-  getFollowingUsernames: (user: User) => Promise<string[]>;
-  getNewFollowers: (
-    user: User,
-    options?: { size?: number; lastUser?: User }
-  ) => Promise<User[]>;
-  getFollowingUsers: (
-    user: User,
-    options?: { size?: number; lastUser?: User }
-  ) => Promise<User[]>;
-  getFollowersUsers: (
-    user: User,
-    options?: { size?: number; lastUser?: User }
-  ) => Promise<User[]>;
+
   onHomeFeedChange: (
     user: User,
     observer: (tweets: Tweet) => void,
     following: string[]
   ) => Unsubscribe;
 };
+
+type Options = { size?: number; date?: Date };
+
+type GetFollowers = (
+  username: string,
+  options?: { size?: number; lastUser?: string }
+) => Promise<User[]>;
+
+type GetFollowings = (
+  username: string,
+  options?: { size?: number; lastUser?: string }
+) => Promise<User[]>;
+
+type GetNotFollowingPeople = (
+  username: string,
+  options?: Options
+) => Promise<User[]>;
+
+type GetFollowingUsernames = (username: string) => Promise<string[]>;
+
+type GetTweets = (usernames: string[], options?: Options) => Promise<Tweet[]>;
 
 type AddUser = (user: User) => Promise<void>;
 
@@ -43,7 +51,7 @@ type GetUser = ({
 }: {
   id?: string;
   username?: string;
-}) => Promise<User | null>;
+}) => Promise<User>;
 
 type IsFollowing = ({
   username,

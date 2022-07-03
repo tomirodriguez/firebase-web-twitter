@@ -1,44 +1,32 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Spinner, UserList } from '../components/ui';
-import { FirebaseContext } from '../context/FirebaseContext';
+import { useFollowings } from '../hooks/useFollowings';
+
+const STARTING_AMOUT = 10;
 
 export const FollowingPage: FC = () => {
   const { username = '' } = useParams<UserProfileParams>();
-  const [loading, setLoading] = useState(true);
+  const { getFollowings, loading } = useFollowings();
   const [users, setUsers] = useState<User[]>([]);
   const [showShowMoreButton, setShowShowMoreButton] = useState(true);
-  const { getFollowingUsers, getUser } = useContext(FirebaseContext);
-  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    getUser({ username }).then(setUser);
-  }, [username, getUser]);
-
-  useEffect(() => {
-    if (!user || !loading) return;
-
-    const STARTING_AMOUT = 10;
-
-    getFollowingUsers(user, { size: STARTING_AMOUT })
-      .then((users) => {
-        if (users.length < STARTING_AMOUT) setShowShowMoreButton(false);
-        if (users.length > 0) setUsers(users);
-      })
-      .finally(() => setLoading(false));
-  }, [user, loading, getFollowingUsers]);
-
-  if (!user) return null;
+    getFollowings(username, 10).then((users) => {
+      if (users.length < STARTING_AMOUT) setShowShowMoreButton(false);
+      if (users.length > 0) setUsers(users);
+    });
+  }, [username, getFollowings]);
 
   const handleShowMore = () => {
-    const SHOW_MORE_SIZE = 1;
-    getFollowingUsers(user, {
-      size: SHOW_MORE_SIZE,
-      lastUser: users[users.length - 1],
-    }).then((moreUsers) => {
-      if (moreUsers.length < SHOW_MORE_SIZE) setShowShowMoreButton(false);
-      setUsers([...users, ...moreUsers]);
-    });
+    // const SHOW_MORE_SIZE = 1;
+    // getFollowingUsers(user.username, {
+    //   size: SHOW_MORE_SIZE,
+    //   lastUser: users[users.length - 1].username,
+    // }).then((moreUsers) => {
+    //   if (moreUsers.length < SHOW_MORE_SIZE) setShowShowMoreButton(false);
+    //   setUsers([...users, ...moreUsers]);
+    // });
   };
 
   return loading ? (

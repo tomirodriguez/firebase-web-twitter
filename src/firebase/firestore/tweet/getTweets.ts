@@ -15,14 +15,7 @@ import { getDoc } from 'firebase/firestore';
 import { CustomError } from '../../../utils';
 import { USER_DOESNT_EXISTS } from '../../errorKeys';
 
-type Options = {
-  size?: number;
-  timestamp?: Timestamp;
-};
-
-type HomeFeedType = (user: User, options?: Options) => Promise<Tweet[]>;
-
-export const getHomeFeed: HomeFeedType = async (user: User, options) => {
+export const getTweets: GetTweets = async (users, options) => {
   // const followsDocRef = getFollowsRef(user.id);
   // const followsDocSnap = await getDoc(followsDocRef);
 

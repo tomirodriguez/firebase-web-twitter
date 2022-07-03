@@ -32,22 +32,21 @@ export const FollowInteraction: React.FC<Props> = ({ username }) => {
       .catch((error) => {
         if (error instanceof CustomError && error.code === ALREADY_FOLLOWING) {
           setIsFollowingUser(true);
-        } else {
-          console.error(error);
         }
+        throw error;
       })
       .finally(() => setLoading(false));
   };
 
   const handleUnfollowUser = async () => {
     setLoading(true);
-    unfollow(username)
+    await unfollow(username)
       .then(() => setIsFollowingUser(false))
       .catch((error) => {
         if (error instanceof CustomError && error.code === NOT_FOLLOWING) {
           setIsFollowingUser(false);
         } else {
-          console.error(error);
+          throw error;
         }
       })
       .finally(() => setLoading(false));

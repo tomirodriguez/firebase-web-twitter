@@ -4,15 +4,14 @@ import { auth } from '../firebase';
 import { signInWithGoogle, signOut } from '../firebase/auth';
 import {
   followUser,
-  getFollowersUsers,
-  getFollowingUsernames,
-  getFollowingUsers,
-  getNewFollowers,
+  getFollowers,
+  getFollowings,
+  getNotFollowingPeople,
   isFollowing,
   unfollowUser,
 } from '../firebase/firestore/follow';
 import {
-  getHomeFeed,
+  getTweets,
   getUserTweets,
   onHomeFeedChange,
   postTweet,
@@ -30,12 +29,11 @@ const defaultFirebaseContext: DatabaseContext = {
   isFollowing,
   postTweet,
   getUserTweets,
-  getHomeFeed,
+  getTweets: getTweets,
   onHomeFeedChange,
-  getFollowingUsernames,
-  getNewFollowers,
-  getFollowingUsers,
-  getFollowersUsers,
+  getNotFollowingPeople,
+  getFollowings,
+  getFollowers,
 };
 
 export const FirebaseContext = createContext<DatabaseContext>(

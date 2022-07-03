@@ -28,8 +28,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "emulators": "firebase emulators:start --project 'demo-local'",
-    "envs": "node ./scripts/create_env_files",
-    "populate": "node -e 'require(\"./scripts/populate_db\").populate()'",
     "deploy": "env-cmd -f .env.production yarn build && firebase deploy"
   },
   "eslintConfig": {

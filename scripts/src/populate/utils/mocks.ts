@@ -1,5 +1,8 @@
-const USERS = [
+import { User } from '../../types';
+
+export const USERS: User[] = [
   {
+    lastUpdate: new Date(),
     id: '21',
     name: 'Cynthia',
     email: 'cgerryk@t.co',
@@ -10,6 +13,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '22',
     name: 'Inness',
     email: 'iingryl@cbc.ca',
@@ -20,6 +24,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '48',
     name: 'Elsy',
     email: 'ewinskill1b@mozilla.com',
@@ -30,6 +35,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '68',
     name: 'Ki',
     email: 'kpavlenkov1v@google.pl',
@@ -40,6 +46,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '46',
     name: 'Dave',
     email: 'dbirrane19@cdc.gov',
@@ -50,6 +57,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '23',
     name: 'Oby',
     email: 'owhyberdm@samsung.com',
@@ -60,6 +68,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '17',
     name: 'Lowe',
     email: 'lmcgucking@hatena.ne.jp',
@@ -70,6 +79,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '59',
     name: 'Patty',
     email: 'pmiell1m@is.gd',
@@ -80,6 +90,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '34',
     name: 'Nevile',
     email: 'nchiswellx@cloudflare.com',
@@ -90,6 +101,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '45',
     name: 'Towney',
     email: 'tmanjin18@icio.us',
@@ -100,6 +112,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '43',
     name: 'Kirby',
     email: 'kbediss16@wp.com',
@@ -110,6 +123,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '14',
     name: 'Man',
     email: 'mskentelberyd@photobucket.com',
@@ -120,6 +134,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '41',
     name: 'Pebrook',
     email: 'pbowdidge14@ca.gov',
@@ -130,6 +145,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '18',
     name: 'Lela',
     email: 'lmcgonigleh@csmonitor.com',
@@ -140,6 +156,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '24',
     name: 'Harv',
     email: 'hchallengern@canalblog.com',
@@ -150,6 +167,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '52',
     name: 'Barbette',
     email: 'bjovasevic1f@mapquest.com',
@@ -160,6 +178,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '37',
     name: 'Holt',
     email: 'hcypler10@deviantart.com',
@@ -170,6 +189,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '8',
     name: 'Eachelle',
     email: 'egrishukhin7@symantec.com',
@@ -180,6 +200,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '11',
     name: 'Stepha',
     email: 'spingstonea@ucsd.edu',
@@ -190,6 +211,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '25',
     name: 'Marga',
     email: 'mstapeleo@tiny.cc',
@@ -200,6 +222,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '26',
     name: 'Nerissa',
     email: 'ngillsonp@wikipedia.org',
@@ -210,6 +233,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '95',
     name: 'Van',
     email: 'vsnel2m@blinklist.com',
@@ -220,6 +244,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '76',
     name: 'Latrena',
     email: 'lklimpke23@yolasite.com',
@@ -230,6 +255,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '71',
     name: 'Derrek',
     email: 'ddagostino1y@webmd.com',
@@ -240,6 +266,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '98',
     name: 'Hobie',
     email: 'hmandry2p@alibaba.com',
@@ -250,6 +277,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '96',
     name: 'Blondell',
     email: 'bboyen2n@kickstarter.com',
@@ -260,6 +288,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '87',
     name: 'Codie',
     email: 'ctee2e@example.com',
@@ -270,6 +299,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '60',
     name: 'Kettie',
     email: 'kkevane1n@nps.gov',
@@ -280,6 +310,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '36',
     name: 'Barbette',
     email: 'bcarusz@squidoo.com',
@@ -290,6 +321,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '77',
     name: 'Sara-ann',
     email: 'swastling24@un.org',
@@ -300,6 +332,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '32',
     name: 'Fallon',
     email: 'fabotsonv@instagram.com',
@@ -310,6 +343,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '86',
     name: 'Arliene',
     email: 'amedmore2d@apple.com',
@@ -320,6 +354,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '62',
     name: 'Kylie',
     email: 'kardley1p@sina.com.cn',
@@ -330,6 +365,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '10',
     name: 'Lacie',
     email: 'lglentworth9@smugmug.com',
@@ -340,6 +376,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '65',
     name: 'Aubry',
     email: 'aseals1s@skype.com',
@@ -350,6 +387,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '90',
     name: 'Amalita',
     email: 'avigne2h@aboutads.info',
@@ -360,6 +398,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '16',
     name: 'Skylar',
     email: 'spermainf@unesco.org',
@@ -370,6 +409,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '12',
     name: 'Genny',
     email: 'gburdonb@hostgator.com',
@@ -380,6 +420,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '55',
     name: 'Loreen',
     email: 'lgiocannoni1i@dagondesign.com',
@@ -390,6 +431,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '3',
     name: 'Cathrin',
     email: 'crait2@cornell.edu',
@@ -400,6 +442,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '78',
     name: 'Abeu',
     email: 'awoolway25@github.com',
@@ -410,6 +453,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '64',
     name: 'Debra',
     email: 'dtettersell1r@who.int',
@@ -420,6 +464,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '61',
     name: 'Marshall',
     email: 'mshynn1o@blogtalkradio.com',
@@ -430,6 +475,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '5',
     name: 'Sayers',
     email: 'sjeannon4@opera.com',
@@ -440,6 +486,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '89',
     name: 'Franklin',
     email: 'fwillox2g@issuu.com',
@@ -450,6 +497,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '35',
     name: 'Mozes',
     email: 'mtregiany@deliciousdays.com',
@@ -460,6 +508,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '7',
     name: 'Wolfie',
     email: 'wfavelle6@google.ca',
@@ -470,6 +519,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '31',
     name: 'Taylor',
     email: 'tlaileyu@discuz.net',
@@ -480,6 +530,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '74',
     name: 'Des',
     email: 'dirce21@smh.com.au',
@@ -490,6 +541,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '9',
     name: 'Verney',
     email: 'vvynoll8@discuz.net',
@@ -500,6 +552,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '29',
     name: 'Baillie',
     email: 'bpirellis@paypal.com',
@@ -510,6 +563,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '58',
     name: 'Yvonne',
     email: 'yglyssanne1l@nba.com',
@@ -520,6 +574,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '63',
     name: 'Horst',
     email: 'heisikowitz1q@domainmarket.com',
@@ -530,6 +585,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '93',
     name: 'Edwin',
     email: 'edraycott2k@theatlantic.com',
@@ -540,6 +596,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '100',
     name: 'Burgess',
     email: 'bbeyer2r@msn.com',
@@ -550,6 +607,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '47',
     name: 'Astrix',
     email: 'acarnier1a@princeton.edu',
@@ -560,6 +618,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '66',
     name: 'Lutero',
     email: 'lrude1t@state.gov',
@@ -570,6 +629,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '13',
     name: 'Arvie',
     email: 'acornelissec@merriam-webster.com',
@@ -580,6 +640,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '28',
     name: 'Bathsheba',
     email: 'blucockr@taobao.com',
@@ -590,6 +651,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '85',
     name: 'Malvina',
     email: 'mspeer2c@baidu.com',
@@ -600,6 +662,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '15',
     name: 'Ammamaria',
     email: 'adillowe@wordpress.org',
@@ -610,6 +673,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '40',
     name: 'Taddeo',
     email: 'trussen13@java.com',
@@ -620,6 +684,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '73',
     name: 'Corabelle',
     email: 'crilton20@addtoany.com',
@@ -630,6 +695,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '42',
     name: 'Nan',
     email: 'noleahy15@forbes.com',
@@ -640,6 +706,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '94',
     name: 'Mina',
     email: 'mhaglinton2l@last.fm',
@@ -650,6 +717,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '53',
     name: 'Tracie',
     email: 'tginity1g@spotify.com',
@@ -660,6 +728,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '19',
     name: 'Barnaby',
     email: 'bmitroshinovi@smh.com.au',
@@ -670,6 +739,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '72',
     name: 'Obed',
     email: 'otille1z@noaa.gov',
@@ -680,6 +750,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '27',
     name: 'Thoma',
     email: 'tdunkirkq@google.com.hk',
@@ -690,6 +761,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '91',
     name: 'Levon',
     email: 'lgairdner2i@wsj.com',
@@ -700,6 +772,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '20',
     name: 'Shanan',
     email: 'ssallissj@vimeo.com',
@@ -710,6 +783,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '81',
     name: 'Ferdie',
     email: 'ffeldklein28@last.fm',
@@ -720,6 +794,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '49',
     name: 'Minor',
     email: 'mbateup1c@prweb.com',
@@ -730,6 +805,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '88',
     name: 'Timotheus',
     email: 'tocrowley2f@youku.com',
@@ -740,6 +816,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '39',
     name: 'Harrison',
     email: 'halenikov12@de.vu',
@@ -750,6 +827,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '70',
     name: 'Branden',
     email: 'bpizer1x@icio.us',
@@ -760,6 +838,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '33',
     name: 'Nollie',
     email: 'nkirmanw@wsj.com',
@@ -770,6 +849,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '82',
     name: 'Perla',
     email: 'pgomer29@adobe.com',
@@ -780,6 +860,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '83',
     name: 'Molli',
     email: 'mogborne2a@feedburner.com',
@@ -790,6 +871,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '1',
     name: 'Kelci',
     email: 'kkuhlen0@fema.gov',
@@ -800,6 +882,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '4',
     name: 'Lawrence',
     email: 'lhadgkiss3@wired.com',
@@ -810,6 +893,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '54',
     name: 'Cybill',
     email: 'cleyninye1h@posterous.com',
@@ -820,6 +904,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '84',
     name: 'Laura',
     email: 'lchurn2b@oaic.gov.au',
@@ -830,6 +915,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '97',
     name: 'Gertrude',
     email: 'gabatelli2o@163.com',
@@ -840,6 +926,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '99',
     name: 'Cacilia',
     email: 'cflecknell2q@photobucket.com',
@@ -850,6 +937,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '30',
     name: 'Sibylla',
     email: 'spendricht@jimdo.com',
@@ -860,6 +948,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '69',
     name: 'Katalin',
     email: 'kstrangman1w@unesco.org',
@@ -870,6 +959,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '38',
     name: 'Cori',
     email: 'cmcmechan11@merriam-webster.com',
@@ -880,6 +970,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '75',
     name: 'Naomi',
     email: 'nnorker22@jimdo.com',
@@ -890,6 +981,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '51',
     name: 'Martynne',
     email: 'mlawling1e@tiny.cc',
@@ -900,6 +992,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '44',
     name: 'Rivalee',
     email: 'rfidell17@wordpress.com',
@@ -910,6 +1003,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '67',
     name: 'Lyell',
     email: 'litzhayek1u@gravatar.com',
@@ -920,6 +1014,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '57',
     name: 'Jorie',
     email: 'jkirkbright1k@microsoft.com',
@@ -930,6 +1025,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '92',
     name: 'Dorothea',
     email: 'dwhewill2j@japanpost.jp',
@@ -940,6 +1036,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '2',
     name: 'Lynsey',
     email: 'lgergolet1@deliciousdays.com',
@@ -950,6 +1047,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '80',
     name: 'Phil',
     email: 'pgreetland27@t-online.de',
@@ -960,6 +1058,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '6',
     name: 'Pepita',
     email: 'piliffe5@bloglovin.com',
@@ -970,6 +1069,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '50',
     name: 'Faustina',
     email: 'fvonwelldun1d@prweb.com',
@@ -980,6 +1080,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '79',
     name: 'Nevins',
     email: 'nmasson26@businessweek.com',
@@ -990,6 +1091,7 @@ const USERS = [
     following: 0,
   },
   {
+    lastUpdate: new Date(),
     id: '56',
     name: 'Loy',
     email: 'lmanklow1j@usda.gov',
@@ -1001,4 +1103,21 @@ const USERS = [
   },
 ];
 
-module.exports.USERS = USERS;
+export const TWEETS = [
+  'Ullamco aliqua laborum irure enim sit occaecat velit.',
+  'Labore do et velit quis voluptate nulla incididunt.',
+  'Excepteur sit ex reprehenderit veniam ipsum ipsum sint officia fugiat non.',
+  'Labore enim mollit nulla reprehenderit consequat.',
+  'Nulla reprehenderit in exercitation proident pariatur anim.',
+  'Quis et nostrud anim amet est enim enim eu aute proident quis.',
+  'Magna minim sunt eiusmod qui pariatur.',
+  'Consectetur non deserunt esse laborum eu est consectetur ea aliquip aliqua sunt fugiat dolore.',
+  'Eu laborum Lorem quis aliqua nostrud anim dolor ex proident.',
+  'Qui deserunt tempor ut officia eu eiusmod dolore.',
+  'Et deserunt labore pariatur id mollit esse ex ad commodo elit est veniam fugiat consequat.',
+  'Magna deserunt reprehenderit cupidatat quis laboris enim consectetur nisi dolore irure qui et non.',
+  'Reprehenderit dolore qui eiusmod pariatur sint duis ut amet aute.',
+  'Cupidatat sunt sint eu id quis cupidatat laborum labore reprehenderit minim elit velit non.',
+  'Do proident incididunt non pariatur.',
+  'Aliqua esse aute excepteur est reprehenderit eiusmod reprehenderit sint mollit.',
+];

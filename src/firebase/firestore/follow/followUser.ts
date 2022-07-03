@@ -1,8 +1,8 @@
-import { increment, Timestamp, writeBatch } from 'firebase/firestore';
+import { doc, increment, writeBatch } from 'firebase/firestore';
 import { firestore } from '../../firebaseConfig';
 import { FOLLOW_INEXISTENT_USER } from '../errors';
 import { getUser, getUserRef } from '../user';
-import { getFollowRef } from './getRefs';
+import { getFollowsCollectionRef } from './getRefs';
 
 import { isFollowing } from './isFollowing';
 
@@ -21,17 +21,14 @@ export const followUser: FollowUser = async ({
 
   if (following) return;
 
-  const userRef = getUserRef(user.id);
-  const userToFollowRef = getUserRef(userToFollow.id);
-
   const batch = writeBatch(firestore);
 
-  batch.update(userRef, { following: increment(1) });
-  batch.update(userToFollowRef, { followers: increment(1) });
-  batch.set<FirestoreFollow>(getFollowRef(), {
-    timestamp: Timestamp.now(),
+  batch.update(getUserRef(user.username), { following: increment(1) });
+  batch.update(getUserRef(toFollowUsername), { followers: increment(1) });
+  batch.set<FirestoreFollow>(doc(getFollowsCollectionRef()), {
+    date: new Date(),
     username: user.username,
-    following: toFollowUsername,
+    follow: toFollowUsername,
   });
 
   return batch.commit();

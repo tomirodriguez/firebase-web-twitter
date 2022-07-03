@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { DatabaseContext } from '../context/DatabaseContext';
 import { userLoaded } from '../reducers';
 import { EMPTY_PROFILE_USER } from './mocks/users';
+import { getNotFollowingPeople } from '../firebase/firestore/follow/getNotFollowingPeople';
 
 type InitialState = {
   user?: User | null;
@@ -42,7 +43,11 @@ export const DatabaseTestContext: FC<
   };
 
   const getUser: GetUser = async ({ username = '' }) => {
-    return usersDatabase.get(username) || null;
+    const user = usersDatabase.get(username);
+
+    if (!user) throw new Error();
+
+    return user;
   };
 
   const signOut: SignOut = async () => {
@@ -155,7 +160,7 @@ export const DatabaseTestContext: FC<
     // return timelineDatabase.filter((tweet) => tweet.username === username);
   };
 
-  const getHomeFeed = async (user: User) => {
+  const getTweets = async () => {
     //   const userFriends = followsDatabase.find(
     //     (data) => data.username === user.username
     //   );
@@ -181,11 +186,15 @@ export const DatabaseTestContext: FC<
     return [];
   };
 
-  const getFollowingUsers = async () => {
+  const getFollowings = async () => {
     return [];
   };
 
-  const getFollowersUsers = async () => {
+  const getFollowers = async () => {
+    return [];
+  };
+
+  const getNotFollowingPeople = async () => {
     return [];
   };
 
@@ -202,12 +211,11 @@ export const DatabaseTestContext: FC<
         userLoginObserver: () => () => {},
         postTweet,
         getUserTweets,
-        getHomeFeed,
         onHomeFeedChange,
-        getFollowingUsernames,
-        getNewFollowers,
-        getFollowingUsers,
-        getFollowersUsers,
+        getNotFollowingPeople,
+        getFollowings,
+        getFollowers,
+        getTweets,
       }}
     >
       {children}

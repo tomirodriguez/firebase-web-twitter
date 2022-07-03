@@ -1,29 +1,14 @@
-import {
-  collection,
-  CollectionReference,
-  documentId,
-  getDoc,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  startAfter,
-  where,
-} from 'firebase/firestore';
-import { CustomError } from '../../../utils';
-import { FOLLOWS_COLLECTION } from '../constants';
-import { USER_DOESNT_EXIST } from '../../errorKeys';
-import { firestore } from '../../firebaseConfig';
+import { getUser } from '../user/getUser';
+import { getFollowingUsernames } from './utils/getFollowingUsernames';
 
-type Options = {
-  size?: number;
-  lastUser?: User;
-};
+export const getFollowings: GetFollowings = async (username, options) => {
+  const usernames = await getFollowingUsernames(username);
 
-export const getFollowingUsers = async (
-  user: User,
-  options?: Options
-): Promise<User[]> => {
+  const users = await Promise.all(
+    usernames.map((username) => getUser({ username }))
+  );
+
+  return users.filter((user) => user !== null);
   // const userRef = getFollowsRef(user.id);
 
   // const userDoc = await getDoc(userRef);
