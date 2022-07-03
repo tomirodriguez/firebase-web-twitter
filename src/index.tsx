@@ -6,8 +6,8 @@ import { SEO } from './components';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
-import './index.css';
 import { DatabaseProvider } from './context/DatabaseContext';
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

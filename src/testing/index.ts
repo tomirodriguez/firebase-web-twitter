@@ -1,1 +1,1 @@
-export * from './TestingFirebaseContext';
+export * from './TestingContext';

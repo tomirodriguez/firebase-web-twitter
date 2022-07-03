@@ -4,10 +4,9 @@ import { Spinner } from '.';
 type Props = {
   loading: boolean;
   onClick: () => void;
-  following: boolean;
 };
 
-export const FollowButton: FC<Props> = ({ loading, onClick, following }) => {
+export const FollowButton: FC<Props> = ({ loading, onClick }) => {
   return (
     <button
       title={'Follow'}

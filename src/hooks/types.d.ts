@@ -14,6 +14,7 @@ type UseUserHook = () => {
   user: User | null;
   loading: boolean;
   signOut: () => Promise<void>;
-  tweet: (tweet: string) => Promise<void>;
-  updateProfile: (user: User) => Promise<void>;
+  isFollowing: (username: string) => Promise<boolean>;
+  follow: (username: string) => Promise<void>;
+  unfollow: (username: string) => Promise<void>;
 };

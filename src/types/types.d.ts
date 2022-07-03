@@ -1,4 +1,5 @@
 type User = {
+  lastUpdate: Date;
   id: string;
   name: string;
   image?: string;

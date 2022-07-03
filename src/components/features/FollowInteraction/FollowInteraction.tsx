@@ -1,37 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../../../hooks/useUser';
-import { FollowButton, UnfollowButton } from '../../ui';
-import { CustomError } from '../../../utils/CustomError';
 import { ALREADY_FOLLOWING, NOT_FOLLOWING } from '../../../firebase/errorKeys';
-import { useContext } from 'react';
-import { FirebaseContext } from '../../../context/FirebaseContext';
+import { useUser } from '../../../hooks/useUser';
+import { CustomError } from '../../../utils/CustomError';
+import { FollowButton, UnfollowButton } from '../../ui';
 
 type Props = {
   username: string;
 };
 
 export const FollowInteraction: React.FC<Props> = ({ username }) => {
-  const { user } = useUser();
-  const { isFollowing, followUser, unfollowUser } = useContext(FirebaseContext);
+  const { user, isFollowing, follow, unfollow } = useUser();
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [followingUser, setFollowingUser] = useState(false);
+  const [isFollowingUser, setIsFollowingUser] = useState(false);
 
   useEffect(() => {
-    if (user)
-      isFollowing({ username: user.username, following: username }).then(
-        setFollowingUser
-      );
-  }, [isFollowing, username, user]);
+    if (user && isFirstLoad)
+      isFollowing(username)
+        .then((following) => {
+          if (isFollowingUser !== following) setIsFollowingUser(following);
+        })
+        .finally(() => setIsFirstLoad(false));
+  }, [isFollowing, username, user, isFirstLoad, isFollowingUser]);
 
   if (!user) return null;
 
-  const handleFollowUser = () => {
+  const handleFollowUser = async () => {
     setLoading(true);
-    followUser({ user, toFollowUsername: username })
-      .then(() => setFollowingUser(true))
+    await follow(username)
+      .then(() => setIsFollowingUser(true))
       .catch((error) => {
         if (error instanceof CustomError && error.code === ALREADY_FOLLOWING) {
-          setFollowingUser(true);
+          setIsFollowingUser(true);
         } else {
           console.error(error);
         }
@@ -39,13 +39,13 @@ export const FollowInteraction: React.FC<Props> = ({ username }) => {
       .finally(() => setLoading(false));
   };
 
-  const handleUnfollowUser = () => {
+  const handleUnfollowUser = async () => {
     setLoading(true);
-    unfollowUser({ user, toUnfollowUser: username })
-      .then(() => setFollowingUser(false))
+    unfollow(username)
+      .then(() => setIsFollowingUser(false))
       .catch((error) => {
         if (error instanceof CustomError && error.code === NOT_FOLLOWING) {
-          setFollowingUser(false);
+          setIsFollowingUser(false);
         } else {
           console.error(error);
         }
@@ -53,17 +53,13 @@ export const FollowInteraction: React.FC<Props> = ({ username }) => {
       .finally(() => setLoading(false));
   };
 
-  return !followingUser ? (
-    <FollowButton
-      following={followingUser}
-      onClick={handleFollowUser}
-      loading={loading}
-    />
-  ) : (
-    <UnfollowButton
-      following={followingUser}
-      onClick={handleUnfollowUser}
-      loading={loading}
-    />
+  return (
+    <div>
+      {!isFollowingUser ? (
+        <FollowButton onClick={handleFollowUser} loading={loading} />
+      ) : (
+        <UnfollowButton onClick={handleUnfollowUser} loading={loading} />
+      )}
+    </div>
   );
 };

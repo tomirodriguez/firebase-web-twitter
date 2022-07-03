@@ -1,12 +1,8 @@
-type RemoveObserver = () => void;
-
-type UserLoginObserver = (user: User | null) => void;
-
 type DatabaseContext = {
   userLoginObserver: (observer: UserLoginObserver) => RemoveObserver;
 
   signInWithGoogle: () => Promise<void>;
-  signOut: () => Promise<void>;
+  signOut: SignOut;
   addUser: (user: User) => Promise<void>;
   getUser: GetUser;
   followUser: FollowUser;
@@ -97,3 +93,9 @@ type PostTweet = ({
   username: string;
   tweet: string;
 }) => Promise<void>;
+
+type RemoveObserver = () => void;
+
+type UserLoginObserver = (user: User | null) => void;
+
+type SignOut = () => Promise<void>;

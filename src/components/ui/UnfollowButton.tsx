@@ -4,10 +4,9 @@ import { Spinner } from '.';
 type Props = {
   loading: boolean;
   onClick: () => void;
-  following: boolean;
 };
 
-export const UnfollowButton: FC<Props> = ({ loading, onClick, following }) => {
+export const UnfollowButton: FC<Props> = ({ loading, onClick }) => {
   const [hovering, setHovering] = useState(false);
 
   return (

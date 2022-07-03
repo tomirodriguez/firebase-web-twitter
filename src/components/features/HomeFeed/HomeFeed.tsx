@@ -26,9 +26,9 @@ export const HomeFeed: FC = () => {
   useEffect(() => {
     if (!user) return;
 
-    getHomeFeed(user)
-      .then(setTweets)
-      .finally(() => setLoading(false));
+    // getHomeFeed(user)
+    //   .then(setTweets)
+    //   .finally(() => setLoading(false));
   }, [user, getHomeFeed]);
 
   const saveNewTweet = useCallback(
@@ -57,11 +57,11 @@ export const HomeFeed: FC = () => {
   useEffect(() => {
     if (!user || loadingFollowingUsers || loading) return;
 
-    const unsubcsribe = onHomeFeedChange(user, saveNewTweet, [
-      ...followingUsernames,
-    ]);
+    // const unsubcsribe = onHomeFeedChange(user, saveNewTweet, [
+    //   ...followingUsernames,
+    // ]);
 
-    return () => unsubcsribe;
+    // return () => unsubcsribe;
   }, [
     user,
     onHomeFeedChange,
@@ -74,12 +74,12 @@ export const HomeFeed: FC = () => {
   useEffect(() => {
     if (!user) return;
 
-    const feedUsersWithUser = new Map<string, User>();
-    feedUsersWithUser.set(user.username, user);
-    setFeedUsers(feedUsersWithUser);
-    getFollowingUsernames(user)
-      .then((users) => setFollowingUsernames(users))
-      .finally(() => setLoadingFollowingUsers(false));
+    // const feedUsersWithUser = new Map<string, User>();
+    // feedUsersWithUser.set(user.username, user);
+    // setFeedUsers(feedUsersWithUser);
+    // getFollowingUsernames(user)
+    //   .then((users) => setFollowingUsernames(users))
+    //   .finally(() => setLoadingFollowingUsers(false));
   }, [user, getFollowingUsernames]);
 
   const getUsersData = useCallback(async () => {
@@ -107,7 +107,7 @@ export const HomeFeed: FC = () => {
   }, [tweets, feedUsers, getUser, followingUsernames]);
 
   useEffect(() => {
-    if (!loading) getUsersData();
+    // if (!loading) getUsersData();
   }, [loading, getUsersData]);
 
   if (!user) return null;

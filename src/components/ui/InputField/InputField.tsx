@@ -88,7 +88,7 @@ export const InputField: FC<Props> = ({
           name={id}
           type={type}
           value={forcedValue}
-          aria-errormessage="error-message"
+          aria-errormessage={`error-message-${label}`}
           aria-invalid={showError}
           aria-placeholder={placeholder}
           autoComplete={autocomplete ? 'on' : 'off'}
@@ -99,7 +99,10 @@ export const InputField: FC<Props> = ({
         />
       </div>
       {showError && (
-        <p id="error-message" className="mt-1 text-error text-xs text-right">
+        <p
+          id={`error-message-${label}`}
+          className="mt-1 text-error text-xs text-right"
+        >
           {error}
         </p>
       )}

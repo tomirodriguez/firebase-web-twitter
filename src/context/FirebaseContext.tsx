@@ -51,6 +51,7 @@ export const FirebaseProvider: FC<PropsWithChildren> = ({ children }) => {
       const firebaseUser = await getUser({ id });
       if (!firebaseUser)
         observer({
+          lastUpdate: new Date(),
           id,
           email: email || '',
           bio: '',

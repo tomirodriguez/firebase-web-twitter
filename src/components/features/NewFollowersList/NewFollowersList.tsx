@@ -14,9 +14,9 @@ export const NewFollowersList = () => {
   useEffect(() => {
     if (!user || !loading) return;
 
-    getNewFollowers(user, { size: 3 })
-      .then(setFollowList)
-      .finally(() => setLoading(false));
+    // getNewFollowers(user, { size: 3 })
+    //   .then(setFollowList)
+    //   .finally(() => setLoading(false));
   }, [user, getNewFollowers, loading]);
 
   if (!user) return null;

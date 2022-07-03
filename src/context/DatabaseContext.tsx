@@ -7,7 +7,6 @@ export const DatabaseContext = FirebaseContext;
 
 export const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
   const context = useContext<DatabaseContext>(FirebaseContext);
-
   const { userLoginObserver } = context;
   const dispatch = useDispatch();
 

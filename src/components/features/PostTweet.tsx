@@ -11,7 +11,7 @@ export const PostTweet: FC = () => {
   const isTweetValid =
     tweetToPost.length <= MAX_TWEET_LENGTH && tweetToPost.length > 0;
   const tweetInput = useRef<HTMLDivElement>(null);
-  const { user, tweet } = useUser();
+  const { user } = useUser();
 
   if (!user) return null;
 
@@ -27,10 +27,10 @@ export const PostTweet: FC = () => {
 
   const handleTweetSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
-    setLoading(true);
-    tweet(tweetToPost)
-      .then(() => setTweetToPost(''))
-      .finally(() => setLoading(false));
+    // setLoading(true);
+    // tweet(tweetToPost)
+    //   .then(() => setTweetToPost(''))
+    //   .finally(() => setLoading(false));
   };
 
   return (

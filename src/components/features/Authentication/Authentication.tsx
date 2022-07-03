@@ -1,13 +1,13 @@
 import { FC, SyntheticEvent, useContext } from 'react';
-import { FirebaseContext } from '../../../context/FirebaseContext';
+import { useDispatch } from 'react-redux';
+import { DatabaseContext } from '../../../context/DatabaseContext';
+import { useUser } from '../../../hooks/useUser';
 import { Logo } from '../../../icons';
+import { userLoaded } from '../../../reducers';
 import { FillUserData } from './components/FillUserData';
 import { LoginBackground } from './components/LoginBackground';
 import { LoginForm } from './components/LoginForm';
-import { useUser } from '../../../hooks/useUser';
-import { DatabaseContext } from '../../../context/DatabaseContext';
-import { useDispatch } from 'react-redux';
-import { userLoaded } from '../../../reducers';
+import { USERNAME_TAKEN } from './errors';
 
 export const Authentication: FC = () => {
   const { user } = useUser();
@@ -17,6 +17,8 @@ export const Authentication: FC = () => {
     signInWithGoogle: signIn,
   } = useContext(DatabaseContext);
   const dispatch = useDispatch();
+
+  if (user && user.username) return null;
 
   const handleGoogleSignIn = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -32,8 +34,7 @@ export const Authentication: FC = () => {
 
     const existingUser = await getUser({ username });
 
-    if (existingUser)
-      return { field: 'username', error: 'Username already taken' };
+    if (existingUser) return { field: 'username', error: USERNAME_TAKEN };
 
     const newUser = { ...user, name, username, bio };
     await addUser({ ...user, name, username, bio }).then(() => {

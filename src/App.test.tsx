@@ -1,16 +1,17 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { DUMMY_USER, EMPTY_PROFILE_USER } from './testing/mocks';
+import { TestingContext } from './testing';
+import { EMPTY_PROFILE_USER } from './testing/mocks/users';
 
-describe.skip('<App>', () => {
+describe('<App>', () => {
   test('should redirect to login if no user is logged', async () => {
     render(
-      // <TestingUserProvider user={null}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-      // </TestingUserProvider>
+      <TestingContext user={null}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </TestingContext>
     );
 
     expect(window.location.pathname).toBe('/login');
@@ -18,23 +19,23 @@ describe.skip('<App>', () => {
 
   test('should redirect to login if user is logged but has no data', async () => {
     render(
-      // <TestingUserProvider user={EMPTY_PROFILE_USER}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-      // </TestingUserProvider>
+      <TestingContext user={EMPTY_PROFILE_USER}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </TestingContext>
     );
 
     expect(window.location.pathname).toBe('/login');
   });
 
-  test('should redirect to home if path is "/"', async () => {
+  test('should redirect to home if path is "/" an a user es logged', async () => {
     render(
-      // <TestingUserProvider user={DUMMY_USER}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-      // </TestingUserProvider>
+      <TestingContext>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </TestingContext>
     );
 
     expect(window.location.pathname).toBe('/home');
