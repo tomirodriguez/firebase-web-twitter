@@ -9,7 +9,7 @@ import {
 import { firestore } from '../../firebaseConfig';
 import { UNFOLLOW_INEXISTENT_USER } from '../errors';
 import { getUser, getUserRef } from '../user';
-import { getFollowRef, getFollowsCollectionRef } from './getRefs';
+import { getFollowRef, getFollowsCollectionRef } from './utils/getRefs';
 
 export const unfollowUser: UnfollowUser = async ({
   user,

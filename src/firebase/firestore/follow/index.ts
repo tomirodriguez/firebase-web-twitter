@@ -4,4 +4,4 @@ export * from './unfollowUser';
 export * from './getNotFollowingPeople';
 export * from './getFollowings';
 export * from './getFollowers';
-export * from './getRefs';
+export * from './utils/getRefs';

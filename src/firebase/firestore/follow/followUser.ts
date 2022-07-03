@@ -2,7 +2,7 @@ import { doc, increment, writeBatch } from 'firebase/firestore';
 import { firestore } from '../../firebaseConfig';
 import { FOLLOW_INEXISTENT_USER } from '../errors';
 import { getUser, getUserRef } from '../user';
-import { getFollowsCollectionRef } from './getRefs';
+import { getFollowsCollectionRef } from './utils/getRefs';
 
 import { isFollowing } from './isFollowing';
 

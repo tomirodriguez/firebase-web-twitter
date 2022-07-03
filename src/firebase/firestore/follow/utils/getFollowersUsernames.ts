@@ -1,5 +1,5 @@
 import { getDocs, query, where } from 'firebase/firestore';
-import { getFollowsCollectionRef } from '../getRefs';
+import { getFollowsCollectionRef } from './getRefs';
 
 export const getFollowersUsernames = async (
   username: string
@@ -13,7 +13,7 @@ export const getFollowersUsernames = async (
 
   const followings: string[] = [];
   querySnapshot.forEach((snap) => {
-    followings.push(snap.data().follow);
+    followings.push(snap.data().username);
   });
 
   return followings;

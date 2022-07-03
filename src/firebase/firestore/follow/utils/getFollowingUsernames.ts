@@ -1,5 +1,5 @@
 import { getDocs, query, where } from 'firebase/firestore';
-import { getFollowsCollectionRef } from '../getRefs';
+import { getFollowsCollectionRef } from './getRefs';
 
 export const getFollowingUsernames = async (
   username: string

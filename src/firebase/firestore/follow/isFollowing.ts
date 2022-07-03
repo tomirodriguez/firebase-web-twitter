@@ -1,5 +1,5 @@
 import { getDocs, query, where } from 'firebase/firestore';
-import { getFollowsCollectionRef } from './getRefs';
+import { getFollowsCollectionRef } from './utils/getRefs';
 
 export const isFollowing: IsFollowing = async ({ username, following }) => {
   const followQuery = query<FirestoreFollow>(
