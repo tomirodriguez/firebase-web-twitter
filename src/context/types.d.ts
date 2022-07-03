@@ -13,9 +13,22 @@ type DatabaseContext = {
   getFollowers: GetFollowers;
   postTweet: PostTweet;
   getFollowingsUsernames: GetFollowingsUsernames;
-  onHomeFeedChange: OnHomeFeedChange;
   getUserTweets: (username: string) => Promise<Tweet[]>;
+
+  onHomeFeedChange: OnHomeFeedChange;
+  onNewFollowing: OnNewFollowing;
+  onFollowerGain: OnFollowerGain;
 };
+
+type OnFollowerGain = (
+  username: string,
+  observer: (username: string) => void
+) => Unsubscribe;
+
+type OnNewFollowing = (
+  username: string,
+  observer: (username: string) => void
+) => Unsubscribe;
 
 type OnHomeFeedChange = (
   user: User,
@@ -39,8 +52,8 @@ type GetFollowings = (
 
 type GetUsers = (options?: {
   size?: number;
-  user?: User;
-  excluse?: string[];
+  lastUser?: User;
+  exclude?: string[];
 }) => Promise<User[]>;
 
 type GetFollowingUsernames = (username: string) => Promise<string[]>;

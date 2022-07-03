@@ -5,3 +5,5 @@ export * from './getFollowings';
 export * from './getFollowers';
 export * from './utils/getRefs';
 export * from './utils/getFollowingsUsernames';
+export * from './onFollowerGain';
+export * from './onNewFollowing';

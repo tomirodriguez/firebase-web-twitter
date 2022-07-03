@@ -9,6 +9,8 @@ import {
   isFollowing,
   unfollowUser,
   getFollowingsUsernames,
+  onNewFollowing,
+  onFollowerGain,
 } from '../firebase/firestore/follow';
 import {
   getTweets,
@@ -35,6 +37,8 @@ const defaultFirebaseContext: DatabaseContext = {
   getFollowings,
   getFollowers,
   getFollowingsUsernames,
+  onFollowerGain,
+  onNewFollowing,
 };
 
 export const FirebaseContext = createContext<DatabaseContext>(

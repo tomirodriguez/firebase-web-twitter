@@ -9,13 +9,13 @@ import {
 import { getUserCollectionRef } from '../user/getRefs';
 
 export const getUsers: GetUsers = async (options) => {
-  const exclude = options?.excluse || [];
+  const exclude = options?.exclude || [];
 
   const size = options?.size || 20;
 
   let q = query<User>(getUserCollectionRef(), orderBy('username'), limit(size));
 
-  if (options?.user) q = query(q, startAfter(options.user.username));
+  if (options?.lastUser) q = query(q, startAfter(options.lastUser.username));
 
   const chunkSize = 10;
 
@@ -32,7 +32,9 @@ export const getUsers: GetUsers = async (options) => {
     const querySnapshot = await getDocs<User>(newQuery);
 
     querySnapshot.forEach((doc) => {
-      notFollowingUsers.push(doc.data());
+      const user = doc.data();
+      if (!exclude.find((excluded) => excluded === user.username))
+        notFollowingUsers.push(doc.data());
     });
   }
 

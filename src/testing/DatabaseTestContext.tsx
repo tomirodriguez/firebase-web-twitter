@@ -201,6 +201,9 @@ export const DatabaseTestContext: FC<
     return [];
   };
 
+  const onNewFollowing = () => {};
+  const onFollowerGain = () => {};
+
   return (
     <DatabaseContext.Provider
       value={{
@@ -220,6 +223,8 @@ export const DatabaseTestContext: FC<
         getFollowers,
         getTweets,
         getFollowingsUsernames,
+        onNewFollowing,
+        onFollowerGain,
       }}
     >
       {children}

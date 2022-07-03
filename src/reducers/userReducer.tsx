@@ -5,10 +5,17 @@ export const userSlice = createSlice({
   initialState: {
     loading: true,
     user: null,
+    following: [],
+    followers: [],
   },
   reducers: {
     userLoaded: (state, action) => {
-      state.user = action.payload;
+      const { followers, followings, ...user } = action.payload;
+
+      console.log(action.payload);
+      state.user = user;
+      state.followers = followers || [];
+      state.following = followings || [];
       state.loading = false;
     },
   },
