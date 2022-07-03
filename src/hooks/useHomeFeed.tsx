@@ -8,6 +8,7 @@ export const useHomeFeed: UseHomeFeedHook = () => {
   const [loading, setLoading] = useState(true);
   const [lastTweet, setLastTweet] = useState<Tweet | null>(null);
   const [feed, setFeed] = useState<Tweet[]>([]);
+  const [hiddenFeed, setHiddenFeed] = useState<Tweet[]>([]);
   const [followingUsernames, setFollowingUsernames] = useState<string[]>([]);
 
   const getFeed = useCallback(
@@ -25,7 +26,10 @@ export const useHomeFeed: UseHomeFeedHook = () => {
 
   useEffect(() => {
     getFeed(15, new Date())
-      .then(setFeed)
+      .then((tweets) => {
+        setHiddenFeed(tweets);
+        setFeed(tweets.slice(0, 15));
+      })
       .finally(() => setLoading(false));
   }, [followingUsernames, user, getFeed]);
 
@@ -34,12 +38,20 @@ export const useHomeFeed: UseHomeFeedHook = () => {
   }, [feed]);
 
   const showMore = useCallback(async () => {
+    const SHOW_MORE_SIZE = 10;
+
+    if (hiddenFeed.length >= feed.length + SHOW_MORE_SIZE) {
+      setFeed(hiddenFeed.slice(0, feed.length + SHOW_MORE_SIZE));
+      return;
+    }
+
     if (lastTweet)
-      getFeed(10, lastTweet.date).then((moreTweets) => {
-        console.log({ moreTweets });
-        setFeed([...feed, ...moreTweets]);
+      getFeed(SHOW_MORE_SIZE, lastTweet.date).then((moreTweets) => {
+        const joinFeed = [...hiddenFeed, ...moreTweets];
+        setHiddenFeed(joinFeed);
+        setFeed(joinFeed.slice(0, feed.length + SHOW_MORE_SIZE));
       });
-  }, [lastTweet, getFeed, feed]);
+  }, [lastTweet, getFeed, feed, hiddenFeed]);
 
   return { loading, showMore, feed };
 };

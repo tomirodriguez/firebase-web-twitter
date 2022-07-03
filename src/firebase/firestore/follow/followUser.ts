@@ -10,6 +10,7 @@ export const followUser: FollowUser = async ({
   user,
   toFollowUsername,
 }): Promise<void> => {
+  if (user.username === toFollowUsername) return;
   const userToFollow = await getUser({ username: toFollowUsername });
 
   if (!userToFollow) throw FOLLOW_INEXISTENT_USER;

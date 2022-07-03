@@ -13,34 +13,42 @@ import { firestore } from '../../firebaseConfig';
 import { TWEETS_COLLECTION } from '../constants';
 
 export const getTweets: GetTweets = async (usernames, options) => {
-  const q = query<FirestoreTweet>(
+  const chunkSize = 10;
+
+  console.log({ usernames });
+
+  let q = query<FirestoreTweet>(
     collection(
       firestore,
       TWEETS_COLLECTION
     ) as CollectionReference<FirestoreTweet>,
     orderBy('date', 'desc'),
     startAfter(Timestamp.fromDate(options?.date || new Date())),
-    limit(options?.size || 20),
-    where('username', 'in', usernames)
+    limit(options?.size || 20)
   );
-
-  const querySnapshot = await getDocs<FirestoreTweet>(q);
 
   const tweets: Tweet[] = [];
 
-  querySnapshot.forEach((doc) => {
-    const { likes, date, tweet, username } = doc.data();
+  for (let i = 0; i < usernames.length; i += chunkSize) {
+    const chunk = usernames.slice(i, i + chunkSize);
+    const newQuery = query(q, where('username', 'in', chunk));
 
-    const { seconds, nanoseconds } = date;
+    const querySnapshot = await getDocs<FirestoreTweet>(newQuery);
 
-    tweets.push({
-      id: doc.id,
-      likes,
-      tweet,
-      username,
-      date: new Timestamp(seconds, nanoseconds).toDate(),
+    querySnapshot.forEach((doc) => {
+      const { likes, date, tweet, username } = doc.data();
+
+      const { seconds, nanoseconds } = date;
+
+      tweets.push({
+        id: doc.id,
+        likes,
+        tweet,
+        username,
+        date: new Timestamp(seconds, nanoseconds).toDate(),
+      });
     });
-  });
+  }
 
   return tweets;
 };

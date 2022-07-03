@@ -14,6 +14,7 @@ export const unfollowUser: UnfollowUser = async ({
   user,
   toUnfollowUser,
 }): Promise<void> => {
+  if (user.username === toUnfollowUser) return;
   const userToUnfollow = await getUser({ username: toUnfollowUser });
 
   if (!userToUnfollow) throw UNFOLLOW_INEXISTENT_USER;
