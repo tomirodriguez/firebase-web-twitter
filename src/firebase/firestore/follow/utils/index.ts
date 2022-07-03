@@ -1,2 +1,2 @@
 export * from './getFollowersUsernames';
-export * from './getFollowingUsernames';
+export * from './getFollowingsUsernames';

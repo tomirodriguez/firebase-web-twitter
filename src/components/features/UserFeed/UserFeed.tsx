@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFindUser } from '../../../hooks/useFindUser';
 import { Spinner, UserProfile } from '../../ui';
@@ -8,7 +8,15 @@ type Props = {};
 
 export const UserFeed: FC<Props> = () => {
   const { username = '' } = useParams<UserProfileParams>();
-  const { userFound, loading } = useFindUser(username);
+  const { findUser } = useFindUser();
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    findUser(username)
+      .then(setUser)
+      .finally(() => setLoading(false));
+  }, [username, findUser]);
 
   return (
     <div className="flex flex-col">
@@ -19,14 +27,14 @@ export const UserFeed: FC<Props> = () => {
       ) : (
         <UserProfile
           username={username}
-          name={userFound?.name}
-          image={userFound?.image}
-          bio={userFound?.bio}
-          followers={userFound?.followers}
-          following={userFound?.following}
+          name={user?.name}
+          image={user?.image}
+          bio={user?.bio}
+          followers={user?.followers}
+          following={user?.following}
         />
       )}
-      {userFound && <UserTweets user={userFound} />}
+      {user && <UserTweets user={user} />}
     </div>
   );
 };

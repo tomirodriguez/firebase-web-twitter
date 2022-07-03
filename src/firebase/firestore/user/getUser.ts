@@ -7,7 +7,7 @@ import { getUserCollectionRef } from './getRefs';
 
 const getUserWithUsername = async (username: string) => {
   return getDocument<User>(USERS_COLLECTION, username).then((doc) => {
-    if (!doc.exists()) throw USER_DOESNT_EXIST_ERROR;
+    if (!doc.exists()) return null;
     return { ...doc.data() };
   });
 };
@@ -23,7 +23,7 @@ const getUserWithId = async (id: string) => {
     user = { ...snap.data() };
   });
 
-  if (!user) throw USER_DOESNT_EXIST_ERROR;
+  if (!user) return null;
   return user;
 };
 

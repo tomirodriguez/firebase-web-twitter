@@ -11,8 +11,8 @@ export const useUser: UseUserHook = () => {
     isFollowing: dbIsFollowing,
     followUser,
     unfollowUser,
-    getNotFollowingPeople,
     postTweet,
+    getNotFollowingPeople,
   } = useContext(DatabaseContext);
 
   const isFollowing = useCallback(
@@ -49,27 +49,6 @@ export const useUser: UseUserHook = () => {
     [postTweet, user]
   );
 
-  const getFeedBeforeDate: GetFeedBeforeDate = useCallback(
-    async (options = {}) => {
-      if (!user) throw new Error('no user');
-
-      return [];
-
-      // const { size = 20, date: timestamp = new Date() } = options;
-
-      // const following = await getFollowingUsernames(user.username);
-
-      // const tweets = await getTweets([...following, user.username], {
-      //   size,
-      //   date: timestamp,
-      // });
-
-      // console.log({ tweets });
-      // return tweets;
-    },
-    []
-  );
-
   const discoverPeople: DiscoverPeople = useCallback(
     async (size = 2) => {
       if (!user) throw new Error('no user');
@@ -85,7 +64,6 @@ export const useUser: UseUserHook = () => {
     isFollowing,
     follow,
     unfollow,
-    getFeedBeforeDate,
     discoverPeople,
     tweet,
   };

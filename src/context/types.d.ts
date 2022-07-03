@@ -12,6 +12,7 @@ type DatabaseContext = {
   getFollowings: GetFollowings;
   getFollowers: GetFollowers;
   postTweet: PostTweet;
+  getFollowingsUsernames: GetFollowingsUsernames;
 
   getUserTweets: (username: string) => Promise<Tweet[]>;
 
@@ -28,6 +29,8 @@ type GetFollowers = (
   username: string,
   options?: { size?: number; lastUser?: string }
 ) => Promise<User[]>;
+
+type GetFollowingsUsernames = (username: string) => Promise<string[]>;
 
 type GetFollowings = (
   username: string,
@@ -51,7 +54,7 @@ type GetUser = ({
 }: {
   id?: string;
   username?: string;
-}) => Promise<User>;
+}) => Promise<User | null>;
 
 type IsFollowing = ({
   username,

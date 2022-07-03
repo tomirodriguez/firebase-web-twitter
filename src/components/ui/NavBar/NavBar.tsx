@@ -19,7 +19,7 @@ export const NavBar: FC = () => {
 
   return (
     <>
-      <div className="lg:px-3 flex flex-col items-center">
+      <div className="lg:px-3 flex flex-col items-center lg:items-start">
         <h1>
           <span hidden>WebTwitter</span>
           <LogoLink />

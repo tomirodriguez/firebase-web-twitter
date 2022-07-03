@@ -1,16 +1,16 @@
-import { FC, useCallback, useContext, useEffect, useState } from 'react';
-import { FirebaseContext } from '../../../context/FirebaseContext';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useUser } from '../../../hooks';
+import { useFindUser } from '../../../hooks/useFindUser';
+import { useHomeFeed } from '../../../hooks/useHomeFeed';
 import { ShowMoreButton, Spinner, Tweet } from '../../ui';
 
 export const HomeFeed: FC = () => {
-  const { user, getFeedBeforeDate } = useUser();
+  const { user } = useUser();
+  const { findUser } = useFindUser();
+  const { feed, loading } = useHomeFeed();
 
-  const [loading, setLoading] = useState(true);
-  const [loadingFollowingUsers, setLoadingFollowingUsers] = useState(true);
   const [loadingShowMore, setLoadingShowMore] = useState(false);
 
-  const [tweets, setTweets] = useState<Tweet[]>([]);
   const [newTweets, setNewTweets] = useState<Tweet[]>([]);
   const [noMoreTweets, setNoMoreTweets] = useState(false);
 
@@ -18,96 +18,114 @@ export const HomeFeed: FC = () => {
     new Map<string, User>()
   );
 
-  const { onHomeFeedChange, getUser } = useContext(FirebaseContext);
-
-  useEffect(() => {
+  const updateUsersData = useCallback(async () => {
     if (!user) return;
+    const feedUsernames = Array.from(
+      new Set<string>(feed.map((feed) => feed.username))
+    );
 
-    getFeedBeforeDate()
-      .then(setTweets)
-      .finally(() => setLoading(false));
-  }, [user, getFeedBeforeDate]);
+    if (feedUsernames.length === feedUsers.size) return;
 
-  const saveNewTweet = useCallback(
-    (newTweet: Tweet) => {
-      if (newTweets.find((tweet) => newTweet.id === tweet.id)) return;
+    const newUsersData = new Map<string, User>();
+    await Promise.all(
+      feedUsernames.map(async (username) => {
+        if (username === user.username) {
+          newUsersData.set(user.username, user);
+          return;
+        }
 
-      const isMyTweet = newTweet.username === user?.username;
+        const userToStore =
+          feedUsers.get(username) || (await findUser(username));
+        if (userToStore) newUsersData.set(username, userToStore);
+      })
+    );
 
-      if (isMyTweet) setTweets([newTweet, ...tweets]);
-      else setNewTweets([newTweet, ...newTweets]);
-    },
-    [newTweets, tweets, user]
-  );
-
-  useEffect(() => {
-    // const filteredNewTweets = newTweets.filter((newTweet) => {
-    //   const isShowing = tweets.find((tweet) => tweet.id === newTweet.id);
-    //   if (isShowing) return false;
-    //   return true;
-    // });
-    // if (filteredNewTweets.length !== newTweets.length)
-    //   setNewTweets(filteredNewTweets);
-  }, [newTweets, tweets]);
+    setFeedUsers(newUsersData);
+  }, [feedUsers, findUser, feed, user]);
 
   useEffect(() => {
-    if (!user || loadingFollowingUsers || loading) return;
+    updateUsersData();
+  }, [updateUsersData]);
 
-    // const unsubcsribe = onHomeFeedChange(user, saveNewTweet, [
-    //   ...followingUsernames,
-    // ]);
+  // const saveNewTweet = useCallback(
+  //   (newTweet: Tweet) => {
+  //     if (newTweets.find((tweet) => newTweet.id === tweet.id)) return;
 
-    // return () => unsubcsribe;
-  }, [user, onHomeFeedChange, loadingFollowingUsers, loading, saveNewTweet]);
+  //     const isMyTweet = newTweet.username === user?.username;
 
-  const getUsersData = useCallback(async () => {
-    // if (feedUsers.size === followingUsernames.length + 1) return;
-    // const updatedFeedUsers = new Map(feedUsers);
-    // const promises: Promise<void>[] = [];
-    // tweets.forEach((tweet) => {
-    //   if (!updatedFeedUsers.has(tweet.username)) {
-    //     promises.push(
-    //       getUser({ username: tweet.username }).then((user) => {
-    //         if (user) {
-    //           updatedFeedUsers.set(user.username, user);
-    //         }
-    //       })
-    //     );
-    //   }
-    // });
-    // await Promise.all(promises);
-    // setFeedUsers(updatedFeedUsers);
-  }, [tweets, feedUsers, getUser]);
+  //     if (isMyTweet) setTweets([newTweet, ...tweets]);
+  //     else setNewTweets([newTweet, ...newTweets]);
+  //   },
+  //   [newTweets, tweets, user]
+  // );
 
-  useEffect(() => {
-    // if (!loading) getUsersData();
-  }, [loading, getUsersData]);
+  // useEffect(() => {
+  // const filteredNewTweets = newTweets.filter((newTweet) => {
+  //   const isShowing = tweets.find((tweet) => tweet.id === newTweet.id);
+  //   if (isShowing) return false;
+  //   return true;
+  // });
+  // if (filteredNewTweets.length !== newTweets.length)
+  //   setNewTweets(filteredNewTweets);
+  // }, [newTweets, tweets]);
+
+  // useEffect(() => {
+  //   if (!user || loadingFollowingUsers || loading) return;
+
+  // const unsubcsribe = onHomeFeedChange(user, saveNewTweet, [
+  //   ...followingUsernames,
+  // ]);
+
+  // return () => unsubcsribe;
+  // }, [user, onHomeFeedChange, loadingFollowingUsers, loading, saveNewTweet]);
+
+  // const getUsersData = useCallback(async () => {
+  // if (feedUsers.size === followingUsernames.length + 1) return;
+  // const updatedFeedUsers = new Map(feedUsers);
+  // const promises: Promise<void>[] = [];
+  // tweets.forEach((tweet) => {
+  //   if (!updatedFeedUsers.has(tweet.username)) {
+  //     promises.push(
+  //       getUser({ username: tweet.username }).then((user) => {
+  //         if (user) {
+  //           updatedFeedUsers.set(user.username, user);
+  //         }
+  //       })
+  //     );
+  //   }
+  // });
+  // await Promise.all(promises);
+  // setFeedUsers(updatedFeedUsers);
+  // }, [feed, feedUsers, getUser]);
+
+  // useEffect(() => {
+  // if (!loading) getUsersData();
+  // }, [loading, getUsersData]);
 
   if (!user) return null;
 
   const newTweetsCount = newTweets.length;
 
   const handleShowNewTweets = () => {
-    const convinedTweets = [...newTweets, ...tweets];
-    convinedTweets.sort((a, b) => {
-      if (a.date < b.date) return 1;
-      if (b.date < a.date) return -1;
-      return 0;
-    });
-    setTweets([...newTweets, ...tweets]);
-    setNewTweets([]);
+    // const convinedTweets = [...newTweets, ...feed];
+    // convinedTweets.sort((a, b) => {
+    //   if (a.date < b.date) return 1;
+    //   if (b.date < a.date) return -1;
+    //   return 0;
+    // });
+    // setTweets([...newTweets, ...feed]);
+    // setNewTweets([]);
   };
 
   const handleShowMore = () => {
-    const lastTweet = tweets.slice(-1)[0];
-
-    setLoadingShowMore(true);
-    getFeedBeforeDate({ size: 10, date: lastTweet.date })
-      .then((moreTweets) => {
-        setTweets([...tweets, ...moreTweets]);
-        if (moreTweets.length === 0) setNoMoreTweets(true);
-      })
-      .finally(() => setLoadingShowMore(false));
+    // const lastTweet = tweets.slice(-1)[0];
+    // setLoadingShowMore(true);
+    // getFeedBeforeDate({ size: 10, date: lastTweet.date })
+    //   .then((moreTweets) => {
+    //     setTweets([...tweets, ...moreTweets]);
+    //     if (moreTweets.length === 0) setNoMoreTweets(true);
+    //   })
+    //   .finally(() => setLoadingShowMore(false));
   };
 
   return loading ? (
@@ -125,7 +143,7 @@ export const HomeFeed: FC = () => {
         }`}</button>
       )}
       <ul>
-        {[...tweets].map((tweet) => {
+        {[...feed].map((tweet) => {
           const userAuthor = feedUsers.get(tweet.username);
 
           return (

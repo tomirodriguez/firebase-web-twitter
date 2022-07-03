@@ -198,6 +198,10 @@ export const DatabaseTestContext: FC<
     return [];
   };
 
+  const getFollowingsUsernames = async () => {
+    return [];
+  };
+
   return (
     <DatabaseContext.Provider
       value={{
@@ -216,6 +220,7 @@ export const DatabaseTestContext: FC<
         getFollowings,
         getFollowers,
         getTweets,
+        getFollowingsUsernames,
       }}
     >
       {children}

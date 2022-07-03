@@ -1,14 +1,19 @@
 import { getUser } from '../user/getUser';
-import { getFollowingUsernames } from './utils/getFollowingUsernames';
+import { getFollowingsUsernames } from './utils/getFollowingsUsernames';
 
 export const getFollowings: GetFollowings = async (username, options) => {
-  const usernames = await getFollowingUsernames(username);
+  const usernames = await getFollowingsUsernames(username);
 
-  const users = await Promise.all(
-    usernames.map((username) => getUser({ username }))
+  const users: User[] = [];
+  await Promise.all(
+    usernames.map((username) =>
+      getUser({ username }).then((user) => {
+        if (user) users.push(user);
+      })
+    )
   );
 
-  return users.filter((user) => user !== null);
+  return users;
   // const userRef = getFollowsRef(user.id);
 
   // const userDoc = await getDoc(userRef);

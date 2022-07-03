@@ -11,8 +11,10 @@ type UserTweetsHook = () => {
   getUserTweets: (username: string) => Promise<Tweet[]>;
 };
 
-type HomeFeedHook = () => {
-  getFeed: (user: User) => Promise<Tweet[]>;
+type UseHomeFeedHook = () => {
+  loading: boolean;
+  feed: Tweet[];
+  showMore: () => Promise<Tweet[]>;
 };
 
 type UseUserHook = () => {
@@ -22,14 +24,10 @@ type UseUserHook = () => {
   isFollowing: (username: string) => Promise<boolean>;
   follow: (username: string) => Promise<void>;
   unfollow: (username: string) => Promise<void>;
-  getFeedBeforeDate: GetFeedBeforeDate;
-  discoverPeople: DiscoverPeople;
   tweet: (tweet: string) => Promise<void>;
+  discoverPeople: DiscoverPeople;
 };
 
 type DiscoverPeople = (size?: number) => Promise<User[]>;
 
-type GetFeedBeforeDate = (options?: {
-  date?: Date;
-  size?: number;
-}) => Promise<Tweet[]>;
+type GetFeed = () => Promise<Tweet[]>;
