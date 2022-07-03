@@ -25,7 +25,7 @@ export const SignOut: FC = () => {
           username={username}
         />
       </div>
-      <div className="grow text-left pl-4">
+      <div className="grow text-left pl-4 hidden xl:block">
         <div className="text-sm font-bold">{name}</div>
         <div className="text-sm text-secondary-text">@{username}</div>
       </div>
