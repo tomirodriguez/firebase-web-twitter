@@ -105,9 +105,11 @@ export const useHomeFeed: UseHomeFeedHook = () => {
     return () => unsubscriptions.forEach((unsubscription) => unsubscription());
   }, [user, onHomeFeedChange, newTweets, feed, hiddenFeed, followingUsernames]);
 
-  const showNewestTweets = () => {
-    console.log({ newTweets });
-  };
+  const showNewestTweets = useCallback(() => {
+    setFeed([...newTweets, ...feed]);
+    setHiddenFeed([...newTweets, ...hiddenFeed]);
+    setNewTweets([]);
+  }, [feed, hiddenFeed, newTweets]);
 
   return {
     loading,
