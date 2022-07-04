@@ -24,53 +24,68 @@ export const DatabaseTestContext: FC<
   );
   const [followsDatabase, setFollowsDatabase] = useState(fdb);
   const [timelineDatabase, setTimelineDatabase] = useState(tdb);
-  const [observer, setObserver] = useState<() => void>(() => {});
-  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    if (observer && loaded) {
-      observer();
-    }
-  }, [observer, currentUser, loaded]);
+  const onAuthStateChanged = useCallback(
+    (observer: UserLoginObserver) => {
+      observer(currentUser);
+      return () => {};
+    },
+    [currentUser]
+  );
 
-  const userLoginObserver = (observerReceived: UserLoginObserver) => {
-    setObserver(() => {
-      observerReceived(currentUser);
-    });
+  const userLoginObserver = useCallback(
+    (newObserver: UserLoginObserver) => {
+      return onAuthStateChanged(newObserver);
+    },
+    [onAuthStateChanged]
+  );
 
-    return () => setObserver(() => {});
-  };
+  // const userLoginObserver = (observerReceived: UserLoginObserver) => {
+  //   setObserver(() => {
+  //     observerReceived(currentUser);
+  //   });
+
+  //   return () => setObserver(() => {});
+  // };
 
   const signInWithGoogle = async () => {
     setCurrentUser(EMPTY_PROFILE_USER);
   };
 
-  const addUser: AddUser = async (user: User) => {
-    usersDatabase.set(user.username, user);
-    // setUser(user);
-  };
+  const addUser: AddUser = useCallback(
+    async (user: User) => {
+      usersDatabase.set(user.username, user);
+      setCurrentUser(user);
+    },
+    [usersDatabase]
+  );
 
-  const getUser: GetUser = async ({ username = '' }) => {
-    const userFound = usersDatabase.get(username);
+  const getUser: GetUser = useCallback(
+    async ({ username = '' }) => {
+      const userFound = usersDatabase.get(username);
 
-    if (!userFound) throw new Error();
-
-    return userFound;
-  };
+      return userFound || null;
+    },
+    [usersDatabase]
+  );
 
   const signOut: SignOut = async () => {
     setCurrentUser(null);
   };
 
-  const isFollowing: IsFollowing = async ({ username, following }) => {
-    const userFollowing = followsDatabase.find((follow) => {
-      const { followUsername: userFollowed, username: userFollowing } = follow;
-      if (userFollowed === following && userFollowing === username) return true;
-      return false;
-    });
+  const isFollowing: IsFollowing = useCallback(
+    async ({ username, following }) => {
+      const userFollowing = followsDatabase.find((follow) => {
+        const { follow: userFollowed, username: userFollowing } = follow;
+        if (userFollowed === following && userFollowing === username)
+          return true;
+        return false;
+      });
 
-    return userFollowing !== undefined;
-  };
+      return userFollowing !== undefined;
+    },
+    [followsDatabase]
+  );
 
   const followUser: FollowUser = async ({ user, toFollowUsername }) => {
     // const isAlreadyFollowing = await isFollowing({
@@ -100,9 +115,9 @@ export const DatabaseTestContext: FC<
       ...followsDatabase,
       {
         id: user.username + toFollowUsername,
-        followUsername: toFollowUsername,
+        follow: toFollowUsername,
         username: user.username,
-        timestamp: new Date(),
+        date: new Date(),
       },
     ];
 
@@ -136,15 +151,12 @@ export const DatabaseTestContext: FC<
 
     const newFollowsDatabase: Follow[] = followsDatabase.filter((follow) => {
       return (
-        follow.username !== user.username ||
-        follow.followUsername !== toUnfollowUser
+        follow.username !== user.username || follow.follow !== toUnfollowUser
       );
     });
 
     // setUsersDatabase(newUsersDatabase);
     setFollowsDatabase(newFollowsDatabase);
-
-    console.log({ newFollowsDatabase });
   };
 
   const getUserProfileWithId = async (id: string) => {
@@ -210,17 +222,13 @@ export const DatabaseTestContext: FC<
         (relation) => relation.username === username
       );
 
-      return filteredRelations.map((relation) => relation.username);
+      return filteredRelations.map((relation) => relation.follow);
     },
     [followsDatabase]
   );
 
   const onNewFollowing = () => {};
   const onFollowerGain = () => {};
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
 
   return (
     <DatabaseContext.Provider
@@ -245,7 +253,7 @@ export const DatabaseTestContext: FC<
         onFollowerGain,
       }}
     >
-      {loaded ? children : null}
+      {children}
     </DatabaseContext.Provider>
   );
 };

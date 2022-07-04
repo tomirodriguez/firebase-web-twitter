@@ -33,7 +33,7 @@ describe('<FollowInteraction>', () => {
     expect(unfollowBtn).toBeInTheDocument();
   });
 
-  test.skip('should be able to unfollow an user', async () => {
+  test('should be able to unfollow an user', async () => {
     const userToFollow = OTHER_DUMMY_USER.username;
 
     const userDb: User[] = [
@@ -42,9 +42,9 @@ describe('<FollowInteraction>', () => {
     ];
     const followDb: Follow[] = [
       {
-        followUsername: OTHER_DUMMY_USER.username,
+        follow: OTHER_DUMMY_USER.username,
         id: '1',
-        timestamp: new Date(),
+        date: new Date(),
         username: DUMMY_USER.username,
       },
     ];
@@ -53,6 +53,7 @@ describe('<FollowInteraction>', () => {
       <TestingContext
         usersDatabaseInitialState={userDb}
         followsDatabaseInitialState={followDb}
+        user={userDb[0]}
       >
         <BrowserRouter>
           <FollowInteraction username={userToFollow} />

@@ -51,7 +51,9 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const loadExistentUserFollowings = useCallback(async () => {
     if (user && user.username && user.following > 0) {
+      console.log('ACA');
       const followings = await getFollowingsUsernames(user.username);
+      console.log({ followings });
       setFollowingUsernames(followings);
     }
   }, [getFollowingsUsernames, user]);

@@ -39,13 +39,13 @@ describe('<Authentication>', () => {
     expect(userProfileComponent).toBeInTheDocument();
   });
 
-  test.skip('should be able to set an user profile', async () => {
+  test('should be able to set an user profile', async () => {
     const name = 'A name';
     const username = 'an_username';
     const bio = 'This is my bio';
 
     const { container } = render(
-      <TestingContext user={EMPTY_PROFILE_USER}>
+      <TestingContext user={EMPTY_PROFILE_USER} usersDatabaseInitialState={[]}>
         <BrowserRouter>
           <Authentication />
         </BrowserRouter>

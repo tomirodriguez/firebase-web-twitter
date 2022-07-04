@@ -20,7 +20,7 @@ type Tweet = {
 
 type Follow = {
   id: string;
-  timestamp: Date;
+  date: Date;
   username: string;
-  followUsername: string;
+  follow: string;
 };
