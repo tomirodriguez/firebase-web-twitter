@@ -3,19 +3,15 @@ import { useUser } from './useUser';
 import { DatabaseContext } from '../context/DatabaseContext';
 
 export const useHomeFeed: UseHomeFeedHook = () => {
-  const { user } = useUser();
-  const { getTweets, getFollowingsUsernames, onHomeFeedChange } =
-    useContext(DatabaseContext);
+  const { user, followingUsernames } = useUser();
+  const { getTweets, onHomeFeedChange } = useContext(DatabaseContext);
 
   const [loading, setLoading] = useState(true);
   const [lastTweet, setLastTweet] = useState<Tweet | null>(null);
   const [feed, setFeed] = useState<Tweet[]>([]);
   const [hiddenFeed, setHiddenFeed] = useState<Tweet[]>([]);
-  const [followingUsernames, setFollowingUsernames] = useState<string[]>([]);
   const [moreLeft, setMoreLeft] = useState(true);
   const [newTweets, setNewTweets] = useState<Tweet[]>([]);
-
-  useEffect(() => {}, []);
 
   const getFeed = useCallback(
     async (size: number, date: Date) => {
@@ -33,11 +29,6 @@ export const useHomeFeed: UseHomeFeedHook = () => {
     },
     [getTweets, user, followingUsernames]
   );
-
-  useEffect(() => {
-    if (!user) return;
-    getFollowingsUsernames(user.username).then(setFollowingUsernames);
-  }, [user, getFollowingsUsernames]);
 
   useEffect(() => {
     getFeed(15, new Date())
@@ -78,7 +69,7 @@ export const useHomeFeed: UseHomeFeedHook = () => {
   }, [newTweets, feed]);
 
   useEffect(() => {
-    if (!user) return () => {};
+    if (!user || loading) return () => {};
 
     const observer = (listenedTweet: Tweet) => {
       const inListenedTweets = newTweets.find(

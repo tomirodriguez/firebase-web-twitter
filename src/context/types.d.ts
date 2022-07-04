@@ -127,8 +127,11 @@ type SignOut = () => Promise<void>;
 
 type UserContext = {
   user: User | null;
-  followingsUsernames: string[];
-  followingsUsers: Map<string, User>;
+  followingUsernames: string[];
+  followingUsers: Map<string, User>;
   loading: boolean;
   createUserProfile: (user: User) => Promise<void>;
+  isFollowing: (username: string) => Promise<boolean>;
+  follow: (username: string) => Promise<void>;
+  unfollow: (username: string) => Promise<void>;
 };

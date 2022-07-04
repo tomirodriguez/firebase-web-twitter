@@ -9,10 +9,14 @@ type Props = {
 };
 
 export const FollowInteraction: React.FC<Props> = ({ username }) => {
-  const { user, isFollowing, follow, unfollow } = useUser();
+  const { user, follow, unfollow, isFollowing, followingUsernames } = useUser();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [loading, setLoading] = useState(false);
   const [isFollowingUser, setIsFollowingUser] = useState(false);
+
+  useEffect(() => {
+    isFollowing(username).then((response) => setIsFollowingUser(response));
+  }, [followingUsernames, username, isFollowing]);
 
   useEffect(() => {
     if (user && isFirstLoad)

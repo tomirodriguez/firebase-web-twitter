@@ -20,7 +20,7 @@ export const followUser: FollowUser = async ({
     following: toFollowUsername,
   });
 
-  if (following) return;
+  if (following) throw new Error('Already following');
 
   const batch = writeBatch(firestore);
 

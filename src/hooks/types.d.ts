@@ -30,6 +30,7 @@ type UseHomeFeedHook = () => {
 type UseUserHook = () => {
   user: User | null;
   loading: boolean;
+  followingUsernames: string[];
   signOut: () => Promise<void>;
   isFollowing: (username: string) => Promise<boolean>;
   follow: (username: string) => Promise<void>;

@@ -3,40 +3,10 @@ import { DatabaseContext } from '../context/DatabaseContext';
 import { UserContext } from '../context/UserContext';
 
 export const useUser: UseUserHook = () => {
-  const { loading, user } = useContext(UserContext);
+  const { loading, user, follow, unfollow, isFollowing, followingUsernames } =
+    useContext(UserContext);
 
-  const {
-    signOut,
-    isFollowing: dbIsFollowing,
-    followUser,
-    unfollowUser,
-    postTweet,
-  } = useContext(DatabaseContext);
-
-  const isFollowing = useCallback(
-    async (username: string) => {
-      if (!user) throw new Error('no user');
-      return dbIsFollowing({ username: user.username, following: username });
-    },
-    [user, dbIsFollowing]
-  );
-
-  const follow = useCallback(
-    async (username: string) => {
-      if (!user) throw new Error('no user');
-
-      return followUser({ user, toFollowUsername: username });
-    },
-    [user, followUser]
-  );
-
-  const unfollow = useCallback(
-    async (username: string) => {
-      if (!user) throw new Error('no user');
-      return unfollowUser({ user, toUnfollowUser: username });
-    },
-    [user, unfollowUser]
-  );
+  const { signOut, postTweet } = useContext(DatabaseContext);
 
   const tweet = useCallback(
     async (tweet: string) => {
@@ -50,10 +20,11 @@ export const useUser: UseUserHook = () => {
   return {
     user,
     loading,
+    followingUsernames,
     signOut,
-    isFollowing,
     follow,
     unfollow,
     tweet,
+    isFollowing,
   };
 };

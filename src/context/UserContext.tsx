@@ -3,6 +3,7 @@ import {
   createContext,
   FC,
   PropsWithChildren,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -10,16 +11,20 @@ import {
 import { auth } from '../firebase';
 import { getUser } from '../firebase/firestore/user';
 import { DatabaseContext } from './DatabaseContext';
-import { useCallback } from 'react';
+
+const NOT_IMPLEMENTED_FUNCTION = async () => {
+  throw new Error('To implement');
+};
 
 const defaultUserContext: UserContext = {
   user: null,
   loading: true,
-  followingsUsernames: [],
-  followingsUsers: new Map(),
-  createUserProfile: async () => {
-    throw new Error('To implement');
-  },
+  followingUsernames: [],
+  followingUsers: new Map(),
+  createUserProfile: NOT_IMPLEMENTED_FUNCTION,
+  follow: NOT_IMPLEMENTED_FUNCTION,
+  unfollow: NOT_IMPLEMENTED_FUNCTION,
+  isFollowing: NOT_IMPLEMENTED_FUNCTION,
 };
 
 export const UserContext = createContext<UserContext>(defaultUserContext);
@@ -27,23 +32,26 @@ export const UserContext = createContext<UserContext>(defaultUserContext);
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
-  const { getFollowingsUsernames, addUser } = useContext(DatabaseContext);
-  const [followingsUsernames, setFollowingsUsernames] = useState<string[]>([]);
-  const [followingsUsers, setFollowingsUsers] = useState(
-    new Map<string, User>()
+  const { getFollowingsUsernames, addUser, followUser, unfollowUser } =
+    useContext(DatabaseContext);
+  const [followingUsernames, setFollowingUsernames] = useState<string[]>([]);
+  const [followingUsers, setFollowingUsers] = useState(new Map<string, User>());
+
+  const createUserProfile = useCallback(
+    async (user: User) => {
+      setLoading(true);
+      return addUser(user)
+        .then(() => setUser(user))
+        .finally(() => setLoading(false));
+    },
+    [addUser]
   );
 
-  const createUserProfile = useCallback(async (user: User) => {
-    setLoading(true);
-    return addUser(user)
-      .then(() => setUser(user))
-      .finally(() => setLoading(false));
-  }, []);
   const loadExistentUser = useCallback(
     async (user: User) => {
       if (user.following > 0) {
         const followings = await getFollowingsUsernames(user.username);
-        setFollowingsUsernames(followings);
+        setFollowingUsernames(followings);
       }
 
       setUser(user);
@@ -81,14 +89,54 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     return () => unsubscribe();
   }, [loadExistentUser]);
 
+  const follow = useCallback(
+    async (username: string) => {
+      if (!user) throw new Error('no user');
+
+      return followUser({ user, toFollowUsername: username })
+        .then(() => {
+          setFollowingUsernames([username, ...followingUsernames]);
+        })
+        .catch(console.error);
+    },
+    [user, followUser, followingUsernames]
+  );
+
+  const unfollow = useCallback(
+    async (username: string) => {
+      if (!user) throw new Error('no user');
+
+      return unfollowUser({ user, toUnfollowUser: username })
+        .then(() => {
+          setFollowingUsernames(
+            followingUsernames.filter(
+              (followedUser) => followedUser !== username
+            )
+          );
+        })
+        .catch(console.error);
+    },
+    [user, unfollowUser, followingUsernames]
+  );
+
+  const isFollowing = useCallback(
+    async (username: string) => {
+      return !!followingUsernames.find((following) => following === username);
+    },
+    [followingUsernames]
+  );
+
   return (
     <UserContext.Provider
       value={{
         user,
         loading,
-        followingsUsernames,
-        followingsUsers,
+        followingUsernames,
+        followingUsers,
         createUserProfile,
+        isFollowing,
+        follow,
+        unfollow,
       }}
     >
       {children}
