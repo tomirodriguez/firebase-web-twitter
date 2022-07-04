@@ -27,6 +27,7 @@ const defaultUserContext: UserContext = {
 export const UserContext = createContext<UserContext>(defaultUserContext);
 
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
+  const [contextLoading, setContextLoading] = useState(true);
   const {
     getFollowingsUsernames,
     addUser,
@@ -35,6 +36,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     user,
     loading,
   } = useContext(DatabaseContext);
+
   const [followingUsernames, setFollowingUsernames] = useState<string[]>([]);
   const [followingUsers] = useState(new Map<string, User>());
 
@@ -46,15 +48,20 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const loadExistentUserFollowings = useCallback(async () => {
+    setContextLoading(true);
     if (user && user.username && user.following > 0) {
       const followings = await getFollowingsUsernames(user.username);
 
       setFollowingUsernames(followings);
+    } else {
+      setFollowingUsernames([]);
     }
+    setContextLoading(false);
   }, [getFollowingsUsernames, user]);
 
   useEffect(() => {
-    loadExistentUserFollowings();
+    setContextLoading(true);
+    loadExistentUserFollowings().finally(() => setContextLoading(false));
   }, [loadExistentUserFollowings]);
 
   const follow = useCallback(
@@ -98,7 +105,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
-        loading,
+        loading: contextLoading || loading,
         followingUsernames,
         followingUsers,
         createUserProfile,

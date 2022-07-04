@@ -16,7 +16,7 @@ export const UserList: FC<Props> = ({
     <article>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>
+          <li key={user.username}>
             <FollowUser user={user} />
           </li>
         ))}

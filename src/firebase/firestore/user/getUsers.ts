@@ -27,14 +27,20 @@ export const getUsers: GetUsers = async (options) => {
     i += chunkSize
   ) {
     const chunk = exclude.slice(i, i + chunkSize);
+
     const newQuery = query(q, where('username', 'not-in', chunk));
 
     const querySnapshot = await getDocs<User>(newQuery);
 
     querySnapshot.forEach((doc) => {
       const user = doc.data();
-      if (!exclude.find((excluded) => excluded === user.username))
-        notFollowingUsers.push(doc.data());
+      const isInExluded = !exclude.find(
+        (excluded) => excluded === user.username
+      );
+      const isAlreadySaved = notFollowingUsers.find(
+        (notFollowing) => notFollowing.username === user.username
+      );
+      if (isInExluded && !isAlreadySaved) notFollowingUsers.push(doc.data());
     });
   }
 

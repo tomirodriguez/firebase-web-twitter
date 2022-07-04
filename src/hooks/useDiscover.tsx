@@ -3,12 +3,11 @@ import { useUser } from './useUser';
 import { DatabaseContext } from '../context/DatabaseContext';
 
 export const useDiscover: UseDiscoverHook = (initialSearch: number) => {
-  const { user, followingUsernames: loadedFollowingUsernames } = useUser();
+  const { user, followingUsernames } = useUser();
   const { getUsers } = useContext(DatabaseContext);
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
   const [hiddenUsers, setHiddenUsers] = useState<User[]>([]);
-  const [followingUsernames] = useState<string[]>(loadedFollowingUsernames);
   const [moreLeft, setMoreLeft] = useState(true);
 
   const getNotFollowingUsers = useCallback(
@@ -20,6 +19,7 @@ export const useDiscover: UseDiscoverHook = (initialSearch: number) => {
         lastUser,
         exclude: [...followingUsernames, user.username],
       }).then((newUsers) => {
+        console.log({ newUsers });
         if (newUsers.length === 0) {
           setMoreLeft(false);
         }
@@ -32,9 +32,9 @@ export const useDiscover: UseDiscoverHook = (initialSearch: number) => {
   useEffect(() => {
     if (!user) return;
     getNotFollowingUsers(10)
-      .then((users) => {
-        setHiddenUsers(users);
-        setUsers(users.slice(0, initialSearch));
+      .then((newUsers) => {
+        setHiddenUsers(newUsers);
+        setUsers(newUsers.slice(0, initialSearch));
       })
       .finally(() => setLoading(false));
   }, [user, getNotFollowingUsers, initialSearch]);
