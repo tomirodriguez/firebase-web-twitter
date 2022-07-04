@@ -74,7 +74,7 @@ export const FirebaseProvider: FC<PropsWithChildren> = ({ children }) => {
           id,
           email: email || '',
           bio: '',
-          image: photoURL || undefined,
+          image: photoURL || '',
           followers: 0,
           following: 0,
           username: '',
