@@ -27,6 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "emulators": "firebase emulators:start --project 'demo-local'",
     "deploy": "env-cmd -f .env.production yarn build && firebase deploy"
   },
   "eslintConfig": {
