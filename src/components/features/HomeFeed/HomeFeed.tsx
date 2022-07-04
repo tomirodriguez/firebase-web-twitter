@@ -56,46 +56,6 @@ export const HomeFeed: FC = () => {
     showMore().finally(() => setLoadingShowMore(false));
   };
 
-  // const saveNewTweet = useCallback(
-  //   (newTweet: Tweet) => {
-  //     if (newTweets.find((tweet) => newTweet.id === tweet.id)) return;
-
-  //     setNewTweets([newTweet, ...newTweets]);
-  //   },
-  //   [newTweets]
-  // );
-
-  // useEffect(() => {
-  // const filteredNewTweets = newTweets.filter((newTweet) => {
-  //   const isShowing = tweets.find((tweet) => tweet.id === newTweet.id);
-  //   if (isShowing) return false;
-  //   return true;
-  // });
-  // if (filteredNewTweets.length !== newTweets.length)
-  //   setNewTweets(filteredNewTweets);
-  // }, [newTweets, tweets]);
-
-  // useEffect(() => {
-  //   const unsubcsribe = onHomeFeedUpdate(saveNewTweet);
-
-  //   return unsubcsribe;
-  // }, [saveNewTweet, onHomeFeedUpdate]);
-
-  // if (!user) return null;
-
-  // const newTweetsCount = newTweets.length;
-
-  // const handleShowNewTweets = () => {
-  //   const convinedTweets = [...newTweets, ...feed];
-  //   convinedTweets.sort((a, b) => {
-  //     if (a.date < b.date) return 1;
-  //     if (b.date < a.date) return -1;
-  //     return 0;
-  //   });
-  //   setTweets([...newTweets, ...feed]);
-  //   setNewTweets([]);
-  // };
-
   return loading ? (
     <div className="w-full py-12 flex items-center justify-center">
       <Spinner />
@@ -132,7 +92,7 @@ export const HomeFeed: FC = () => {
           <Spinner />
         </div>
       ) : (
-        !moreLeft && (
+        moreLeft && (
           <div className="border-b border-border">
             <ShowMoreButton onShowMore={() => handleShowMore} />
           </div>

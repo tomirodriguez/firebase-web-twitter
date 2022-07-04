@@ -6,8 +6,6 @@ import { RootState } from '../store';
 export const useUser: UseUserHook = () => {
   const { loading, user } = useSelector((state: RootState) => state.user);
 
-  console.log({ user });
-
   const {
     signOut,
     isFollowing: dbIsFollowing,

@@ -1,18 +1,25 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
-import { useUser } from './useUser';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { DatabaseContext } from '../context/DatabaseContext';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { useUser } from './useUser';
 
 export const useDiscover: UseDiscoverHook = (initialSearch: number) => {
   const { user } = useUser();
-  const { getUsers } = useContext(DatabaseContext);
+  const { getUsers, getFollowingsUsernames } = useContext(DatabaseContext);
+  const [followingsLoaded, setFollowingsLoaded] = useState(false);
+  const [following, setFollowing] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
   const [hiddenUsers, setHiddenUsers] = useState<User[]>([]);
-  const { following } = useSelector((state: RootState) => state.user);
 
   const [moreLeft, setMoreLeft] = useState(true);
+
+  useEffect(() => {
+    if (!user) return;
+
+    getFollowingsUsernames(user.username)
+      .then(setFollowing)
+      .finally(() => setFollowingsLoaded(true));
+  }, [getFollowingsUsernames, user]);
 
   const getNotFollowingUsers = useCallback(
     async (size: number, lastUser?: User) => {
@@ -21,11 +28,12 @@ export const useDiscover: UseDiscoverHook = (initialSearch: number) => {
       return getUsers({
         size,
         lastUser,
-        exclude: following,
+        exclude: [...following, user.username],
       }).then((newUsers) => {
         if (newUsers.length === 0) {
           setMoreLeft(false);
         }
+
         return newUsers;
       });
     },
@@ -33,14 +41,14 @@ export const useDiscover: UseDiscoverHook = (initialSearch: number) => {
   );
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !followingsLoaded) return;
     getNotFollowingUsers(10)
       .then((users) => {
         setHiddenUsers(users);
         setUsers(users.slice(0, initialSearch));
       })
       .finally(() => setLoading(false));
-  }, [user, getNotFollowingUsers, initialSearch]);
+  }, [user, getNotFollowingUsers, initialSearch, followingsLoaded]);
 
   const showMore = useCallback(async () => {
     const SHOW_MORE_SIZE = 10;
