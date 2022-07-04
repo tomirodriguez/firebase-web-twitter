@@ -121,7 +121,7 @@ type PostTweet = ({
 
 type RemoveObserver = () => void;
 
-type UserLoginObserver = (user: User | null) => void;
+type UserLoginObserver = (user: User | null) => Promise<void>;
 
 type SignOut = () => Promise<void>;
 

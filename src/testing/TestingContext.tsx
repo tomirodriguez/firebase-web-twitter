@@ -1,6 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import { Provider } from 'react-redux';
-import store from '../store';
+import { UserProvider } from '../context';
 import { DatabaseTestContext } from './DatabaseTestContext';
 import { DUMMY_USER, FOLLOWS_DATABASE, USERS_DATABASE } from './mocks';
 import { TIMELINE_DATABASE } from './mocks/tweets';
@@ -23,16 +22,14 @@ export const TestingContext: FC<
   ...contextProps
 }) => {
   return (
-    <Provider store={store}>
-      <DatabaseTestContext
-        usersDatabaseInitialState={usersDatabaseInitialState}
-        followsDatabaseInitialState={followsDatabaseInitialState}
-        timelineDatabaseInitialState={timelineDatabaseInitialState}
-        user={user}
-        {...contextProps}
-      >
-        {children}
-      </DatabaseTestContext>
-    </Provider>
+    <DatabaseTestContext
+      usersDatabaseInitialState={usersDatabaseInitialState}
+      followsDatabaseInitialState={followsDatabaseInitialState}
+      timelineDatabaseInitialState={timelineDatabaseInitialState}
+      user={user}
+      {...contextProps}
+    >
+      <UserProvider>{children}</UserProvider>
+    </DatabaseTestContext>
   );
 };

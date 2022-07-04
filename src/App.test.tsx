@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { TestingContext } from './testing';
@@ -37,6 +37,9 @@ describe('<App>', () => {
         </BrowserRouter>
       </TestingContext>
     );
+    await waitFor(() => {
+      screen.getByText('Home');
+    });
 
     expect(window.location.pathname).toBe('/home');
   });

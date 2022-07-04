@@ -1,7 +1,5 @@
-import { FC, PropsWithChildren, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, PropsWithChildren, useCallback, useState, useEffect } from 'react';
 import { DatabaseContext } from '../context/DatabaseContext';
-import { userLoaded } from '../reducers';
 import { EMPTY_PROFILE_USER } from './mocks/users';
 
 type InitialState = {
@@ -15,42 +13,53 @@ export const DatabaseTestContext: FC<
   PropsWithChildren & InitialState & Partial<DatabaseContext>
 > = ({
   children,
-  user: initialUser,
+  user: initialUser = null,
   usersDatabaseInitialState: udb,
   followsDatabaseInitialState: fdb,
   timelineDatabaseInitialState: tdb,
 }) => {
-  const [currentUser, setUser] = useState(initialUser);
+  const [currentUser, setCurrentUser] = useState(initialUser);
   const [usersDatabase, setUsersDatabase] = useState(
     new Map<string, User>(udb.map((user) => [user.username, user]))
   );
   const [followsDatabase, setFollowsDatabase] = useState(fdb);
   const [timelineDatabase, setTimelineDatabase] = useState(tdb);
-
-  const dispatch = useDispatch();
+  const [observer, setObserver] = useState<() => void>(() => {});
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(userLoaded(currentUser));
-  }, [dispatch, currentUser]);
+    if (observer && loaded) {
+      observer();
+    }
+  }, [observer, currentUser, loaded]);
+
+  const userLoginObserver = (observerReceived: UserLoginObserver) => {
+    setObserver(() => {
+      observerReceived(currentUser);
+    });
+
+    return () => setObserver(() => {});
+  };
 
   const signInWithGoogle = async () => {
-    setUser(EMPTY_PROFILE_USER);
+    setCurrentUser(EMPTY_PROFILE_USER);
   };
 
   const addUser: AddUser = async (user: User) => {
-    setUser(user);
+    usersDatabase.set(user.username, user);
+    // setUser(user);
   };
 
   const getUser: GetUser = async ({ username = '' }) => {
-    const user = usersDatabase.get(username);
+    const userFound = usersDatabase.get(username);
 
-    if (!user) throw new Error();
+    if (!userFound) throw new Error();
 
-    return user;
+    return userFound;
   };
 
   const signOut: SignOut = async () => {
-    setUser(null);
+    setCurrentUser(null);
   };
 
   const isFollowing: IsFollowing = async ({ username, following }) => {
@@ -132,8 +141,10 @@ export const DatabaseTestContext: FC<
       );
     });
 
-    setUsersDatabase(newUsersDatabase);
+    // setUsersDatabase(newUsersDatabase);
     setFollowsDatabase(newFollowsDatabase);
+
+    console.log({ newFollowsDatabase });
   };
 
   const getUserProfileWithId = async (id: string) => {
@@ -177,10 +188,6 @@ export const DatabaseTestContext: FC<
     return [];
   };
 
-  const getFollowingUsernames = async () => {
-    return [];
-  };
-
   const getNewFollowers = async () => {
     return [];
   };
@@ -197,12 +204,23 @@ export const DatabaseTestContext: FC<
     return [];
   };
 
-  const getFollowingsUsernames = async () => {
-    return [];
-  };
+  const getFollowingsUsernames = useCallback(
+    async (username: string) => {
+      const filteredRelations = followsDatabase.filter(
+        (relation) => relation.username === username
+      );
+
+      return filteredRelations.map((relation) => relation.username);
+    },
+    [followsDatabase]
+  );
 
   const onNewFollowing = () => {};
   const onFollowerGain = () => {};
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
 
   return (
     <DatabaseContext.Provider
@@ -214,7 +232,7 @@ export const DatabaseTestContext: FC<
         isFollowing,
         followUser,
         unfollowUser,
-        userLoginObserver: () => () => {},
+        userLoginObserver,
         postTweet,
         getUserTweets,
         onHomeFeedChange,
@@ -227,7 +245,7 @@ export const DatabaseTestContext: FC<
         onFollowerGain,
       }}
     >
-      {children}
+      {loaded ? children : null}
     </DatabaseContext.Provider>
   );
 };

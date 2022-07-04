@@ -1,4 +1,3 @@
-import { onAuthStateChanged } from 'firebase/auth';
 import {
   createContext,
   FC,
@@ -8,8 +7,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { auth } from '../firebase';
-import { getUser } from '../firebase/firestore/user';
 import { DatabaseContext } from './DatabaseContext';
 
 const NOT_IMPLEMENTED_FUNCTION = async () => {
@@ -32,8 +29,13 @@ export const UserContext = createContext<UserContext>(defaultUserContext);
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
-  const { getFollowingsUsernames, addUser, followUser, unfollowUser } =
-    useContext(DatabaseContext);
+  const {
+    getFollowingsUsernames,
+    addUser,
+    followUser,
+    unfollowUser,
+    userLoginObserver,
+  } = useContext(DatabaseContext);
   const [followingUsernames, setFollowingUsernames] = useState<string[]>([]);
   const [followingUsers] = useState(new Map<string, User>());
 
@@ -47,47 +49,25 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     [addUser]
   );
 
-  const loadExistentUser = useCallback(
-    async (user: User) => {
-      if (user.following > 0) {
-        const followings = await getFollowingsUsernames(user.username);
-        setFollowingUsernames(followings);
-      }
-
-      setUser(user);
-    },
-    [getFollowingsUsernames]
-  );
+  const loadExistentUserFollowings = useCallback(async () => {
+    if (user && user.username && user.following > 0) {
+      const followings = await getFollowingsUsernames(user.username);
+      setFollowingUsernames(followings);
+    }
+  }, [getFollowingsUsernames, user]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (listenedUser) => {
-      setLoading(true);
-      if (!listenedUser) {
-        setUser(null);
-        setLoading(false);
-        return;
-      }
+    loadExistentUserFollowings();
+  }, [loadExistentUserFollowings]);
 
-      const { uid: id, email, displayName } = listenedUser;
-      const firebaseUser = await getUser({ id });
-      if (!firebaseUser) {
-        setUser({
-          lastUpdate: new Date(),
-          id,
-          email: email || '',
-          bio: '',
-          followers: 0,
-          following: 0,
-          username: '',
-          name: displayName || '',
-        });
-        setLoading(false);
-      } else {
-        loadExistentUser(firebaseUser).finally(() => setLoading(false));
-      }
+  useEffect(() => {
+    const unsubscribe = userLoginObserver(async (listenedUser) => {
+      setUser(listenedUser);
+      setLoading(false);
     });
+
     return () => unsubscribe();
-  }, [loadExistentUser]);
+  }, [loadExistentUserFollowings, userLoginObserver]);
 
   const follow = useCallback(
     async (username: string) => {

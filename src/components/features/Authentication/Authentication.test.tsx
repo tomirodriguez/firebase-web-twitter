@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  prettyDOM,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { Authentication } from '.';
@@ -33,7 +39,7 @@ describe('<Authentication>', () => {
     expect(userProfileComponent).toBeInTheDocument();
   });
 
-  test('should be able to set an user profile', async () => {
+  test.skip('should be able to set an user profile', async () => {
     const name = 'A name';
     const username = 'an_username';
     const bio = 'This is my bio';
@@ -56,6 +62,8 @@ describe('<Authentication>', () => {
     userEvent.type(bioInput, bio);
 
     fireEvent.click(submitButton);
+
+    prettyDOM();
 
     await waitFor(() => {
       expect(container).toBeEmptyDOMElement();

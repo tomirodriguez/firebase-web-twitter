@@ -33,7 +33,7 @@ describe('<FollowInteraction>', () => {
     expect(unfollowBtn).toBeInTheDocument();
   });
 
-  test('should be able to unfollow an user', async () => {
+  test.skip('should be able to unfollow an user', async () => {
     const userToFollow = OTHER_DUMMY_USER.username;
 
     const userDb: User[] = [
