@@ -19,6 +19,7 @@ export const DatabaseTestContext: FC<
   timelineDatabaseInitialState: tdb,
 }) => {
   const [currentUser, setCurrentUser] = useState(initialUser);
+  const [loading, setLoading] = useState(true);
   const [usersDatabase, setUsersDatabase] = useState(
     new Map<string, User>(udb.map((user) => [user.username, user]))
   );
@@ -32,6 +33,10 @@ export const DatabaseTestContext: FC<
     },
     [currentUser]
   );
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const userLoginObserver = useCallback(
     (newObserver: UserLoginObserver) => {
@@ -233,6 +238,7 @@ export const DatabaseTestContext: FC<
   return (
     <DatabaseContext.Provider
       value={{
+        loading,
         signInWithGoogle,
         addUser,
         getUser,
@@ -240,7 +246,6 @@ export const DatabaseTestContext: FC<
         isFollowing,
         followUser,
         unfollowUser,
-        userLoginObserver,
         postTweet,
         getUserTweets,
         onHomeFeedChange,
@@ -251,6 +256,7 @@ export const DatabaseTestContext: FC<
         getFollowingsUsernames,
         onNewFollowing,
         onFollowerGain,
+        user: currentUser,
       }}
     >
       {children}

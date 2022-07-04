@@ -1,16 +1,22 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { createContext, FC, PropsWithChildren } from 'react';
+import {
+  createContext,
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from 'react';
 import { auth } from '../firebase';
 import { signInWithGoogle, signOut } from '../firebase/auth';
 import {
   followUser,
   getFollowers,
   getFollowings,
-  isFollowing,
-  unfollowUser,
   getFollowingsUsernames,
-  onNewFollowing,
+  isFollowing,
   onFollowerGain,
+  onNewFollowing,
+  unfollowUser,
 } from '../firebase/firestore/follow';
 import {
   getTweets,
@@ -19,9 +25,11 @@ import {
   postTweet,
 } from '../firebase/firestore/tweet';
 import { addUser, getUser, getUsers } from '../firebase/firestore/user';
+import { useCallback } from 'react';
 
 const defaultFirebaseContext: DatabaseContext = {
-  userLoginObserver: () => () => {},
+  user: null,
+  loading: true,
   signInWithGoogle,
   signOut,
   addUser,
@@ -46,14 +54,22 @@ export const FirebaseContext = createContext<DatabaseContext>(
 );
 
 export const FirebaseProvider: FC<PropsWithChildren> = ({ children }) => {
-  const userLoginObserver = (observer: UserLoginObserver) => {
-    return onAuthStateChanged(auth, async (user) => {
-      if (!user) return observer(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
-      const { uid: id, email, displayName } = user;
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (userFromAuth) => {
+      setLoading(true);
+      if (!userFromAuth) {
+        setLoading(false);
+        setUser(null);
+        return;
+      }
+
+      const { uid: id, email, displayName } = userFromAuth;
       const firebaseUser = await getUser({ id });
       if (!firebaseUser)
-        observer({
+        setUser({
           lastUpdate: new Date(),
           id,
           email: email || '',
@@ -63,15 +79,30 @@ export const FirebaseProvider: FC<PropsWithChildren> = ({ children }) => {
           username: '',
           name: displayName || '',
         });
-      else observer(firebaseUser);
+      else setUser(firebaseUser);
+
+      setLoading(false);
     });
-  };
+
+    return () => unsubscribe();
+  }, []);
+
+  const addUserAndUpdate = useCallback(async (user: User) => {
+    setLoading(true);
+    return addUser(user)
+      .then(() => {
+        setUser(user);
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <FirebaseContext.Provider
       value={{
         ...defaultFirebaseContext,
-        userLoginObserver,
+        addUser: addUserAndUpdate,
+        user,
+        loading,
       }}
     >
       {children}

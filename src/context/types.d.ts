@@ -1,5 +1,6 @@
 type DatabaseContext = {
-  userLoginObserver: (observer: UserLoginObserver) => RemoveObserver;
+  user: User | null;
+  loading: boolean;
   signInWithGoogle: () => Promise<void>;
   signOut: SignOut;
   addUser: AddUser;
