@@ -38,7 +38,7 @@ export const Authentication: FC = () => {
 
     const newUser = { ...user, name, username, bio };
     await addUser({ ...user, name, username, bio }).then(() => {
-      dispatch(userLoaded(newUser));
+      dispatch(userLoaded({ user: newUser }));
     });
 
     return {};

@@ -6,6 +6,7 @@ export const useHomeFeed: UseHomeFeedHook = () => {
   const { user } = useUser();
   const { getTweets, getFollowingsUsernames, onHomeFeedChange } =
     useContext(DatabaseContext);
+
   const [loading, setLoading] = useState(true);
   const [lastTweet, setLastTweet] = useState<Tweet | null>(null);
   const [feed, setFeed] = useState<Tweet[]>([]);
