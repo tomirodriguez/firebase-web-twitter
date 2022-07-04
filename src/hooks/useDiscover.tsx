@@ -4,13 +4,11 @@ import { DatabaseContext } from '../context/DatabaseContext';
 
 export const useDiscover: UseDiscoverHook = (initialSearch: number) => {
   const { user, followingUsernames: loadedFollowingUsernames } = useUser();
-  const { getUsers, getFollowingsUsernames } = useContext(DatabaseContext);
+  const { getUsers } = useContext(DatabaseContext);
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
   const [hiddenUsers, setHiddenUsers] = useState<User[]>([]);
-  const [followingUsernames, setFollowingUsernames] = useState<string[]>(
-    loadedFollowingUsernames
-  );
+  const [followingUsernames] = useState<string[]>(loadedFollowingUsernames);
   const [moreLeft, setMoreLeft] = useState(true);
 
   const getNotFollowingUsers = useCallback(

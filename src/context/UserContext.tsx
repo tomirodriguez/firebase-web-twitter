@@ -35,7 +35,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const { getFollowingsUsernames, addUser, followUser, unfollowUser } =
     useContext(DatabaseContext);
   const [followingUsernames, setFollowingUsernames] = useState<string[]>([]);
-  const [followingUsers, setFollowingUsers] = useState(new Map<string, User>());
+  const [followingUsers] = useState(new Map<string, User>());
 
   const createUserProfile = useCallback(
     async (user: User) => {

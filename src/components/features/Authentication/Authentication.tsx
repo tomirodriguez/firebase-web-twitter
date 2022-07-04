@@ -1,24 +1,17 @@
 import { FC, SyntheticEvent, useContext } from 'react';
-import { useDispatch } from 'react-redux';
 import { DatabaseContext } from '../../../context/DatabaseContext';
+import { UserContext } from '../../../context/UserContext';
 import { useUser } from '../../../hooks/useUser';
 import { Logo } from '../../../icons';
-import { userLoaded } from '../../../reducers';
 import { FillUserData } from './components/FillUserData';
 import { LoginBackground } from './components/LoginBackground';
 import { LoginForm } from './components/LoginForm';
 import { USERNAME_TAKEN } from './errors';
-import { UserContext } from '../../../context/UserContext';
 
 export const Authentication: FC = () => {
   const { user } = useUser();
   const { createUserProfile } = useContext(UserContext);
-  const {
-    getUser,
-    addUser,
-    signInWithGoogle: signIn,
-  } = useContext(DatabaseContext);
-  const dispatch = useDispatch();
+  const { getUser, signInWithGoogle: signIn } = useContext(DatabaseContext);
 
   if (user && user.username) return null;
 
