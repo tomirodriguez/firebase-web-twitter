@@ -10,11 +10,9 @@ export const userSlice = createSlice({
   },
   reducers: {
     userLoaded: (state, action) => {
-      const { followers, followings, ...user } = action.payload;
-
-      state.user = user;
-      state.followers = followers || [];
-      state.following = followings || [];
+      state.user = action.payload.user || null;
+      state.followers = action.payload?.followers || [];
+      state.following = action.payload?.following || [];
       state.loading = false;
     },
   },

@@ -33,6 +33,7 @@ export const onHomeFeedChange: OnHomeFeedChange = (
     const unsubscribe = onSnapshot<FirestoreTweet>(
       newQuery,
       (querySnapshot) => {
+        if (querySnapshot.empty) return;
         const { likes, username, tweet, date } = querySnapshot.docs[0].data();
         const { seconds, nanoseconds } = date;
 

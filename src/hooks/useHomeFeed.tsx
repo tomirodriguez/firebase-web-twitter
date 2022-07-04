@@ -6,6 +6,7 @@ export const useHomeFeed: UseHomeFeedHook = () => {
   const { user } = useUser();
   const { getTweets, getFollowingsUsernames, onHomeFeedChange } =
     useContext(DatabaseContext);
+
   const [loading, setLoading] = useState(true);
   const [lastTweet, setLastTweet] = useState<Tweet | null>(null);
   const [feed, setFeed] = useState<Tweet[]>([]);
@@ -80,6 +81,12 @@ export const useHomeFeed: UseHomeFeedHook = () => {
     if (!user) return () => {};
 
     const observer = (listenedTweet: Tweet) => {
+      const inListenedTweets = newTweets.find(
+        (newTweet) => newTweet.id === listenedTweet.id
+      );
+
+      if (inListenedTweets) return;
+
       const tweetsWithSameId = feed.filter(
         (tweet) => tweet.id === listenedTweet.id
       );
@@ -106,10 +113,10 @@ export const useHomeFeed: UseHomeFeedHook = () => {
   }, [user, onHomeFeedChange, newTweets, feed, hiddenFeed, followingUsernames]);
 
   const showNewestTweets = useCallback(() => {
-    // setFeed([...newTweets, ...feed]);
-    // setHiddenFeed([...newTweets, ...hiddenFeed]);
-    //   // setNewTweets([]);
-  }, []);
+    setFeed([...newTweets, ...feed]);
+    setHiddenFeed([...newTweets, ...hiddenFeed]);
+    setNewTweets([]);
+  }, [newTweets, feed, hiddenFeed]);
 
   return {
     loading,

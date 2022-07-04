@@ -17,7 +17,7 @@ export const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
       if (user) {
         followings = await getFollowingsUsernames(user.username);
       }
-      dispatch(userLoaded({ ...user, followers, followings }));
+      dispatch(userLoaded({ user, followers, followings }));
     });
 
     return unsubscribe;
