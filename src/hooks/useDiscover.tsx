@@ -19,7 +19,6 @@ export const useDiscover: UseDiscoverHook = (initialSearch: number) => {
         lastUser,
         exclude: [...followingUsernames, user.username],
       }).then((newUsers) => {
-        console.log({ newUsers });
         if (newUsers.length === 0) {
           setMoreLeft(false);
         }
