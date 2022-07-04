@@ -66,7 +66,7 @@ export const FirebaseProvider: FC<PropsWithChildren> = ({ children }) => {
         return;
       }
 
-      const { uid: id, email, displayName } = userFromAuth;
+      const { uid: id, email, displayName, photoURL } = userFromAuth;
       const firebaseUser = await getUser({ id });
       if (!firebaseUser)
         setUser({
@@ -74,6 +74,7 @@ export const FirebaseProvider: FC<PropsWithChildren> = ({ children }) => {
           id,
           email: email || '',
           bio: '',
+          image: photoURL || undefined,
           followers: 0,
           following: 0,
           username: '',
