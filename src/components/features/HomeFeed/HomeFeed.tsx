@@ -94,7 +94,7 @@ export const HomeFeed: FC = () => {
       ) : (
         moreLeft && (
           <div className="border-b border-border">
-            <ShowMoreButton onShowMore={() => handleShowMore} />
+            <ShowMoreButton onShowMore={handleShowMore} />
           </div>
         )
       )}
