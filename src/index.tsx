@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import store from './store';
 import { DatabaseProvider } from './context/DatabaseContext';
 import './index.css';
+import { UserProvider } from './context/UserContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,10 +18,12 @@ root.render(
   <FirebaseProvider>
     <Provider store={store}>
       <DatabaseProvider>
-        <BrowserRouter>
-          <SEO />
-          <App />
-        </BrowserRouter>
+        <UserProvider>
+          <BrowserRouter>
+            <SEO />
+            <App />
+          </BrowserRouter>
+        </UserProvider>
       </DatabaseProvider>
     </Provider>
   </FirebaseProvider>

@@ -1,10 +1,9 @@
 import { useCallback, useContext } from 'react';
-import { useSelector } from 'react-redux';
 import { DatabaseContext } from '../context/DatabaseContext';
-import { RootState } from '../store';
+import { UserContext } from '../context/UserContext';
 
 export const useUser: UseUserHook = () => {
-  const { loading, user } = useSelector((state: RootState) => state.user);
+  const { loading, user } = useContext(UserContext);
 
   const {
     signOut,

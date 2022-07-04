@@ -124,3 +124,11 @@ type RemoveObserver = () => void;
 type UserLoginObserver = (user: User | null) => void;
 
 type SignOut = () => Promise<void>;
+
+type UserContext = {
+  user: User | null;
+  followingsUsernames: string[];
+  followingsUsers: Map<string, User>;
+  loading: boolean;
+  createUserProfile: (user: User) => Promise<void>;
+};

@@ -8,9 +8,11 @@ import { FillUserData } from './components/FillUserData';
 import { LoginBackground } from './components/LoginBackground';
 import { LoginForm } from './components/LoginForm';
 import { USERNAME_TAKEN } from './errors';
+import { UserContext } from '../../../context/UserContext';
 
 export const Authentication: FC = () => {
   const { user } = useUser();
+  const { createUserProfile } = useContext(UserContext);
   const {
     getUser,
     addUser,
@@ -37,11 +39,8 @@ export const Authentication: FC = () => {
     if (existingUser) return { field: 'username', error: USERNAME_TAKEN };
 
     const newUser = { ...user, name, username, bio };
-    await addUser({ ...user, name, username, bio }).then(() => {
-      dispatch(userLoaded(newUser));
-    });
 
-    return {};
+    return await createUserProfile(newUser).then(() => ({}));
   };
 
   return (

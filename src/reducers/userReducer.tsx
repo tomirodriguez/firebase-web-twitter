@@ -12,7 +12,6 @@ export const userSlice = createSlice({
     userLoaded: (state, action) => {
       const { followers, followings, ...user } = action.payload;
 
-      console.log(action.payload);
       state.user = user;
       state.followers = followers || [];
       state.following = followings || [];
