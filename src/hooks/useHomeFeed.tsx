@@ -81,6 +81,12 @@ export const useHomeFeed: UseHomeFeedHook = () => {
     if (!user) return () => {};
 
     const observer = (listenedTweet: Tweet) => {
+      const inListenedTweets = newTweets.find(
+        (newTweet) => newTweet.id === listenedTweet.id
+      );
+
+      if (inListenedTweets) return;
+
       const tweetsWithSameId = feed.filter(
         (tweet) => tweet.id === listenedTweet.id
       );
@@ -107,9 +113,9 @@ export const useHomeFeed: UseHomeFeedHook = () => {
   }, [user, onHomeFeedChange, newTweets, feed, hiddenFeed, followingUsernames]);
 
   const showNewestTweets = useCallback(() => {
-    // setFeed([...newTweets, ...feed]);
-    // setHiddenFeed([...newTweets, ...hiddenFeed]);
-    // setNewTweets([]);
+    setFeed([...newTweets, ...feed]);
+    setHiddenFeed([...newTweets, ...hiddenFeed]);
+    setNewTweets([]);
   }, [newTweets, feed, hiddenFeed]);
 
   return {
