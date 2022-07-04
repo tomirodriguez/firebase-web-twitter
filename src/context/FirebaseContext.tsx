@@ -80,7 +80,7 @@ export const FirebaseProvider: FC<PropsWithChildren> = ({ children }) => {
           username: '',
           name: displayName || '',
         });
-      else setUser(firebaseUser);
+      else setUser({ ...firebaseUser, image: photoURL || '' });
 
       setLoading(false);
     });
